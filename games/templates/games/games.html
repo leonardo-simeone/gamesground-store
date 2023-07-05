@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Gamesground{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+
+      <div class="col-12 mt-3 left">
+        <div class="row">
+          {% for game in games %}
+          <div class="col-md-3 recipe-card-padding">
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="image-container">
+                  {% if "default-image" in game.image.url %}
+                  <img class="card-img-top rounded" src="{% static 'images/default-image.jpg' %}"
+                    alt="Default Image: no image">
+                  {% else %}
+                  <img class="card-img-top rounded" src=" {{ game.image.url }} " alt="{{game.name}}">
+                  {% endif %}
+                </div>
+
+                <h2 class="card-title"><a class="title-color" href="#">{{game.name}}</a>
+                </h2>
+
+                <p class="card-text">{{game.price}}</p>
+                <p class="card-text text-muted">{{game.platform.name}}</p>
+
+              </div>
+            </div>
+          </div>
+          {% if forloop.counter|divisibleby:4 %}
+        </div>
+        <div class="row">
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
