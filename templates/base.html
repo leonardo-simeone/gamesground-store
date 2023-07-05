@@ -14,6 +14,9 @@
   {% block extra_meta %}
   {% endblock %}
 
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+
   {% block corecss %}
   <!-- Bootstrap script -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
@@ -21,8 +24,7 @@
   <!-- Google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300&family=Varela+Round&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600&family=Merriweather+Sans:wght@300&display=swap" rel="stylesheet">
   <!-- Base css -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   {% endblock %}
@@ -46,7 +48,7 @@
   <script src="https://js.stripe.com/v3/"></script>
   {% endblock %}
 
-  {% block extra_js %}
+  {% block extra_js %}  
   {% endblock %}
 
   <title>{% block title %}Gamesground{% endblock %}</title>
@@ -54,17 +56,21 @@
 
 <body>
   <header>
+    <!-- Messages -->
+    {% if messages %}
+        <div class="message-container"></div>
+    {% endif %}
     <!-- Desktop logo and search bar -->
-    <div id="topnav" class="row pt-lg-2 d-none d-lg-flex navbar-dark bg-dark">
+    <div id="topnav" class="row pt-lg-2 d-none d-lg-flex navbar-dark bg-dark topnav-margin">
       <div class="col-12 col-lg-6 my-auto py-1 py-lg-0 text-center text-lg-left">
-        <a class="navbar-brand" href="{% url 'home' %}"><img src="" width="50" height="47" alt="Website logo"></a>
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static '/images/logo.png' %}" class="logo-img" width="100" height="94" alt="Website logo"></a>
       </div>
       <div class="col-12 col-lg-6 my-auto py-1 py-lg-0">
-        <form method="GET" action="">
+        <form method="GET" action="" class="search-form">
           <div class="input-group w-50 ml-auto">
             <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search">
             <div class="input-group-append">
-              <button class="form-control btn btn-black border-black rounded-0" type="submit">
+              <button class="search-icon form-control btn btn-black border-black rounded-0" type="submit">
                 <span class="icon">
                   <i class="fas fa-search"></i>
                 </span>
@@ -75,7 +81,7 @@
       </div>
     </div>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-4 pb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-3 pb-3">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -118,15 +124,15 @@
         <ul class="nav navbar-nav w-auto mx-auto">
 
           <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-white mr-3 {% if request.resolver_match.view_name == 'home' %}active-link{% endif %}"
+            <a class="logo-font font-weight-bold nav-link text-white mr-3 nav-hover {% if request.resolver_match.view_name == 'home' %}active-link{% endif %}"
               href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-3 {% if request.resolver_match.view_name == 'about_us' %}active-link{% endif %}"
+            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover {% if request.resolver_match.view_name == 'about_us' %}active-link{% endif %}"
               href="#">About Us</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-3" href="#" id="all-products-link"
+            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-products-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               All Games
             </a>
@@ -141,7 +147,7 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-3" href="#" id="all-products-link"
+            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-products-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Genre
             </a>
@@ -154,16 +160,25 @@
               <a href="#" class="dropdown-item">Rpg</a>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-3 {% if request.resolver_match.view_name == 'all_games' %}active-link{% endif %}"
-              href="#">PEGI rating</a>
+          <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-products-link"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              PEGI Rating
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
+              <a href="#" class="dropdown-item">3</a>
+              <a href="#" class="dropdown-item">7</a>
+              <a href="#" class="dropdown-item">12</a>
+              <a href="#" class="dropdown-item">16</a>
+              <a href="#" class="dropdown-item">18</a>
+            </div>
           </li>
           <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-3 {% if request.resolver_match.view_name == 'contact' %}active-link{% endif %}"
+            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover {% if request.resolver_match.view_name == 'contact' %}active-link{% endif %}"
               href="#">Contact</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-3" href="#" id="all-products-link"
+            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-products-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               My Account
             </a>
@@ -183,7 +198,7 @@
           <li class="nav-item d-none d-lg-block">
             <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link logo-font font-weight-bold mr-3"
               href="">
-              <div class="text-center">
+              <div class="text-center nav-hover">
                 <div><span class="my-0">0</span> <i class="fas fa-shopping-bag fa-lg"></i></div>
 
               </div>
@@ -199,10 +214,72 @@
   </header>
 
   <main>
+    <!-- BACK TO TOP BUTTON -->
+    <button type="button" class="btn btn-floating btn-lg" id="btn-back-to-top" aria-label="Back to Top Button">
+      <i class="fa-solid fa-arrow-up"></i>
+  </button>
     {% block content %}
 
     {% endblock content %}
   </main>
+
+  <footer class="footer-container">
+    <div class="footer">
+        <div class="row">
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener"
+            aria-label="Visit our Facebook page (opens in a new tab)"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener"
+            aria-label="Visit our Instagram page (opens in a new tab)"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener"
+            aria-label="Visit our Youtube channel (opens in a new tab)"><i class="fa fa-youtube"></i></a>
+            <a href="https://twitter.com/" target="_blank" rel="noopener"
+            aria-label="Visit our Twiter page (opens in a new tab)"><i class="fa fa-twitter"></i></a>
+        </div>
+
+        <div class="row">
+            <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#privacy-policy">Privacy Policy</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#terms-conditions">Terms & Conditions</a></li>
+            </ul>
+        </div>
+
+        <div class="row">
+            Gamesground Store || Created and Coded By: Leonardo Simeone
+        </div>
+    </div>
+</footer>
+
+
+<!-- BACK TO TOP BUTTON JS-->
+<script type="text/javascript">
+  let mybutton = document.getElementById("btn-back-to-top");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function () {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  if (
+    document.body.scrollTop > 20 ||
+    document.documentElement.scrollTop > 20
+  ) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+// When the user clicks on the button, scroll to the top of the document
+mybutton.addEventListener("click", backToTop);
+
+function backToTop() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
+</script>
 </body>
 
 </html>
