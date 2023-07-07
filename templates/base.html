@@ -51,22 +51,19 @@
   {% block extra_js %}  
   {% endblock %}
 
-  <title>{% block title %}Gamesground{% endblock %}</title>
+  <title>Gamesground {% block title %}{% endblock %}</title>
 </head>
 
 <body>
   <header>
-    <!-- Messages -->
-    {% if messages %}
-        <div class="message-container"></div>
-    {% endif %}
+    
     <!-- Desktop logo and search bar -->
     <div id="topnav" class="row pt-lg-2 d-none d-lg-flex navbar-dark bg-dark topnav-margin">
       <div class="col-12 col-lg-6 my-auto py-1 py-lg-0 text-center text-lg-left">
         <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static '/images/logo.png' %}" class="logo-img" width="100" height="94" alt="Website logo"></a>
       </div>
       <div class="col-12 col-lg-6 my-auto py-1 py-lg-0">
-        <form method="GET" action="" class="search-form">
+        <form method="GET" action="{% url 'games' %}" class="search-form">
           <div class="input-group w-50 ml-auto">
             <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search">
             <div class="input-group-append">
@@ -96,7 +93,7 @@
           </div>
         </a>
         <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
-          <form class="form" method="GET" action="">
+          <form class="form" method="GET" action="{% url 'games' %}">
             <div class="input-group w-100">
               <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search">
               <div class="input-group-append">
@@ -137,13 +134,13 @@
               All Games
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-              <a href="#" class="dropdown-item">PS5 Games</a>
-              <a href="#" class="dropdown-item ">PS4 Games</a>
-              <a href="#" class="dropdown-item ">XBOX ONE Games</a>
-              <a href="#" class="dropdown-item ">XBOX X/S Games</a>
-              <a href="#" class="dropdown-item ">NINTENDO Games</a>
-              <a href="#" class="dropdown-item ">PC Games</a>
-              <a href="#" class="dropdown-item">All Games</a>
+              <a href="{% url 'games' %}?platform=PS5" class="dropdown-item">PS5 Games</a>
+              <a href="{% url 'games' %}?platform=PS4" class="dropdown-item ">PS4 Games</a>
+              <a href="{% url 'games' %}?platform=XBOX ONE" class="dropdown-item ">XBOX ONE Games</a>
+              <a href="{% url 'games' %}?platform=XBOX SERIES X/S" class="dropdown-item ">XBOX X/S Games</a>
+              <a href="{% url 'games' %}?platform=NINTENDO SWITCH" class="dropdown-item ">NINTENDO Games</a>
+              <a href="{% url 'games' %}?platform=PC" class="dropdown-item ">PC Games</a>
+              <a href="{% url 'games' %}" class="dropdown-item">All Games</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -152,12 +149,13 @@
               Genre
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-              <a href="#" class="dropdown-item">Action</a>
-              <a href="#" class="dropdown-item">Adventure</a>
-              <a href="#" class="dropdown-item">Fantasy</a>
-              <a href="#" class="dropdown-item">Horror</a>
-              <a href="#" class="dropdown-item">Shooter</a>
-              <a href="#" class="dropdown-item">Rpg</a>
+              <a href="{% url 'games' %}?genre=Action" class="dropdown-item">Action</a>
+              <a href="{% url 'games' %}?genre=Adventure" class="dropdown-item">Adventure</a>
+              <a href="{% url 'games' %}?genre=Fantasy" class="dropdown-item">Fantasy</a>
+              <a href="{% url 'games' %}?genre=Horror" class="dropdown-item">Horror</a>
+              <a href="{% url 'games' %}?genre=Shooter" class="dropdown-item">Shooter</a>
+              <a href="{% url 'games' %}?genre=Racing" class="dropdown-item">Racing</a>
+              <a href="{% url 'games' %}?genre=Rpg" class="dropdown-item">Rpg</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -166,11 +164,11 @@
               PEGI Rating
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-              <a href="#" class="dropdown-item">3</a>
-              <a href="#" class="dropdown-item">7</a>
-              <a href="#" class="dropdown-item">12</a>
-              <a href="#" class="dropdown-item">16</a>
-              <a href="#" class="dropdown-item">18</a>
+              <a href="{% url 'games' %}?pegi_rating=3" class="dropdown-item">3</a>
+              <a href="{% url 'games' %}?pegi_rating=7" class="dropdown-item">7</a>
+              <a href="{% url 'games' %}?pegi_rating=12" class="dropdown-item">12</a>
+              <a href="{% url 'games' %}?pegi_rating=16" class="dropdown-item">16</a>
+              <a href="{% url 'games' %}?pegi_rating=18" class="dropdown-item">18</a>
             </div>
           </li>
           <li class="nav-item">
