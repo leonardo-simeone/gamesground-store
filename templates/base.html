@@ -216,12 +216,23 @@
     <button type="button" class="btn btn-floating btn-lg" id="btn-back-to-top" aria-label="Back to Top Button">
       <i class="fa-solid fa-arrow-up"></i>
   </button>
+  <!-- Messages -->
+  {% for message in messages %}
+    <div class="alert text-center {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" id="msg" role="alert">
+      {{message}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endfor %}
+
     {% block content %}
 
     {% endblock content %}
+
   </main>
 
-  <footer class="footer-container">
+  <footer class="footer-container mt-2">
     <div class="footer">
         <div class="row">
             <a href="https://www.facebook.com/" target="_blank" rel="noopener"
