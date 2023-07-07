@@ -24,11 +24,11 @@
                 
                 <a href="{% url 'game_detail' game.id %}" class="card-body" id="game-info-card">
                   <div class="image-container">
-                    {% if "default-image" in game.image.url %}
-                      <img class="card-img-top rounded" src="{% static 'images/default-image.jpg' %}"
-                      alt="Default Image: no image">
+                    {% if game.image %}
+                    <img class="card-img-top rounded" src="{{ game.image.url }}" alt="{{game.name}}">
                     {% else %}
-                      <img class="card-img-top rounded" src="{{ game.image.url }}" alt="{{game.name}}">
+                    <img class="card-img-top rounded" src="{% static 'images/default-image.png' %}"
+                    alt="no image available">
                     {% endif %}
                   </div>
 
