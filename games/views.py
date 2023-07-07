@@ -12,6 +12,25 @@ def games(request):
 
     games = Game.objects.all()
     query = None
+    platforms = None
+    pegi_ratings = None
+    genres = None
+
+    if 'platform' in request.GET:
+        platforms = request.GET['platform'].split(',')
+        games = games.filter(platform__name__in=platforms)
+        platforms = Platform.objects.filter(name__in=platforms)
+
+    if 'pegi_rating' in request.GET:
+        pegi_ratings = request.GET['pegi_rating'].split(',')
+        games = games.filter(pegi_rating__age__in=pegi_ratings)
+        pegi_ratings = Pegi.objects.filter(age__in=pegi_ratings)
+
+    if 'genre' in request.GET:
+        g = request.GET['genre']
+        genre = Q(genre__icontains=g)            
+        games = games.filter(genre)
+
     if request.GET:
         if 'q' in request.GET:
             query = request.GET['q']
