@@ -168,6 +168,20 @@ a:hover {
     max-width: 12em;
 }
 
+/* GAMES */
+
+.game-title {
+    font-size: 1.3rem;
+}
+
+#game-info-card:hover {
+    color: #4B4A54!important;
+}
+
+.games-container{
+    width: 95%;
+}
+
 
 /* FOOTER */
 
@@ -269,6 +283,13 @@ a:hover {
 @media (min-width:768px) {
     .info-border {
         border-right: 1px solid #FFF5F9;
+    }
+
+    .card-text-overflow{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 300px;
     }
 }
 
