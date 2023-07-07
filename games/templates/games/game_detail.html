@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load embed_video_tags %}
+{% load static %}
+
+
+{% block title %}{{game.name}}{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid" id="game-detail-container">
+    <div class="row align-items-center">
+
+        <div class="col-md-5 p-2 align-self-start">
+            {% if game.image %}
+            <img src="{{ game.image.url }}" class="card-img-top game-detail-img" alt="{{game.name}}">
+            {% else %}
+            <img src="{% static 'images/default-image.png' %}" class="card-img-top game-detail-img" alt="no image available">
+            {% endif %}
+        </div>
+        <div class="col-md-7 p-4 align-self-lg-start">
+            <h2 class="">
+                {{game.name}} </h2>
+                <div class="">
+                    <p><i class="fa-solid fa-euro-sign"></i> {{game.price}}</p>
+                </div>
+                
+            <div class="game-description">
+                <p>{{game.description}}</p>
+            </div>
+
+            <div><span class="mr-2"><i class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></div>
+            <div><span class="mr-2"><i class="fa-regular fa-address-card"></i> </span><strong>{{game.pegi_rating}}</strong></div>
+            <div class="mt-2">
+                {% if game.genre %}
+                {% for g in game.genre %}
+                <a href="{% url 'games' %}?genre={{g}}" class="genre-style mr-2">{{g}}</a>
+                {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+<hr class="mt-4">
+    
+          <h2 class="text-center mt-3">Game Trailer</h2>
+        
+    
+        <div class="row justify-content-center mb-4 video-background">
+            <div class="col-md-6 embed-responsive embed-responsive-4by3 game-trailer">
+            {% video game.trailer 'small' %}
+        </div>
+            
+        </div>
+    
+</div>
+
+{% endblock %}
