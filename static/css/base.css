@@ -182,6 +182,41 @@ a:hover {
     width: 95%;
 }
 
+/* GAME DETAIL */
+
+#game-detail-container {
+    width: 95%;
+}
+
+.game-detail-img {
+    border-radius: 20px;
+    max-width: 100%;
+    min-height: 285px;
+    margin-top: 18px;
+}
+
+.game-description {
+    text-align: justify;
+}
+
+.genre-style {
+    background-color: rgba(217,218,255,.8); /* #D9DAFF in rgba Skip Shade Gradient from base color #000000 */
+    border-radius: 5px;
+    padding: 0 5px;
+    color: #000000!important;
+    border: 1px solid #FFF5F9;
+    text-transform: uppercase;
+    font-family: 'Merriweather Sans', sans-serif;;
+}
+
+.genre-style:hover {
+    background-color: #00E6E4;
+}
+
+.game-trailer {
+    border-radius: 10px;
+}
+
 
 /* FOOTER */
 
