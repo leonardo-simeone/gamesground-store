@@ -1,41 +1,52 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Gamesground{% endblock %}
+{% block title %}Games{% endblock %}
 
 {% block content %}
 
-<div class="container">
+<div class="container-fluid games-container">
+
+  <div class="row text-center mt-3">
+    <div class="col-12">
+      <h2>Games</h2>
+    </div>
+  </div>
+  <hr>
     <div class="row">
 
       <div class="col-12 mt-3 left">
         <div class="row">
           {% for game in games %}
-          <div class="col-md-3 recipe-card-padding">
-            <div class="card mb-4">
-              <div class="card-body">
-                <div class="image-container">
-                  {% if "default-image" in game.image.url %}
-                  <img class="card-img-top rounded" src="{% static 'images/default-image.jpg' %}"
-                    alt="Default Image: no image">
-                  {% else %}
-                  <img class="card-img-top rounded" src=" {{ game.image.url }} " alt="{{game.name}}">
-                  {% endif %}
-                </div>
+          
+            <div class="col-md-4 col-lg-3 mb-4">
+              <div class="card mb-4 h-100">
+                
+                <a href="{% url 'game_detail' game.id %}" class="card-body" id="game-info-card">
+                  <div class="image-container">
+                    {% if "default-image" in game.image.url %}
+                      <img class="card-img-top rounded" src="{% static 'images/default-image.jpg' %}"
+                      alt="Default Image: no image">
+                    {% else %}
+                      <img class="card-img-top rounded" src="{{ game.image.url }}" alt="{{game.name}}">
+                    {% endif %}
+                  </div>
 
-                <h2 class="card-title"><a class="title-color" href="#">{{game.name}}</a>
-                </h2>
+                  <h2 class="card-title game-title card-text-overflow">{{game.name}}
+                  </h2>
 
-                <p class="card-text">{{game.price}}</p>
-                <p class="card-text text-muted">{{game.platform.name}}</p>
-
+                  <p class="card-text"><i class="fa-solid fa-euro-sign"></i> {{game.price}}</p>
+                  <hr>
+                  <p class="card-text card-text-overflow">{{game.platform.name}}</p>
+                  <hr>
+                  <span class="float-right">5 <i class="fa-solid fa-heart"></i></span>
+                </a>
+              
+              
               </div>
             </div>
-          </div>
-          {% if forloop.counter|divisibleby:4 %}
-        </div>
-        <div class="row">
-          {% endif %}
+        
+          
           {% endfor %}
         </div>
       </div>
