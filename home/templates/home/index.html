@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Gamesground{% endblock %}
 
 {% block content %}
 
@@ -13,7 +12,7 @@
             <hr class="my-4 index-hr">
             <p><span id="jumbo-stext"><strong><em>We have games for every console, niche, genre, age and
                             taste.</em></strong></span></p>
-            <a class="btn btn-primary btn-lg" id="jumbo-a" href="#" role="button">Shop Now</a>
+            <a class="btn btn-primary btn-lg" id="jumbo-a" href="{% url 'games' %}" role="button">Shop Now</a>
         </div>
     </div>
 </section>
@@ -24,13 +23,13 @@
         <div class="row mt-3">
             <div class="col-12 mt-3 left pr-0 pl-0">
                 <div class="row">
-                    <div class="col-md-4 recipe-card-padding">
+                    <div class="col-md-4">
                         <div class="card mb-4">
-                            <a href="#">
+                            <a href="{% url 'games' %}?platform=PS5,PS4">
                                 <div class="card-body">
                                     <div class="image-container">
                                         <img class="card-img-top rounded" src="{% static '/images/ps-controller.jpg' %}"
-                                            alt="Default Image: Venezuelan flag waving in the wind">
+                                            alt="play station controller">
                                     </div>
 
                                     <h2 class="card-title">Play Station Games
@@ -42,14 +41,14 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4 recipe-card-padding">
+                    <div class="col-md-4">
                         <div class="card mb-4">
-                            <a href="#">
+                            <a href="{% url 'games' %}?platform=XBOX SERIES X/S,XBOX ONE">
                                 <div class="card-body">
                                     <div class="image-container">
                                         <img class="card-img-top rounded"
                                             src="{% static '/images/xbox-controller.png' %}"
-                                            alt="Default Image: Venezuelan flag waving in the wind">
+                                            alt="xbox controller station controller">
                                     </div>
 
                                     <h2 class="card-title">Xbox Games
@@ -61,13 +60,13 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4 recipe-card-padding">
+                    <div class="col-md-4">
                         <div class="card mb-4">
-                            <a href="#">
+                            <a href="{% url 'games' %}?platform=PC">
                                 <div class="card-body">
                                     <div class="image-container">
                                         <img class="card-img-top rounded" src="{% static '/images/pc-controller.png' %}"
-                                            alt="Default Image: Venezuelan flag waving in the wind">
+                                            alt="keyboard and mouse">
                                     </div>
 
                                     <h2 class="card-title">Pc Games
