@@ -31,6 +31,7 @@ class Game(models.Model):
         ('Action', 'Action'), ('Adventure', 'Adventure'),
         ('Fantasy', 'Fantasy'), ('Horror', 'Horror'),
         ('Shooter', 'Shooter'), ('Racing', 'Racing'), ('Rpg', 'Rpg'),
+        ('Sports', 'Sports'),
         )
 
     name = models.CharField(max_length=254)
