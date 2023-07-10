@@ -182,6 +182,31 @@ a:hover {
     width: 95%;
 }
 
+.platform-badge {
+    background-color: #000000;
+    font-family: 'Catamaran', sans-serif;
+}
+
+.platform-badge:hover {
+    background-color: white;
+    color: #000000!important;
+}
+
+.pegi-row{
+    max-width: fit-content;
+    margin: 0 auto;
+}
+
+.pegi-badge{
+    background-color: #000000;
+    font-family: 'Catamaran', sans-serif;
+}
+
+.link-home:hover{
+    color: #00E6E4!important;
+    text-decoration: underline!important;
+}
+
 /* GAME DETAIL */
 
 #game-detail-container {
@@ -217,6 +242,9 @@ a:hover {
     border-radius: 10px;
 }
 
+.plat-pegi-hover:hover {
+    color: #F9F871!important;
+}
 
 /* FOOTER */
 
