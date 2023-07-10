@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
+from django.db.models.functions import Lower
 from .models import *
 
 
@@ -15,6 +16,24 @@ def games(request):
     platforms = None
     pegi_ratings = None
     genres = None
+    g = None
+    sort = None
+    direction = None
+
+    if request.GET:
+        if 'sort' in request.GET:
+            sortkey = request.GET['sort']
+            sort = sortkey
+            if sortkey == 'name':
+                sortkey = 'lower_name'
+                games = games.annotate(lower_name=Lower('name'))
+            if sortkey == 'platform':
+                sortkey = 'platform__name'
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+            games = games.order_by(sortkey)
 
     if 'platform' in request.GET:
         platforms = request.GET['platform'].split(',')
@@ -28,7 +47,7 @@ def games(request):
 
     if 'genre' in request.GET:
         g = request.GET['genre']
-        genre = Q(genre__icontains=g)            
+        genre = Q(genre__icontains=g)
         games = games.filter(genre)
 
     if request.GET:
@@ -40,9 +59,15 @@ def games(request):
             queries = Q(name__icontains=query) | Q(description__icontains=query) | Q(genre__icontains=query) | Q(platform__name__icontains=query)
             games = games.filter(queries)
 
+    selected_sorting = f'{sort}_{direction}'
+
     context = {
         'games': games,
         'search_term': query,
+        'selected_platforms': platforms,
+        'selected_pegi': pegi_ratings,
+        'g': g,
+        'selected_sorting': selected_sorting,
     }
 
     return render(request, 'games/games.html', context)
