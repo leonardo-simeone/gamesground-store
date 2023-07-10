@@ -10,9 +10,60 @@
   <div class="row text-center mt-3">
     <div class="col-12">
       <h2>Games</h2>
+      {% for s in selected_platforms %}
+        <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1" href="{% url 'games' %}?platform={{ s.name }}">
+          <span class="p-2 mt-2">{{ s.name }}</span>
+        </a>
+       {% endfor %}
+       {% for s in selected_pegi %}
+       <div class="row pegi-row">
+        <div class="col-12">
+       <p class="pegi-badge text-decoration-none rounded mr-2 ml-2 p-1 text-uppercase">
+         Ages {{ s.age }} and Over
+       </p>
+      </div>
+      </div>
+      {% endfor %}
+      {% if g %}
+       <div class="row pegi-row">
+        <div class="col-12">
+       <p class="pegi-badge text-decoration-none rounded mr-2 ml-2 p-1 text-uppercase">
+         {{ g }}
+       </p>
+      </div>
+      </div>
+      {% endif %}
     </div>
   </div>
   <hr>
+
+  <div class="row mt-1 mb-2">
+    <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
+        <div class="sort-select-wrapper w-50">
+            <select id="sort-selector" class="custom-select custom-select-sm rounded border border-{% if selected_sorting != 'None_None' %}info{% else %}black{% endif %}">
+                <option value="reset" {% if selected_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                <option value="price_asc" {% if selected_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                <option value="price_desc" {% if selected_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                <option value="pegi_rating_asc" {% if selected_sorting == 'pegi_rating_asc' %}selected{% endif %}>PEGI Rating (low to high)</option>
+                <option value="pegi_rating_desc" {% if selected_sorting == 'pegi_rating_desc' %}selected{% endif %}>PEGI Rating (high to low)</option>
+                <option value="name_asc" {% if selected_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+                <option value="name_desc" {% if selected_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+                <option value="platform_asc" {% if selected_sorting == 'platform_asc' %}selected{% endif %}>Platform (A-Z)</option>
+                <option value="platform_desc" {% if selected_sorting == 'platform_desc' %}selected{% endif %}>Platform (Z-A)</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 order-md-first">
+        <p class="mt-3 text-center text-md-left">
+            {% if search_term or selected_platforms or selected_pegi or selected_sorting or g != 'None_None' %}
+                <span><a class="link-home" href="{% url 'games' %}">Games Home</a> | </span>
+            {% endif %}
+            {{ games|length }} Games{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+        </p>
+    </div>
+  </div>
+
+
     <div class="row">
 
       <div class="col-12 mt-3 left">
