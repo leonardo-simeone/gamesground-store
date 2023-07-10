@@ -27,9 +27,15 @@
             <div class="game-description">
                 <p>{{game.description}}</p>
             </div>
+            {% if game.platform %}
+                <div><a class="plat-pegi-hover" href="{% url 'games' %}?platform={{ game.platform }}"><span class="mr-2"><i class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></a></div>
+            {% endif %}
 
-            <div><span class="mr-2"><i class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></div>
-            <div><span class="mr-2"><i class="fa-regular fa-address-card"></i> </span><strong>{{game.pegi_rating}}</strong></div>
+            {% if game.pegi_rating %}
+                <div><a class="plat-pegi-hover" href="{% url 'games' %}?pegi_rating={{ game.pegi_rating.age }}"><span class="mr-2"><i class="fa-regular fa-address-card"></i> </span><strong>{{game.pegi_rating}}</strong></a></div>
+            {% endif %}
+            <div><span class="mr-2"><i class="fa-solid fa-calendar-days"></i> </span><strong>{{game.year}}</strong></div>
+            <div><i class="fa-solid fa-heart mr-2"></i> {{ game.total_likes }}</div>
             <div class="mt-2">
                 {% if game.genre %}
                 {% for g in game.genre %}
