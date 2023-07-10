@@ -88,9 +88,11 @@
 
                   <p class="card-text"><i class="fa-solid fa-euro-sign"></i> {{game.price}}</p>
                   <hr>
-                  <p class="card-text card-text-overflow">{{game.platform.name}}</p>
+                  {% if game.platform %}
+                    <p class="card-text card-text-overflow">{{game.platform.name}}</p>
+                  {% endif %}
                   <hr>
-                  <span class="float-right">5 <i class="fa-solid fa-heart"></i></span>
+                  <span class="float-right">{{ game.total_likes }} <i class="fa-solid fa-heart"></i></span>
                 </a>
               
               
@@ -105,3 +107,4 @@
   </div>
 
 {% endblock %}
+
