@@ -40,7 +40,6 @@ class Game(models.Model):
     year = models.CharField(max_length=4)
     platform = models.ForeignKey('Platform', null=True, blank=True, on_delete=models.SET_NULL)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    models.ImageField(null=True, blank=True, default='default-image')
     pegi_rating = models.ForeignKey('Pegi', null=True, blank=True, on_delete=models.SET_NULL)
     image = models.ImageField(null=True, blank=True)
     available_in_other_consoles = models.BooleanField(default=False, null=True, blank=True)
