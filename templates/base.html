@@ -288,8 +288,40 @@ function backToTop() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+</script>
+
+<!-- JS LOGIC TO CONTROL SORT BY BAR -->
+<script type="text/javascript">
+$('#sort-selector').change(function() {
+            var selector = $(this);
+            var currentUrl = new URL(window.location);
+
+            var selectedVal = selector.val();
+            if(selectedVal != "reset" && selectedVal!="pegi_rating_asc" && selectedVal!="pegi_rating_desc"){             
+                
+              var sort = selectedVal.split("_")[0];
+              var direction = selectedVal.split("_")[1];
+              currentUrl.searchParams.set("sort", sort);
+              currentUrl.searchParams.set("direction", direction);
+              window.location.replace(currentUrl);
+
+            } else if (selectedVal == "pegi_rating_asc" || selectedVal == "pegi_rating_desc"){
+                var sort = ("pegi_rating")
+                var direction = selectedVal.split("pegi_rating_")[1];
+                currentUrl.searchParams.set("sort", sort);
+                currentUrl.searchParams.set("direction", direction);
+                window.location.replace(currentUrl);
+            
+            } else {
+                currentUrl.searchParams.delete("sort");
+                currentUrl.searchParams.delete("direction");
+
+                window.location.replace(currentUrl);
+            }
+        })
 
 </script>
+
 </body>
 
 </html>
