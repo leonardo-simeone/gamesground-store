@@ -1,1 +1,1 @@
-web: gunicorn gamesground-store.wsgi:application
+web: gunicorn gamesground_store.wsgi:application
