@@ -246,6 +246,10 @@ a:hover {
     color: #F9F871!important;
 }
 
+.video-background {
+    margin: 0 auto;
+}
+
 /* FOOTER */
 
 .footer-container {
