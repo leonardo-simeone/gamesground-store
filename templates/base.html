@@ -109,9 +109,9 @@
       </li>
       <li class="list-inline-item">
         <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none"
-          href="">
+          href="{% url 'basket_summary' %}">
           <div class="text-center">
-            <div><span class="my-0">0</span> <i class="fas fa-shopping-bag fa-lg"></i></div>
+            <div><span class="my-0">0</span> <i class="fa-solid fa-basket-shopping"></i></div>
 
           </div>
         </a>
@@ -196,9 +196,9 @@
           </li>
           <li class="nav-item d-none d-lg-block">
             <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link logo-font font-weight-bold mr-3"
-              href="">
+              href="{% url 'basket_summary' %}">
               <div class="text-center nav-hover">
-                <div><span class="my-0">0</span> <i class="fas fa-shopping-bag fa-lg"></i></div>
+                <div><span class="my-0">0</span> <i class="fa-solid fa-basket-shopping"></i></div>
 
               </div>
             </a>
