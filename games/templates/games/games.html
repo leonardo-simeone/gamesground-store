@@ -3,6 +3,8 @@
 
 {% block title %}Games{% endblock %}
 
+
+
 {% block content %}
 <div class="site-wide-alert alert alert-warning rounded-0 text-center">
   <strong>Free delivery</strong> when you spend over €{{ free_delivery_threshold }}
@@ -11,30 +13,34 @@
 <div class="container-fluid games-container">
 
   <div class="row text-center mt-3">
-    <div class="col-12">
+    <div class="col-12 consoles-small">
       <h2>Games</h2>
+      
       {% for s in selected_platforms %}
-        <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1" href="{% url 'games' %}?platform={{ s.name }}">
+        <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1 d-none d-md-inline" href="{% url 'games' %}?platform={{ s.name }}">
           <span class="p-2 mt-2">{{ s.name }}</span>
         </a>
+
+        <div class="d-sm-block d-md-none mb-1">
+          <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1" href="{% url 'games' %}?platform={{ s.name }}">
+            <span class="p-2 mt-2">{{ s.name }}</span>
+          </a>
+        </div>
        {% endfor %}
+      
        {% for s in selected_pegi %}
-       <div class="row pegi-row">
-        <div class="col-12">
-       <p class="pegi-badge text-decoration-none rounded mr-2 ml-2 p-1 text-uppercase">
-         Ages {{ s.age }} and Over
-       </p>
-      </div>
-      </div>
+        <div class="pegi-row">
+          <p class="pegi-badge text-decoration-none rounded mr-2 ml-2 p-1 text-uppercase">
+            Ages {{ s.age }} and Over
+          </p>
+        </div>
       {% endfor %}
       {% if g %}
-       <div class="row pegi-row">
-        <div class="col-12">
-       <p class="pegi-badge text-decoration-none rounded mr-2 ml-2 p-1 text-uppercase">
-         {{ g }}
-       </p>
-      </div>
-      </div>
+        <div class="pegi-row">
+          <p class="pegi-badge text-decoration-none rounded mr-2 ml-2 p-1 text-uppercase">
+            {{ g }}
+          </p>
+        </div>
       {% endif %}
     </div>
   </div>
@@ -81,10 +87,10 @@
                 <a href="{% url 'game_detail' game.id %}" class="card-body" id="game-info-card">
                   <div class="image-container">
                     {% if game.image %}
-                    <img class="card-img-top rounded" src="{{ game.image.url }}" alt="{{game.name}}">
+                      <img class="card-img-top rounded" src="{{ game.image.url }}" alt="{{game.name}}">
                     {% else %}
-                    <img class="card-img-top rounded" src="{% static 'images/default-image.png' %}"
-                    alt="no image available">
+                      <img class="card-img-top rounded" src="{% static 'images/default-image.png' %}"
+                      alt="no image available">
                     {% endif %}
                   </div>
 
