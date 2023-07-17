@@ -442,6 +442,41 @@ a:hover {
     }
 }
 
+@media (max-width:767px){
+    .consoles-small {
+        font-size: small;
+        text-align: left;
+    }
+
+    .platform-badge {
+        padding: 0!important;
+        margin: 2px 2px 5px 2px!important;
+    }
+
+    .pegi-row {
+        text-align: left;
+        margin: 0;
+    }
+
+    .pegi-badge {
+        margin-left: 0!important;
+    }
+
+}
+
+@media (max-width:812px) {
+    .small-buttons {
+        padding: 0.25rem 0.56rem;
+        font-size: .875rem;
+        line-height: 1.5;
+    }
+
+    .add-input {
+        padding: 0.31rem 0.5rem;
+    }
+}
+
+
 @media (max-width:520px){
     #jumbo-stext {
         background-color: transparent;
