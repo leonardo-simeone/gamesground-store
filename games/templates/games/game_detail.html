@@ -74,35 +74,49 @@
             <input type="hidden" name="redirect_url" value="{{ request.path }}">
         </form>
         {% if game.platform %}
-                <div class="mt-2"><a class="plat-pegi-hover" href="{% url 'games' %}?platform={{ game.platform }}"><span class="mr-2"><i class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></a></div>
+            <div class="mt-2"><a class="plat-pegi-hover" href="{% url 'games' %}?platform={{ game.platform }}"><span class="mr-2"><i class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></a></div>
+        {% endif %}
+
+        {% if game.pegi_rating %}
+            <div><a class="plat-pegi-hover" href="{% url 'games' %}?pegi_rating={{ game.pegi_rating.age }}"><span class="mr-2"><i class="fa-regular fa-address-card"></i> </span><strong>{{game.pegi_rating}}</strong></a></div>
+        {% endif %}
+        <div><span class="mr-2"><i class="fa-solid fa-calendar-days"></i> </span><strong>{{game.year}}</strong></div>
+        <div><i class="fa-solid fa-heart mr-2"></i> {{ game.total_likes }}</div>
+        <div class="mt-2">
+            {% if game.genre %}
+            {% for g in game.genre %}
+            <a href="{% url 'games' %}?genre={{g}}" class="genre-style mr-2">{{g}}</a>
+            {% endfor %}
             {% endif %}
 
-            {% if game.pegi_rating %}
-                <div><a class="plat-pegi-hover" href="{% url 'games' %}?pegi_rating={{ game.pegi_rating.age }}"><span class="mr-2"><i class="fa-regular fa-address-card"></i> </span><strong>{{game.pegi_rating}}</strong></a></div>
-            {% endif %}
-            <div><span class="mr-2"><i class="fa-solid fa-calendar-days"></i> </span><strong>{{game.year}}</strong></div>
-            <div><i class="fa-solid fa-heart mr-2"></i> {{ game.total_likes }}</div>
-            <div class="mt-2">
-                {% if game.genre %}
-                {% for g in game.genre %}
-                <a href="{% url 'games' %}?genre={{g}}" class="genre-style mr-2">{{g}}</a>
-                {% endfor %}
-                {% endif %}
+        </div>
 
-            </div>
+        <div class="mt-2">
+            {% if game.available_in_other_consoles %}
+            <p><em>This game is available in other consoles</em></p>
+            {% endif %}
+
         </div>
     </div>
-<hr class="mt-4">
+        
+        
+    </div>
+    <hr class="mt-4">
+    <h2>Additional game information</h2>
+    <div class="game-description">
+        <p>{{game.description}}</p>
+    </div>
+    <hr class="mt-4">
     
-          <h2 class="text-center mt-3">Game Trailer</h2>
+    <h2 class="text-center mt-3">Game Trailer</h2>
         
     
-        <div class="row justify-content-center mb-4 video-background">
-            <div class="col-md-6 embed-responsive embed-responsive-4by3 game-trailer">
-            {% video game.trailer 'small' %}
-        </div>
-            
-        </div>
+    <div class="row justify-content-center mb-4 video-background">
+        <div class="col-md-6 embed-responsive embed-responsive-16by9 game-trailer">
+        {% video game.trailer 'small' %}
+    </div>
+        
+    </div>
     
 </div>
 
