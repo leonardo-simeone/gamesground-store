@@ -108,10 +108,16 @@
         </div>
       </li>
       <li class="list-inline-item">
-        <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none"
+        <a class="{% if game_count %}game-count-color{% endif %} nav-link d-block d-lg-none"
           href="{% url 'basket_summary' %}">
-          <div class="text-center">
-            <div><span class="my-0">0</span> <i class="fa-solid fa-basket-shopping"></i></div>
+          <div class="text-center basket-icon{% if game_count %} game-count-color{% endif %}">
+            <div><span class="my-0">
+              {% if game_count %}
+                    {{ game_count }}
+                  {% else %}
+                    0
+                  {% endif %}
+            </span> <i class="fa-solid fa-basket-shopping"></i></div>
 
           </div>
         </a>
@@ -195,10 +201,16 @@
             </div>
           </li>
           <li class="nav-item d-none d-lg-block">
-            <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link logo-font font-weight-bold mr-3"
+            <a class="nav-link logo-font font-weight-bold mr-3"
               href="{% url 'basket_summary' %}">
-              <div class="text-center nav-hover">
-                <div><span class="my-0">0</span> <i class="fa-solid fa-basket-shopping"></i></div>
+              <div class="text-center nav-hover basket-icon{% if game_count %} game-count-color h5{% endif %}">
+                <div><span class="my-0">
+                  {% if game_count %}
+                    {{ game_count }}
+                  {% else %}
+                    0
+                  {% endif %}
+                </span> <i class="fa-solid fa-basket-shopping"></i></div>
 
               </div>
             </a>
