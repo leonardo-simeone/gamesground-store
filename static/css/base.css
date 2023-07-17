@@ -125,6 +125,10 @@ a:hover {
     margin-left: 0;
 }
 
+.basket-icon {
+    color: white;
+}
+
 /* INDEX */
 
 .card {
@@ -207,6 +211,10 @@ a:hover {
     text-decoration: underline!important;
 }
 
+.site-wide-alert {
+    background-color: #F9F871;
+}
+
 /* GAME DETAIL */
 
 #game-detail-container {
@@ -246,8 +254,101 @@ a:hover {
     color: #F9F871!important;
 }
 
+.add-input {
+    border: none;
+    font-family: 'Catamaran', sans-serif;
+}
+
+.add-input:hover {
+    color: #00C9C8;
+}
+
 .video-background {
     margin: 0 auto;
+}
+
+/* BASKET */
+
+
+.table-head {
+    color: #000000;
+    background-color: #FFF5F9;
+}
+
+.tmb {
+    margin-bottom: 0!important;
+}
+
+.table-game-info {
+    background-color: #A3CFCD; /* Matching Gradient from base color #000000 */
+    border-bottom: 1px solid #000000;
+}
+
+.btn-inc-dec {
+    background: #000000!important;
+    color: white;
+}
+
+.btn-inc-dec:hover {
+    color: #00C9C8;
+}
+
+.table-total {
+    background-color: rgba(0,230,228,.5);
+}
+
+.btn-shopping-basket {
+    background-color: #00C9C8;
+    color: #000000!important;
+}
+
+.btn-shopping-basket:hover {
+    background-color: #000000;
+    color: #00C9C8!important;
+}
+
+.update-link{
+    font-family: 'Merriweather Sans', sans-serif!important;
+    color: #000000!important;
+    cursor: pointer;
+}
+
+.remove-item{
+    font-family: 'Merriweather Sans', sans-serif!important;
+    color: #000000!important;
+    cursor: pointer;
+}
+
+.update-link:hover {
+    color: #005B60!important; /* Friend palette from base color #000000 */
+    text-decoration: underline!important;
+}
+
+.remove-item:hover {
+    color: #FB4F93!important; /* Pin Palette from base color #000000 */
+    text-decoration: underline!important;
+}
+
+.basket-total-mobile {
+    background-color: #FFF5F9;
+    margin-right: auto;
+    margin-left: auto;
+    color: #000000;
+}
+
+.game-info-mobile{
+    background-color: #A3CFCD;
+    margin-right: auto;
+    margin-left: auto;
+    color: #000000;
+}
+
+.basket-headings {
+    text-transform: capitalize!important;
+}
+
+.game-count-color {
+    color: #F9F871!important;
 }
 
 /* FOOTER */
