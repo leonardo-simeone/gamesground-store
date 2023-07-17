@@ -28,11 +28,53 @@
                     <p><i class="fa-solid fa-euro-sign"></i> {{game.price}}</p>
                 </div>
                 
-            <div class="game-description">
-                <p>{{game.description}}</p>
+            
+
+            <!-- Quantity Form -->
+        <form class="form" action="{% url 'add_to_basket' game.id %}" method="POST">
+            {% csrf_token %}
+            <div class="col-12 pl-0">
+                <p class="mt-3"><strong>Quantity:</strong></p>
+                <div class="form-group w-50">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button class="decrement-qty btn-inc-dec btn btn-sm" data-item_id=""
+                                id="">
+                                <span>
+                                    <i class="fas fa-minus fa-sm"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <input class="form-control form-control-sm qty_input" type="number"
+                            name="quantity" value="1" min="1" max="99" data-item_id="" id="">
+                        <div class="input-group-append">
+                            <button class="increment-qty btn-inc-dec btn btn-sm" data-item_id=""
+                                id="">
+                                <span>
+                                    <i class="fas fa-plus fa-sm"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            {% if game.platform %}
-                <div><a class="plat-pegi-hover" href="{% url 'games' %}?platform={{ game.platform }}"><span class="mr-2"><i class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></a></div>
+
+            <div class="col-12 mt-2 pl-0">
+                
+                <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" class="btn btn-shopping-basket rounded btn-lg mr-2 small-buttons">
+                    <span class="icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <span class="text-uppercase">Keep Shopping</span>
+                </a>
+
+                <input type="submit" class="text-uppercase add-input btn btn-shopping-basket rounded btn-lg small-buttons" value="Add to Basket">
+
+            </div>
+            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+        </form>
+        {% if game.platform %}
+                <div class="mt-2"><a class="plat-pegi-hover" href="{% url 'games' %}?platform={{ game.platform }}"><span class="mr-2"><i class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></a></div>
             {% endif %}
 
             {% if game.pegi_rating %}
