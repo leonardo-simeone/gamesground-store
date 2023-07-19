@@ -269,5 +269,18 @@
         var form = $(this).prev('.update-form');
         form.submit();
     })
+
+    // Remove game and reload on click
+    $('.remove-item').click(function(e) {
+        var csrfToken = "{{ csrf_token }}";
+        var gameId = $(this).attr('id').split('remove_')[1];
+        var url = `/basket/remove/${gameId}/`;
+        var data = {'csrfmiddlewaretoken': csrfToken,};
+
+        $.post(url, data)
+         .done(function() {
+             location.reload();
+         });
+    })
 </script>
 {% endblock %}
