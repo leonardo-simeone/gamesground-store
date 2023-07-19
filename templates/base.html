@@ -231,7 +231,7 @@
   </button>
   <!-- Messages -->
   {% for message in messages %}
-    <div class="alert text-center {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" id="msg" role="alert">
+    <div class="all-messages alert text-center {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" id="msg" role="alert">
       {{message}}
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -333,6 +333,10 @@ $('#sort-selector').change(function() {
         })
 
 </script>
+
+{% block postloadjs %}
+
+{% endblock %}
 
 </body>
 
