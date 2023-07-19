@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load basket_tools %}
 
 {% block title %}Basket{% endblock %}
 
@@ -31,15 +32,15 @@
             {% if basket_items %}
                 <div class="d-block d-md-none">
                     <div class="row basket-total-mobile mb-2 rounded">
-                        <div class="col pl-2 pt-2">
+                        <div class="col pl-2 pt-2 pr-2">
                             <!-- Basket total mobile -->
                             <h6 class="basket-headings"><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h6>
                             <h6 class="basket-headings">Delivery: €{{ delivery|floatformat:2 }}</h6>
                             <h4 class="mt-4 basket-headings"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong>
                             </h4>
                             {% if free_delivery_delta > 0 %}
-                                <p class="mb-1 text-danger">
-                                    You could get free delivery by spending just <strong>${{ free_delivery_delta }}</strong>
+                                <p class="mb-1 free-delivery">
+                                    You could get <em>free delivery</em><i class="fa-solid fa-truck mr-1 ml-2"></i> by spending just <strong>${{ free_delivery_delta }}</strong>
                                     more!
                                 </p>
                             {% endif %}
@@ -61,7 +62,7 @@
                                     <i class="fas fa-lock"></i>
                                 </span>
                             </a>
-                            <p class="mb-5">You can find your basket contents below</p>
+                            <p class="mb-4 mt-3">You can find your basket contents below</p>
                         </div>
                     </div>
 
@@ -80,12 +81,12 @@
                             </div>
                             <!-- Game Name mobile -->
                             <div class="col-12 col-sm-6 mb-2">
-                                <p class="my-0"><strong>{{ item.game.name }}</strong> <span>{{ item.game.platform }}</span></p>
+                                <p class="my-0 mobile-game-name"><strong>{{ item.game.name }}</strong> <span>{{ item.game.platform }}</span></p>
                             </div>
                             <!-- Game Price mobile -->
                             <div class="col-12 col-sm-6 order-sm-last">
                                 <p class="my-0">Price Each: €{{ item.game.price }}</p>
-                                <p><strong>Subtotal: </strong>€50
+                                <p><strong>Subtotal: </strong>{{ item.game.price | calc_subtotal:item.quantity }}
                                     
                                 </p>
                             </div>
@@ -191,7 +192,7 @@
                                     <a class="remove-item float-right" id="remove_{{ item.game_id }}"><small>Remove</small></a>
                                 </td>
                                 <td class="py-3">
-                                    <p class="my-0">€101.98</p>
+                                    <p class="my-0">{{ item.game.price | calc_subtotal:item.quantity }}</p>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -205,8 +206,8 @@
                                 <h4 class="mt-4 basket-headings"><strong>Grand Total:
                                         €{{ grand_total|floatformat:2 }}</strong></h4>
                                 {% if free_delivery_delta > 0 %}
-                                    <p class="mb-1 text-danger">
-                                        You could get free delivery by spending just <strong>${{ free_delivery_delta }}</strong>
+                                    <p class="mb-1 free-delivery">
+                                        You could get <em>free delivery</em><i class="fa-solid fa-truck mr-1 ml-2"></i> by spending just <strong>${{ free_delivery_delta }}</strong>
                                         more!
                                     </p>
                                 {% endif %}
@@ -244,7 +245,7 @@
             <div class="col">
 
                 <p class="mb-5">You have no games in your basket</p>
-                <a href="{% url 'games' %}" class="btn btn-shopping-basket rounded btn-lg mr-2">
+                <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" class="btn btn-shopping-basket rounded btn-lg mr-2">
                     <span class="icon">
                         <i class="fas fa-chevron-left"></i>
                     </span>
