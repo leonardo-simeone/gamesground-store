@@ -59,7 +59,7 @@ def games(request):
             query = request.GET['q']
             if not query:
                 messages.error(request, 'Opps! You need to write something in the search bar...')
-                return redirect(reverse('home'))
+                return redirect(reverse('games'))
             queries = Q(name__icontains=query) | Q(description__icontains=query) | Q(genre__icontains=query) | Q(platform__name__icontains=query)
             games = games.filter(queries)
 
@@ -78,7 +78,6 @@ def games(request):
 
 
 # ----------------------------------------------------------------
-
 def game_detail(request, game_id):
     """
     A view to show individual game details
