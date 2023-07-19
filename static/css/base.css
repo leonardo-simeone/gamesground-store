@@ -38,7 +38,7 @@ a {
 }
 
 .hero {
-    background: url('/static/images/hero.jpg') no-repeat fixed;
+    background: url('/static/images/hero.jpg') no-repeat;
     background-size: cover;
     height: calc(100vh - 164px);
     max-height: 450px;
@@ -129,6 +129,13 @@ a:hover {
     color: white;
 }
 
+/* MESSAGES */
+
+.all-messages{
+    width: 95vw;
+    margin: 10px auto;
+}
+
 /* INDEX */
 
 .card {
@@ -139,6 +146,10 @@ a:hover {
 .card-body {
     background-color: rgba(0,230,228,.6); /* #00E6E4 in rgba Pin Palette from base color #000000 */
     border-radius: 8px;
+}
+
+.index-card{
+    min-height: 347px;
 }
 
 .card-body:hover {
@@ -226,6 +237,10 @@ a:hover {
     max-width: 100%;
     min-height: 285px;
     margin-top: 18px;
+}
+
+.input-width {
+    max-width: 39%;
 }
 
 .game-description {
@@ -322,11 +337,17 @@ a:hover {
 .update-link:hover {
     color: #005B60!important; /* Friend palette from base color #000000 */
     text-decoration: underline!important;
+    background-color: #FFF5F9;
+    border-radius: 3px;
+    padding: 3px;
 }
 
 .remove-item:hover {
     color: #FB4F93!important; /* Pin Palette from base color #000000 */
     text-decoration: underline!important;
+    background-color: #FFF5F9;
+    border-radius: 3px;
+    padding: 2px;
 }
 
 .basket-total-mobile {
@@ -349,6 +370,16 @@ a:hover {
 
 .game-count-color {
     color: #F9F871!important;
+}
+
+.free-delivery {
+    color: #F9F871;
+    background-color: black;
+    width: 80%;
+    margin: 0 auto;
+    padding: 2px;
+    border-radius: 3px;
+    text-align: center;
 }
 
 /* FOOTER */
@@ -398,6 +429,8 @@ a:hover {
     margin: 0% 1%;
 }
 
+/* MEDIA QUERIES */
+
 @media (max-width:720px) {
     .footer {
         padding: 5% 2% 2% 2%;
@@ -436,11 +469,6 @@ a:hover {
     }
 }
 
-@media (max-width:767px) {
-    #top-info{
-        margin-top: 15px!important;
-    }
-}
 
 @media (max-width:767px){
     .consoles-small {
@@ -460,6 +488,26 @@ a:hover {
 
     .pegi-badge {
         margin-left: 0!important;
+    }
+
+    .free-delivery {
+        width: 100%;
+    }
+
+    .update-link:hover {
+        padding: 0;
+    }
+    
+    .remove-item:hover {
+        padding: 0;
+    }
+
+    .jumbo-wrapper {
+        background-color: rgba(0,0,0,.45)
+    }
+
+    #top-info{
+        margin-top: 15px!important;
     }
 
 }
@@ -483,9 +531,25 @@ a:hover {
     }
 }
 
+
+@media (min-width:576px) {
+    .mobile-game-name{
+        margin-top: 15vh!important
+    }
+}
+
+
 @media (min-width:768px) {
     .info-border {
         border-right: 1px solid #FFF5F9;
+    }
+
+    .hero {
+        background: url('/static/images/hero.jpg') no-repeat fixed;
+        background-size: cover;
+        height: calc(100vh - 164px);
+        max-height: 450px;
+        border-radius: 0!important;
     }
 
     .card-text-overflow{
