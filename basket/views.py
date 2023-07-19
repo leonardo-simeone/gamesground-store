@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, HttpResponse
+from django.contrib import messages
 
 
 def basket_summary(request):
@@ -41,3 +42,18 @@ def adjust_basket(request, game_id):
         basket.pop(game_id)
     request.session['basket'] = basket
     return redirect(reverse('basket_summary'))
+
+
+# ----------------------------------------------------------------
+def remove_from_basket(request, game_id):
+    """Remove the game from the shopping basket"""
+
+    try:
+        basket = request.session.get('basket', {})
+        basket.pop(game_id)
+        request.session['basket'] = basket
+        return HttpResponse(status=200)
+
+    except Exception as e:
+        messages.error(request, f'Error removing game: {e}')
+        return HttpResponse(status=500)
