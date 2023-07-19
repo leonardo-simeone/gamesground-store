@@ -1,0 +1,50 @@
+<script type="text/javascript">
+
+    // Disable +/- buttons outside 1-99 range
+    function handleEnableDisable(gameId) {
+         var currentValueBasket = parseInt($(`#id_qty_basket_${gameId}`).val());
+         var currentValue = parseInt($(`#id_qty_${gameId}`).val());
+         var minusDisabledBasket = currentValueBasket < 2;
+         var minusDisabled = currentValue < 2;
+         var plusDisabledBasket = currentValueBasket > 98;
+         var plusDisabled = currentValue > 98;
+         $(`#decrement-qty-basket_${gameId}`).prop('disabled', minusDisabledBasket);
+         $(`#increment-qty-basket_${gameId}`).prop('disabled', plusDisabledBasket);
+         $(`#decrement-qty_${gameId}`).prop('disabled', minusDisabled);
+         $(`#increment-qty_${gameId}`).prop('disabled', plusDisabled);
+     }
+ 
+     // Ensure proper enabling/disabling of all inputs on page load
+     var allQtyInputs = $('.qty_input');
+     for(var i = 0; i < allQtyInputs.length; i++){
+         var gameId = $(allQtyInputs[i]).data('game_id');
+         handleEnableDisable(gameId);
+     }
+ 
+     // Check enable/disable every time the input is changed
+     $('.qty_input').change(function() {
+         var gameId = $(this).data('game_id');
+         handleEnableDisable(gameId);
+     });
+ 
+ 
+     // Increment quantity
+     $('.increment-qty').click(function(e) {
+        e.preventDefault();
+        var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
+        var currentValue = parseInt($(closestInput).val());
+        $(closestInput).val(currentValue + 1);
+        var gameId = $(this).data('game_id');
+        handleEnableDisable(gameId);
+     });
+ 
+     // Decrement quantity
+     $('.decrement-qty').click(function(e) {
+        e.preventDefault();
+        var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
+        var currentValue = parseInt($(closestInput).val());
+        $(closestInput).val(currentValue - 1);
+        var gameId = $(this).data('game_id');
+        handleEnableDisable(gameId);
+     });
+ </script>
