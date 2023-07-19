@@ -91,7 +91,7 @@
                             </div>
                             <!-- Game Quantity mobile -->
                             <div class="col-12 col-sm-6">
-                                <form class="form update-form" method="POST" action="">
+                                <form class="form update-form" method="POST" action="{% url 'adjust_basket' item.game_id %}">
                                     {% csrf_token %}
                                     <div class="form-group">
                                         <div class="input-group">
@@ -164,7 +164,7 @@
                                 </td>
                                 <td class="py-3 w-25">
                                     <!-- Game Quantity -->
-                                    <form class="form update-form" method="POST" action="">
+                                    <form class="form update-form" method="POST" action="{% url 'adjust_basket' item.game_id %}">
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <div class="input-group">
