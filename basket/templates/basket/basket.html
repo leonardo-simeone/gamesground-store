@@ -96,16 +96,16 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <button class="decrement-qty btn-inc-dec btn btn-sm" data-item_id="" id="">
+                                                <button class="decrement-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="decrement-qty_{{ item.game_id }}">
                                                     <span>
                                                         <i class="fas fa-minus fa-sm"></i>
                                                     </span>
                                                 </button>
                                             </div>
                                             <input class="form-control form-control-sm qty_input" type="number" name="quantity"
-                                                value="" min="1" max="99" data-item_id="" id="">
+                                                value="{{ item.quantity }}" min="1" max="99" data-game_id="{{ item.game_id }}" id="id_qty_{{ item.game_id }}">
                                             <div class="input-group-append">
-                                                <button class="increment-qty btn-inc-dec btn btn-sm" data-item_id="" id="">
+                                                <button class="increment-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="increment-qty_{{ item.game_id }}">
                                                     <span>
                                                         <i class="fas fa-plus fa-sm"></i>
                                                     </span>
@@ -115,7 +115,7 @@
                                     </div>
                                 </form>
                                 <a class="update-link"><small>Update</small></a>
-                                <a class="remove-item float-right" id="" data-product_size=""><small>Remove</small></a>
+                                <a class="remove-item float-right" id="remove_{{ item.game_id }}"><small>Remove</small></a>
                             </div>
                         </div>
                         <div class="row">
@@ -169,16 +169,16 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <button class="decrement-qty btn-inc-dec btn btn-sm" data-item_id="" id="">
+                                                    <button class="decrement-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="decrement-qty-basket_{{ item.game_id }}">
                                                         <span>
                                                             <i class="fas fa-minus fa-sm"></i>
                                                         </span>
                                                     </button>
                                                 </div>
                                                 <input class="form-control form-control-sm qty_input" type="number"
-                                                    name="quantity" value="" min="1" max="99" data-item_id="" id="">
+                                                    name="quantity" value="{{ item.quantity }}" min="1" max="99" data-game_id="{{ item.game_id }}" id="id_qty_basket_{{ item.game_id }}">
                                                 <div class="input-group-append">
-                                                    <button class="increment-qty btn-inc-dec btn btn-sm" data-item_id="" id="">
+                                                    <button class="increment-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="increment-qty-basket_{{ item.game_id }}">
                                                         <span>
                                                             <i class="fas fa-plus fa-sm"></i>
                                                         </span>
@@ -188,7 +188,7 @@
                                         </div>
                                     </form>
                                     <a class="update-link"><small>Update</small></a>
-                                    <a class="remove-item float-right" id="" data-product_size=""><small>Remove</small></a>
+                                    <a class="remove-item float-right" id="remove_{{ item.game_id }}"><small>Remove</small></a>
                                 </td>
                                 <td class="py-3">
                                     <p class="my-0">€101.98</p>
