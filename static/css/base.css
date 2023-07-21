@@ -383,6 +383,33 @@ a:hover {
     text-align: center;
 }
 
+/* CHECKOUT */
+
+.checkout-form-style{
+    background-color: #005B60;
+}
+
+.checkout-hr {
+    border-top: 1px solid #FFF5F9;
+}
+
+.checkout-charge-warning-text {
+    background-color: #000000;
+    color: #F9F871;
+    padding: 2px;
+    border-radius: 3px;
+}
+
+.save-info-cta {
+    color: #F9F871!important;
+}
+
+.save-info-cta:hover {
+    color: #000000!important;
+    background-color: #F9F871;
+    border-radius: 3px;
+}
+
 /* FOOTER */
 
 .footer-container {
@@ -529,6 +556,10 @@ a:hover {
 @media (max-width:520px){
     #jumbo-stext {
         background-color: transparent;
+    }
+
+    .checkout-container {
+        width: 94%!important;
     }
 }
 
