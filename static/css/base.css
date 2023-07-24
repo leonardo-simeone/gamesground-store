@@ -383,31 +383,14 @@ a:hover {
     text-align: center;
 }
 
-/* CHECKOUT */
+/* FORM FIELD FOCUS */
 
-.checkout-form-style{
-    background-color: #005B60;
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(226,182,89,.75) /* #E2B659 in rgba Generic Gradient from base color #000000 */
 }
 
-.checkout-hr {
-    border-top: 1px solid #FFF5F9;
-}
-
-.checkout-charge-warning-text {
-    background-color: #000000;
-    color: #F9F871;
-    padding: 2px;
-    border-radius: 3px;
-}
-
-.save-info-cta {
-    color: #F9F871!important;
-}
-
-.save-info-cta:hover {
-    color: #000000!important;
-    background-color: #F9F871;
-    border-radius: 3px;
+.custom-select:focus {
+    box-shadow: 0 0 0 0.2rem rgba(226,182,89,.75)
 }
 
 /* FOOTER */
@@ -579,7 +562,6 @@ a:hover {
     .hero {
         background: url('/static/images/hero.jpg') no-repeat fixed;
         background-size: cover;
-        height: calc(100vh - 164px);
         max-height: 450px;
         border-radius: 0!important;
     }
