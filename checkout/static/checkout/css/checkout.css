@@ -73,3 +73,8 @@ select option[value=""] {
     color: #aab7c4 !important;
 }
 
+.card-error-div {
+    background-color: #000000;
+    color: #F9F871;
+}
+

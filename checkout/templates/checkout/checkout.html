@@ -52,7 +52,7 @@
                         <p class="my-0 small">Qty: {{ item.quantity }}</p>
                     </div>
                     <div class="col-3 text-right">
-                        <p class="my-0 small">${{ item.game.price | calc_subtotal:item.quantity }}</p>
+                        <p class="my-0 small">€{{ item.game.price | calc_subtotal:item.quantity }}</p>
                     </div>
                 </div>
                 <hr class="mb-2 checkout-hr">
@@ -65,9 +65,9 @@
                     <p class="my-0">Grand Total:</p>
                 </div>
                 <div class="col-3">
-                    <p class="my-0">${{ total | floatformat:2 }}</p>
-                    <p class="my-0">${{ delivery | floatformat:2 }}</p>
-                    <p class="my-0"><strong>${{ grand_total | floatformat:2 }}</strong></p>
+                    <p class="my-0">€{{ total | floatformat:2 }}</p>
+                    <p class="my-0">€{{ delivery | floatformat:2 }}</p>
+                    <p class="my-0"><strong>€{{ grand_total | floatformat:2 }}</strong></p>
                 </div>
             </div>
         </div>
@@ -110,7 +110,7 @@
                     <div class="mb-3 rounded" id="card-element"></div>
 
                     <!-- Used to display form errors -->
-                    <div class="mb-3 text-danger rounded" id="card-errors" role="alert"></div>
+                    <div class="mb-3 rounded card-error-div text-center" id="card-errors" role="alert"></div>
                 </fieldset>
                 
                 <div class="submit-button text-right mt-5 mb-2">                    
@@ -127,7 +127,7 @@
                         </span>
                     </button>
                     <p class="small mt-2">
-                        <span class="checkout-charge-warning-text"><i class="fas fa-exclamation-circle"></i> Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
+                        <span class="checkout-charge-warning-text"><i class="fas fa-exclamation-circle"></i> Your card will be charged <strong>€{{ grand_total|floatformat:2 }}</strong></span>
                     </p>
                 </div>
             </form>
