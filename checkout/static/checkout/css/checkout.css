@@ -78,3 +78,44 @@ select option[value=""] {
     color: #F9F871;
 }
 
+/* CHECKOUT SUCCESS */
+
+.order-confirmation-wrapper{
+    background-color: #000000;
+    color: #FFF5F9;    
+}
+
+.checkout-success-hr {
+    border-top: 1px solid #4B4A54;
+    margin-top: 0.1rem;
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width:420px){    
+    .order-number-text {
+        font-size: small;
+    }
+}
+
+.info-color {
+    color: #00C9C8;
+}
+
+#loading-overlay {
+	display: none;
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 230, 228, .55);
+    z-index: 9999;
+}
+
+.loading-spinner {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100%;
+}
