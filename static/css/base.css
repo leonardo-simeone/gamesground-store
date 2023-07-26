@@ -130,6 +130,10 @@ a:hover {
     color: white;
 }
 
+input[name='q']::placeholder {
+    color: #919191; /* Shades from base color #000000 */
+}
+
 /* MESSAGES */
 
 .all-messages{
@@ -224,7 +228,7 @@ a:hover {
 }
 
 .site-wide-alert {
-    background-color: #F9F871;
+    background-color: #F9F871; /* Generic Gradient from base color #000000 */
 }
 
 /* GAME DETAIL */
@@ -249,17 +253,9 @@ a:hover {
 }
 
 .genre-style {
-    background-color: rgba(217,218,255,.8); /* #D9DAFF in rgba Skip Shade Gradient from base color #000000 */
-    border-radius: 5px;
     padding: 0 5px;
-    color: #000000!important;
-    border: 1px solid #FFF5F9;
     text-transform: uppercase;
     font-family: 'Merriweather Sans', sans-serif;;
-}
-
-.genre-style:hover {
-    background-color: #00E6E4;
 }
 
 .game-trailer {
@@ -281,6 +277,34 @@ a:hover {
 
 .video-background {
     margin: 0 auto;
+}
+
+.not-liked {
+    color: #FFF5F9;
+    background-color: transparent;
+    border: none;
+}
+
+.not-liked:hover {
+    color: #F9F871;
+}
+
+.liked-game {
+    background-color: transparent;
+    border: none;
+    color: #F9F871;
+}
+
+.liked-game:hover {
+    color: #FFF5F9;
+}
+
+.liked-game.focus, .not-liked:focus {
+    box-shadow: none !important;
+}
+
+.not-liked.focus, .liked-game:focus {
+    box-shadow: none !important;
 }
 
 /* BASKET */

@@ -60,7 +60,7 @@
 }
 
 .stripe-style-input::placeholder {
-    color: #919191; /* Shades from base color #000000 */
+    color: #919191;
 }
 
 select,
