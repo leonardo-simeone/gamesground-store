@@ -24,8 +24,8 @@
         <div class="col-md-7 p-4 align-self-lg-start">
             <h2 class="">
                 {{game.name}} </h2>
-                <div class="">
-                    <p><i class="fa-solid fa-euro-sign"></i> {{game.price}}</p>
+                <div>
+                    <p><strong>Price:</strong> <i class="fa-solid fa-euro-sign"></i> {{game.price}}</p>
                 </div>
                 
             
@@ -81,19 +81,47 @@
             <div><a class="plat-pegi-hover" href="{% url 'games' %}?pegi_rating={{ game.pegi_rating.age }}"><span class="mr-2"><i class="fa-regular fa-address-card"></i> </span><strong>{{game.pegi_rating}}</strong></a></div>
         {% endif %}
         <div><span class="mr-2"><i class="fa-solid fa-calendar-days"></i> </span><strong>{{game.year}}</strong></div>
-        <div><i class="fa-solid fa-heart mr-2"></i> {{ game.total_likes }}</div>
         <div class="mt-2">
             {% if game.genre %}
             {% for g in game.genre %}
-            <a href="{% url 'games' %}?genre={{g}}" class="genre-style mr-2">{{g}}</a>
+            <a href="{% url 'games' %}?genre={{g}}" class="btn-shopping-basket genre-style mr-2 rounded">{{g}}</a>
             {% endfor %}
             {% endif %}
-
+            
         </div>
+
+        <form action="{% url 'like_game' game.pk %}" method="POST" class="mt-2">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+            {% if liked %}
+            
+                <button type="submit" name="game_id" value="{{ game_id }}" id="liked-button"
+                    class="btn liked-game pl-0" aria-label="Like Button">
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+                <span><strong>{{ game.total_likes }}</strong> Likes <small class="ml-1"><em>(you like this game)</em></small></span>
+            {% else %}
+
+                <span>Like this game ? <i class="fa-solid fa-arrow-right-long ml-1"></i></span>
+                <button type="submit" name="game_id" value="{{ game_id }}" id="unliked-button"
+                    class="btn not-liked pl-0" aria-label="Like Button">
+                    <i class="fa-regular fa-heart ml-1"></i>
+                </button>
+                <span><strong>{{ game.total_likes }}</strong> Likes</span>
+            {% endif %}
+
+            {% else %}
+            
+                <p>Login to like <i class="fa-regular fa-heart ml-2 mr-2"></i> <span><strong>{{ game.total_likes }}</strong> Likes</span></p>
+            {% endif %}
+        </form>
+
 
         <div class="mt-2">
             {% if game.available_in_other_consoles %}
-            <p><em>This game is available in other consoles</em></p>
+            <p><em>This game is available in other platforms</em></p>
+            {% else %}
+            <p><em>This game is exclusive for this platform</em></p>
             {% endif %}
 
         </div>
