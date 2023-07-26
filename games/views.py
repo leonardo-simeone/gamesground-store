@@ -84,9 +84,35 @@ def game_detail(request, game_id):
     """
 
     game = get_object_or_404(Game, pk=game_id)
+    liked = False
+
+    if game.likes.filter(id=request.user.id).exists():
+        liked = True
 
     context = {
         'game': game,
+        'liked': liked,
     }
 
     return render(request, 'games/game_detail.html', context)
+
+
+# ----------------------------------------------------------------
+def like_game(request, game_id):
+    """
+    A view to control like/unlike games
+    """
+
+    game = get_object_or_404(Game, pk=game_id)
+    liked = False
+
+    if game.likes.filter(id=request.user.id).exists():
+        game.likes.remove(request.user)
+        liked = False
+        messages.success(request, 'You have UNLIKED ' + game.name)
+    else:
+        game.likes.add(request.user)
+        liked = True
+        messages.success(request, 'You have LIKED ' + game.name)
+
+    return redirect(game_detail, game_id)
