@@ -70,7 +70,7 @@ select option {
 
 select:invalid,
 select option[value=""] {
-    color: #aab7c4 !important;
+    color: #919191 !important;
 }
 
 .card-error-div {
