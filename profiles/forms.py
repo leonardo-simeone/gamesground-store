@@ -1,5 +1,58 @@
+from allauth.account.forms import SignupForm
 from django import forms
 from .models import UserProfile
+
+
+class CustomSignupForm(SignupForm):
+    first_name = forms.CharField(max_length=50, label='First Name')
+    last_name = forms.CharField(max_length=50, label='Last Name')
+
+    def save(self, request):
+        user = super(CustomSignupForm, self).save(request)
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.save()
+        return user
+
+    class Meta:
+        model = SignupForm
+        fields = ('first_name', 'last_name', 'username',
+                  'email', 'email2',
+                  'password1', 'password2',)
+
+    field_order = [
+        'first_name', 'last_name', 'username', 'email',
+        'email2', 'password1', 'password2',
+        ]
+
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders, remove auto-generated
+        labels and set autofocus on first field
+        """
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'first_name': 'First Name',
+            'last_name': 'Last Name',
+            'username': 'Username',
+            'email': 'E-mail address',
+            'email2': 'E-mail address confirmation',
+            'password1': 'Password',
+            'password2': 'Password (again)',
+        }
+
+        self.fields['username'].widget.attrs['autofocus'] = False
+        self.fields['first_name'].widget.attrs['autofocus'] = True
+        for field in self.fields:
+
+            if self.fields[field].required:
+                placeholder = f'{placeholders[field]} *'
+            else:
+                placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+
+        self.fields[field].label = False
+
 
 class UserProfileForm(forms.ModelForm):
     class Meta:

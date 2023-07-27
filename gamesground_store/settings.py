@@ -117,6 +117,10 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
+ACCOUNT_FORMS = {
+    'signup': 'profiles.forms.CustomSignupForm',
+    }
+
 WSGI_APPLICATION = 'gamesground_store.wsgi.application'
 
 
