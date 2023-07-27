@@ -84,7 +84,7 @@
             <div class="col-md-4 col-lg-3 mb-4">
               <div class="card mb-4 h-100">
                 
-                <a href="{% url 'game_detail' game.id %}" class="card-body" id="game-info-card">
+                <a href="{% url 'game_detail' game.id %}" class="card-body games-cards-font-color" id="game-info-card">
                   <div class="image-container">
                     {% if game.image %}
                       <img class="card-img-top rounded" src="{{ game.image.url }}" alt="{{game.name}}">
@@ -101,6 +101,8 @@
                   <hr>
                   {% if game.platform %}
                     <p class="card-text card-text-overflow">{{game.platform.name}}</p>
+                  {% else %}
+                    <p class="card-text card-text-overflow"><em>No platform assigned to this game</em></p>
                   {% endif %}
                   <hr>
                   <span class="float-right">{{ game.total_likes }} <i class="fa-solid fa-heart"></i></span>

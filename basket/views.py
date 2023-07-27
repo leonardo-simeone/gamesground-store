@@ -28,7 +28,10 @@ def add_to_basket(request, game_id):
     else:
         basket[game_id] = quantity
 
-    messages.success(request, f'Added {game.name} {game.platform} to your basket')
+    if game.platform:
+        messages.success(request, f'Added {game.name} {game.platform} to your basket')
+    else:
+        messages.success(request, f'Added {game.name} to your basket')
     request.session['basket'] = basket
     return redirect(redirect_url)
 
@@ -44,10 +47,16 @@ def adjust_basket(request, game_id):
 
     if quantity > 0:
         basket[game_id] = quantity
-        messages.success(request, f'Updated {game.name} {game.platform} quantity to {basket[game_id]}')
+        if game.platform:
+            messages.success(request, f'Updated {game.name} {game.platform} quantity to {basket[game_id]}')
+        else:
+            messages.success(request, f'Updated {game.name} quantity to {basket[game_id]}')
     else:
         basket.pop(game_id)
-        messages.success(request, f'Removed {game.name} {game.platform} from your basket')
+        if game.platform:
+            messages.success(request, f'Removed {game.name} {game.platform} from your basket')
+        else:
+            messages.success(request, f'Removed {game.name} from your basket')
 
     request.session['basket'] = basket
     return redirect(reverse('basket_summary'))
@@ -61,7 +70,10 @@ def remove_from_basket(request, game_id):
         game = get_object_or_404(Game, pk=game_id)
         basket = request.session.get('basket', {})
         basket.pop(game_id)
-        messages.success(request, f'Removed {game.name} {game.platform} from your basket')
+        if game.platform:
+            messages.success(request, f'Removed {game.name} {game.platform} from your basket')
+        else:
+            messages.success(request, f'Removed {game.name} from your basket')
 
         request.session['basket'] = basket
         return HttpResponse(status=200)
