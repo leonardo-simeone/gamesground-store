@@ -1,0 +1,30 @@
+.order-history {
+    max-height: 416px; /* height of profile form + submit button */
+    overflow-y: auto;
+}
+
+#profile-update-form .form-control {
+    color: #000000;
+}
+
+
+#profile-update-form input::placeholder {
+    color: #919191;
+}
+
+.order-history-table {
+    color: #FFF5F9;
+}
+
+.profile-form-style {
+    background-color: #005B60;
+}
+
+#id_default_country,
+#id_default_country option:not(:first-child) {
+    color: #000000;
+}
+
+#id_default_country option:first-child {
+    color: #919191!important;
+}
