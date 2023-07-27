@@ -155,6 +155,7 @@ input[name='q']::placeholder {
 
 .index-card{
     min-height: 347px;
+    color: #000000;
 }
 
 .card-body:hover {
@@ -228,7 +229,12 @@ input[name='q']::placeholder {
 }
 
 .site-wide-alert {
+    color: #000000;
     background-color: #F9F871; /* Generic Gradient from base color #000000 */
+}
+
+.games-cards-font-color {
+    color: #000000!important;
 }
 
 /* GAME DETAIL */
@@ -536,6 +542,15 @@ input[name='q']::placeholder {
     text-decoration: underline!important;
 }
 
+.invalid-feedback {
+    color: #F9F871!important;
+}
+
+.allauth-container{
+    margin-top: 65px;
+    margin-bottom: 75px;
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width:720px) {
@@ -649,6 +664,77 @@ input[name='q']::placeholder {
     }
 }
 
+/* ALLAUTH MEDIA QUERIES */
+
+@media (min-width:721px) {
+    .allauth-container{
+        margin-top: 145px;
+        margin-bottom: 155px;
+    }
+}
+
+@media (min-width:992px) {
+    .allauth-container{
+        margin-top: 125px;
+        margin-bottom: 135px;
+    }
+}
+
+@media (min-width:1580px) {
+    .allauth-container{
+        margin-top: 95px;
+        margin-bottom: 105px;
+    }
+}
+
+/* INDEX MEDIA QUERIES */
+
+@media (max-width:1224px) {
+    .info-headings h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width:1178px) {
+    .index-card{
+        min-height: 317px;
+    }
+
+    .index-card-title {
+        font-size: 1.5rem;
+    }    
+}
+
+@media (max-width:1114px) {
+    .index-card{
+        min-height: 297px;
+    }
+
+    .index-card-title {
+        font-size: 1.1rem;
+    }
+
+    
+
+    .info-headings p {
+        font-size: .9rem;
+    }
+}
+
+@media (max-width:767px) {
+    
+    .index-card-title {
+        font-size: 1.6rem;
+    }
+
+    .index-card p {
+        font-size: 1.3rem;
+    }
+
+    .info-headings h3 {
+        font-size: 1.4rem;
+    }
+}
 
 @media (min-width:768px) {
     .info-border {
