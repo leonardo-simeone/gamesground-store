@@ -413,6 +413,10 @@ input[name='q']::placeholder {
     text-align: center;
 }
 
+.no-games-basket {
+    margin-bottom: 350px;
+}
+
 /* FORM FIELD FOCUS */
 
 .form-control:focus {
