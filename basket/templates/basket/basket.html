@@ -75,7 +75,7 @@
                                 {% if item.game.image %}
                                     <img class="img-fluid rounded" src="{{ item.game.image.url }}" alt="{{ item.game.name }}">
                                 {% else %}
-                                    <img class="img-fluid rounded" src="{% static 'images/default-image.png' %}"
+                                    <img class="img-fluid rounded" src="{% static 'images/default-image.webp' %}"
                                     alt="no image available">
                                 {% endif %}
                             </div>
@@ -152,7 +152,7 @@
                                     {% if item.game.image %}
                                         <img class="img-fluid rounded" src="{{ item.game.image.url }}" alt="{{ item.game.name }}">
                                     {% else %}
-                                        <img class="img-fluid rounded" src="{% static 'images/default-image.png' %}"
+                                        <img class="img-fluid rounded" src="{% static 'images/default-image.webp' %}"
                                         alt="no image available">
                                     {% endif %}
                                 </td>

@@ -40,7 +40,7 @@ a {
 }
 
 .hero {
-    background: url('/static/images/hero.jpg') no-repeat;
+    background: url('/static/images/hero.webp') no-repeat;
     background-size: cover;
     max-height: 450px;
     border-radius: 0!important;
@@ -742,7 +742,7 @@ input[name='q']::placeholder {
     }
 
     .hero {
-        background: url('/static/images/hero.jpg') no-repeat fixed;
+        background: url('/static/images/hero.webp') no-repeat fixed;
         background-size: cover;
         max-height: 450px;
         border-radius: 0!important;
