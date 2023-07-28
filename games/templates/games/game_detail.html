@@ -74,13 +74,13 @@
             <input type="hidden" name="redirect_url" value="{{ request.path }}">
         </form>
         {% if game.platform %}
-            <div class="mt-2"><a class="plat-pegi-hover" href="{% url 'games' %}?platform={{ game.platform }}"><span class="mr-2"><i class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></a></div>
+            <div class="mt-2"><a class="btn-shopping-basket genre-style rounded" href="{% url 'games' %}?platform={{ game.platform }}"><span class="mr-2"><i class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></a></div>
         {% endif %}
 
         {% if game.pegi_rating %}
-            <div><a class="plat-pegi-hover" href="{% url 'games' %}?pegi_rating={{ game.pegi_rating.age }}"><span class="mr-2"><i class="fa-regular fa-address-card"></i> </span><strong>{{game.pegi_rating}}</strong></a></div>
+            <div class="mt-2"><a class="btn-shopping-basket genre-style rounded" href="{% url 'games' %}?pegi_rating={{ game.pegi_rating.age }}"><span class="mr-2"><i class="fa-regular fa-address-card"></i> </span><strong>{{game.pegi_rating}}</strong></a></div>
         {% endif %}
-        <div><span class="mr-2"><i class="fa-solid fa-calendar-days"></i> </span><strong>{{game.year}}</strong></div>
+        
         <div class="mt-2">
             {% if game.genre %}
             {% for g in game.genre %}
@@ -89,6 +89,8 @@
             {% endif %}
             
         </div>
+
+        <div class="mt-2"><span class="mr-2"><i class="fa-solid fa-calendar-days"></i> </span><strong>{{game.year}}</strong></div>
 
         <form action="{% url 'like_game' game.pk %}" method="POST" class="mt-2">
             {% csrf_token %}
@@ -129,12 +131,12 @@
         
         
     </div>
-    <hr class="mt-4">
+    <hr class="mt-4 game-detail-hr">
     <h2>Additional game information</h2>
     <div class="game-description">
         <p>{{game.description}}</p>
     </div>
-    <hr class="mt-4">
+    <hr class="mt-4 game-detail-hr">
     
     <h2 class="text-center mt-3">Game Trailer</h2>
         
