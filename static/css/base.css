@@ -134,6 +134,10 @@ input[name='q']::placeholder {
     color: #919191; /* Shades from base color #000000 */
 }
 
+#search-submit-desk {
+    color: #FFF5F9;
+}
+
 /* MESSAGES */
 
 .all-messages{
