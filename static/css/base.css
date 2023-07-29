@@ -92,9 +92,7 @@ a:hover {
 /* NAVBAR */
 
 .search-icon {
-    color: white;
     background-color: #000000;
-    border-color: #000000;;
 }
 
 .search-form {
@@ -270,10 +268,6 @@ input[name='q']::placeholder {
 
 .game-trailer {
     border-radius: 10px;
-}
-
-.plat-pegi-hover:hover {
-    color: #F9F871!important;
 }
 
 .add-input {
