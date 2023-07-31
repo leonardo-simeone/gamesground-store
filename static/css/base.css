@@ -600,6 +600,20 @@ input[name='q']::placeholder {
     margin-bottom: 75px;
 }
 
+.logout-heading {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.logout-p {
+    margin-top: 50px;
+}
+
+.logout-form {
+    margin-top: 50px;
+    margin-bottom: 150px;
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width:720px) {
