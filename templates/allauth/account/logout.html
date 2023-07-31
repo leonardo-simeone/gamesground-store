@@ -9,12 +9,12 @@
 {% block inner_content %}
 
 <hr class="checkout-hr">
-<h2>{% trans "Sign Out" %}</h2>
+<h2 class="logout-heading">{% trans "Sign Out" %}</h2>
 <hr class="checkout-hr">
 
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
+<p class="logout-p">{% trans 'Are you sure you want to sign out?' %}</p>
 
-<form method="post" action="{% url 'account_logout' %}">
+<form class="logout-form" method="post" action="{% url 'account_logout' %}">
   {% csrf_token %}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
