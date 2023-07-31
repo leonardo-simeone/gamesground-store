@@ -16,9 +16,9 @@
 
         <div class="col-md-5 p-2 align-self-start">
             {% if game.image %}
-            <img src="{{ game.image.url }}" class="card-img-top game-detail-img" alt="{{game.name}}">
+            <img src="{{ game.image.url }}" class="card-img-top game-detail-img img-fluid" id="{{game.name}}" alt="{{game.name}}">
             {% else %}
-            <img src="{% static 'images/default-image.webp' %}" class="card-img-top game-detail-img" alt="no image available">
+            <img src="{% static 'images/default-image.webp' %}" class="card-img-top game-detail-img img-fluid" id="{{game.name}}" alt="no image available">
             {% endif %}
         </div>
         <div class="col-md-7 p-4 align-self-lg-start">

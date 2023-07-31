@@ -87,9 +87,9 @@
                 <a href="{% url 'game_detail' game.id %}" class="card-body games-cards-font-color" id="game-info-card">
                   <div class="image-container">
                     {% if game.image %}
-                      <img class="card-img-top rounded" src="{{ game.image.url }}" alt="{{game.name}}">
+                      <img class="card-img-top rounded img-fluid" id="{{game.name}}" src="{{ game.image.url }}" alt="{{game.name}}">
                     {% else %}
-                      <img class="card-img-top rounded" src="{% static 'images/default-image.webp' %}"
+                      <img class="card-img-top rounded img-fluid" id="{{game.name}}" src="{% static 'images/default-image.webp' %}"
                       alt="no image available">
                     {% endif %}
                   </div>
