@@ -679,6 +679,10 @@ input[name='q']::placeholder {
     .hero {
         background-position: center;
     }
+
+    .game-detail-headings{
+        font-size: 1.5rem;
+    }
 }
 
 
@@ -727,7 +731,7 @@ input[name='q']::placeholder {
 
 }
 
-@media (max-width:812px) {
+@media (max-width:829px) {
     .small-buttons {
         padding: 0.25rem 0.56rem;
         font-size: .875rem;
@@ -750,6 +754,12 @@ input[name='q']::placeholder {
 @media (min-width:576px) {
     .mobile-game-name{
         margin-top: 15vh!important
+    }
+}
+
+@media (min-width:1040px) {
+    .input-width {
+        max-width: 25%;
     }
 }
 
@@ -822,6 +832,21 @@ input[name='q']::placeholder {
 
     .info-headings h3 {
         font-size: 1.4rem;
+    }
+}
+
+
+@media (min-width:1669px) {
+    .index-card p {
+        font-size: 1.4rem;
+    }
+
+    .index-card {
+        min-height: 428px;
+    }
+
+    .input-width {
+        max-width: 20%;
     }
 }
 
