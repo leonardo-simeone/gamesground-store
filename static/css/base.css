@@ -126,6 +126,11 @@ input[name='q']::placeholder {
     color: #919191; /* Shades from base color #000000 */
 }
 
+.menu-style {
+    margin: 0 auto;
+    padding-left: 0;
+}
+
 #search-submit-desk {
     color: #FFF5F9;
 }
@@ -233,6 +238,10 @@ input[name='q']::placeholder {
     color: #000000!important;
 }
 
+.edit-delete-buttom-separator {
+    border-top: 1px solid #FFF5F9;
+}
+
 /* GAME DETAIL */
 
 #game-detail-container {
@@ -241,8 +250,6 @@ input[name='q']::placeholder {
 
 .game-detail-img {
     border-radius: 20px;
-    max-width: 100%;
-    min-height: 285px;
     margin-top: 18px;
 }
 
@@ -305,6 +312,10 @@ input[name='q']::placeholder {
     box-shadow: none !important;
 }
 
+.game-detail-hr {
+    border-top: 1px solid #FFF5F9;
+}
+
 /* games form */
 
 .btn-file {
@@ -351,9 +362,7 @@ input[name='q']::placeholder {
     margin: 0 auto;
 }
 
-
 /* BASKET */
-
 
 .table-head {
     color: #000000;
@@ -413,7 +422,7 @@ input[name='q']::placeholder {
 }
 
 .remove-item:hover {
-    color: #FB4F93!important; /* Pin Palette from base color #000000 */
+    color: #FB4F93!important;
     text-decoration: underline!important;
     background-color: #FFF5F9;
     border-radius: 3px;
