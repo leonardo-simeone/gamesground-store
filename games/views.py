@@ -146,3 +146,36 @@ def add_game(request):
 
     return render(request, template, context)
 
+
+# ----------------------------------------------------------------
+@login_required
+def edit_game(request, game_id):
+    """ Edit a game in the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    game = get_object_or_404(Game, pk=game_id)
+    if request.method == 'POST':
+        form = GameForm(request.POST, request.FILES, instance=game)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated game!')
+            return redirect(reverse('game_detail', args=[game.id]))
+        else:
+            messages.error(request, 'Failed to update game. Please ensure the form is valid.')
+    else:
+        form = GameForm(instance=game)
+        if game.platform:
+            messages.info(request, f'You are editing {game.name} {game.platform}')
+        else:
+            messages.info(request, f'You are editing {game.name}')
+
+    template = 'games/edit_game.html'
+    context = {
+        'form': form,
+        'game': game,
+    }
+
+    return render(request, template, context)
+

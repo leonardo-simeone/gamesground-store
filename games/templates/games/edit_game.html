@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Edit Game{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <br>
+                <h2 class="mb-4">Game Management</h2>
+                <hr class="checkout-hr">
+                <h3 class="mb-4 add-game-heading">Edit Game</h3>
+                <hr class="checkout-hr">
+            </div>
+        </div>
+        <div class="row justify-content-center add-edit-game-row">
+            <div class="col-12 col-md-6 add-game-form-style rounded">
+                <form method="POST" action="{% url 'edit_game' game.id %}" class="form mb-2 mt-2" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if field.name != 'image' %}
+                            {{ field | as_crispy_field }}
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+                    {% endfor %}
+                    <div class="text-right">
+                        <a class="btn btn-shopping-basket rounded mr-2" href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC">Cancel</a>
+                        <button class="btn btn-shopping-basket rounded" type="submit">Update Game</button>
+                    </div>
+                </form>
+            </div>            
+        </div>
+    </div>
+
+        
+{% endblock %}
