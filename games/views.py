@@ -179,3 +179,27 @@ def edit_game(request, game_id):
 
     return render(request, template, context)
 
+
+# ----------------------------------------------------------------
+@login_required
+def delete_game(request, game_id):
+    """ Delete a game from the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    game = get_object_or_404(Game, pk=game_id)
+    if request.method == 'POST':
+        game.delete()
+        if game.platform:
+            messages.success(request, f'{game.name} {game.platform} has been deleted!')
+        else:
+            messages.success(request, f'{game.name} has been deleted!')
+        return redirect(reverse('games'))
+
+    template = 'games/delete_game.html'
+    context = {
+        'game': game,
+    }
+
+    return render(request, template, context)
