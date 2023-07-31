@@ -22,7 +22,7 @@
             {% endif %}
         </div>
         <div class="col-md-7 p-4 align-self-lg-start">
-            <h2 class="">
+            <h2 class=" game-detail-headings">
                 {{game.name}} </h2>
                 <div>
                     <p><strong>Price:</strong> <i class="fa-solid fa-euro-sign"></i> {{game.price}}</p>
@@ -74,15 +74,18 @@
             <input type="hidden" name="redirect_url" value="{{ request.path }}">
         </form>
         {% if game.platform %}
-            <div class="mt-2"><a class="btn-shopping-basket genre-style rounded" href="{% url 'games' %}?platform={{ game.platform }}"><span class="mr-2"><i class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></a></div>
+            <p class="mb-0 mt-3 mb-1"><strong>Platform:</strong></p>
+            <div><a class="btn-shopping-basket genre-style rounded p-1" href="{% url 'games' %}?platform={{ game.platform }}"><span class="mr-2"><i class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></a></div>
         {% endif %}
 
         {% if game.pegi_rating %}
-            <div class="mt-2"><a class="btn-shopping-basket genre-style rounded" href="{% url 'games' %}?pegi_rating={{ game.pegi_rating.age }}"><span class="mr-2"><i class="fa-regular fa-address-card"></i> </span><strong>{{game.pegi_rating}}</strong></a></div>
+            <p class="mb-0 mt-3 mb-1"><strong>Pegi Rating:</strong></p>
+            <div><a class="btn-shopping-basket genre-style rounded p-1" href="{% url 'games' %}?pegi_rating={{ game.pegi_rating.age }}"><span class="mr-2"><i class="fa-regular fa-address-card"></i> </span><strong>{{game.pegi_rating}}</strong></a></div>
         {% endif %}
         
-        <div class="mt-2">
+        <div class="mt-3">
             {% if game.genre %}
+            <p class="mb-0 mt-1"><strong>Genres:</strong></p>
             {% for g in game.genre %}
             <a href="{% url 'games' %}?genre={{g}}" class="btn-shopping-basket genre-style mr-2 rounded">{{g}}</a>
             {% endfor %}
@@ -90,7 +93,8 @@
             
         </div>
 
-        <div class="mt-2"><span class="mr-2"><i class="fa-solid fa-calendar-days"></i> </span><strong>{{game.year}}</strong></div>
+        <p class="mb-0 mt-3"><strong>Year:</strong></p>
+        <div><span class="mr-2"><i class="fa-solid fa-calendar-days"></i> </span><strong>{{game.year}}</strong></div>
 
         <form action="{% url 'like_game' game.pk %}" method="POST" class="mt-2">
             {% csrf_token %}
@@ -132,13 +136,13 @@
         
     </div>
     <hr class="mt-4 game-detail-hr">
-    <h2>Additional game information</h2>
+    <h2 class="text-center game-detail-headings">Additional game information</h2>
     <div class="game-description">
         <p>{{game.description}}</p>
     </div>
     <hr class="mt-4 game-detail-hr">
     
-    <h2 class="text-center mt-3">Game Trailer</h2>
+    <h2 class="text-center mt-3 game-detail-headings">Game Trailer</h2>
         
     
     <div class="row justify-content-center mb-4 video-background">
