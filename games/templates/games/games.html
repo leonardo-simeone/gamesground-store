@@ -107,7 +107,15 @@
                   <hr>
                   <span class="float-right">{{ game.total_likes }} <i class="fa-solid fa-heart"></i></span>
                 </a>
-              
+                
+                {% if request.user.is_superuser %}
+                  <hr>
+                  <small>
+                      <a class="btn-shopping-basket genre-style rounded mr-1" href="{% url 'edit_game' game.id %}">Edit</a> 
+                      <a class="btn-shopping-basket genre-style rounded ml-1" href="{% url 'delete_game' game.id %}">Delete</a>
+                  </small>
+                  <hr class="edit-delete-buttom-separator">
+                {% endif %}
               
               </div>
             </div>

@@ -131,6 +131,13 @@
             {% endif %}
 
         </div>
+
+        {% if request.user.is_superuser %}
+            <small>
+                <a class="btn-shopping-basket genre-style rounded" href="{% url 'edit_game' game.id %}">Edit</a> | 
+                <a class="btn-shopping-basket genre-style rounded" href="{% url 'delete_game' game.id %}">Delete</a>
+            </small>
+        {% endif %}
     </div>
         
         
