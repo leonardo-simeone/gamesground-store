@@ -462,6 +462,37 @@ input[name='q']::placeholder {
     margin-bottom: 350px;
 }
 
+/* ADD/EDIT GAME */
+
+.add-game-heading {
+    text-transform: none;
+}
+
+.add-game-form-style {
+    background-color: #005B60;
+}
+
+.form-control {
+    color: #000000;
+    border: 1px solid #000000;
+}
+
+.form-control-sm {
+    border: transparent;
+}
+
+/* DELETE GAME */
+
+.delete-container {
+    margin-bottom: 400px;
+}
+
+.delete-row {
+    margin-bottom: 300px;
+    width: 98%;
+    margin: 0 auto;
+}
+
 /* FORM FIELD FOCUS */
 
 .form-control:focus {
