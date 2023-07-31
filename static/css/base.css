@@ -311,6 +311,53 @@ input[name='q']::placeholder {
     box-shadow: none !important;
 }
 
+/* games form */
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.btn-file input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.custom-checkbox .custom-control-label::before {
+    border-radius: 0.1rem;
+    border-color: #919191;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: #FB4F93; /* Pin Palette from base color #000000 */
+    border-color: #F9F871;
+    border-radius: 0.1rem;
+}
+
+#div_id_pegi_rating {
+    margin-bottom: 30px;
+}
+
+#div_id_available_in_other_consoles {
+    margin-top: 25px;
+}
+
+.img-widget {
+    color: #F9F871;
+}
+
+.add-edit-game-row {
+    width: 98%;
+    margin: 0 auto;
+}
+
+
 /* BASKET */
 
 
