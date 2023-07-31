@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 from django.db.models import Count
 from .models import *
+from .forms import GameForm
 
 
 # ----------------------------------------------------------------
@@ -116,3 +118,31 @@ def like_game(request, game_id):
         messages.success(request, 'You have LIKED ' + game.name)
 
     return redirect(game_detail, game_id)
+
+
+# ----------------------------------------------------------------
+@login_required
+def add_game(request):
+    """ Add a game to the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    if request.method == 'POST':
+        form = GameForm(request.POST, request.FILES)
+        if form.is_valid():
+            game = form.save()
+            messages.success(request, 'Successfully added game!')
+            return redirect(reverse('game_detail', args=[game.id]))
+        else:
+            messages.error(request, 'Failed to add game. Please ensure the form is valid.')
+    else:
+        form = GameForm()
+
+    template = 'games/add_game.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
+
