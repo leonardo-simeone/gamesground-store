@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from .forms import ContactForm
 from django.contrib import messages
+from .models import Contact
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -28,6 +30,26 @@ def contact(request):
     template = 'home/contact.html'
     context = {
         'form': form,
+    }
+    return render(request, template, context)
+
+
+# --------------------------------------------------------------------------
+@login_required
+def contact_list(request):
+    """
+    A view for store owner/admin to list users
+    that have contacted site owner/admin and
+    their corresponding messages
+    """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    contacts = Contact.objects.all()
+    template = 'home/contact_list.html'
+    context = {
+        'contacts': contacts,
     }
     return render(request, template, context)
 
