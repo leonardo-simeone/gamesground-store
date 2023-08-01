@@ -17,12 +17,12 @@
       <h2>Games</h2>
       
       {% for s in selected_platforms %}
-        <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1 d-none d-md-inline" href="{% url 'games' %}?platform={{ s.name }}">
+        <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1 d-none d-md-inline" href="{% url 'games' %}?platform={{ s.name }}" aria-label="takes user to {{s.name}} games page">
           <span class="p-2 mt-2">{{ s.name }}</span>
         </a>
 
         <div class="d-sm-block d-md-none mb-1">
-          <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1" href="{% url 'games' %}?platform={{ s.name }}">
+          <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1" href="{% url 'games' %}?platform={{ s.name }}" aria-label="takes user to {{s.name}} games page">
             <span class="p-2 mt-2">{{ s.name }}</span>
           </a>
         </div>
@@ -84,7 +84,7 @@
             <div class="col-md-4 col-lg-3 mb-4">
               <div class="card mb-4 h-100">
                 
-                <a href="{% url 'game_detail' game.id %}" class="card-body games-cards-font-color" id="game-info-card">
+                <a href="{% url 'game_detail' game.id %}" class="card-body games-cards-font-color" id="{{game.id}}" aria-label="takes user to {{game.name}} detail page">
                   <div class="image-container">
                     {% if game.image %}
                       <img class="card-img-top rounded img-fluid" id="{{game.name}}" src="{{ game.image.url }}" alt="{{game.name}}">
@@ -111,8 +111,8 @@
                 {% if request.user.is_superuser %}
                   <hr>
                   <small>
-                      <a class="btn-shopping-basket genre-style rounded mr-1" href="{% url 'edit_game' game.id %}">Edit</a> 
-                      <a class="btn-shopping-basket genre-style rounded ml-1" href="{% url 'delete_game' game.id %}">Delete</a>
+                      <a class="btn-shopping-basket genre-style rounded mr-1" href="{% url 'edit_game' game.id %}" aria-label="takes user to edit {{game.name}} page">Edit</a> 
+                      <a class="btn-shopping-basket genre-style rounded ml-1" href="{% url 'delete_game' game.id %}" aria-label="takes user to delete {{game.name}} page">Delete</a>
                   </small>
                   <hr class="edit-delete-buttom-separator">
                 {% endif %}
