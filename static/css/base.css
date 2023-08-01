@@ -526,6 +526,34 @@ input[name='q']::placeholder {
     box-shadow: 0 0 0 0.2rem rgba(226,182,89,.75)
 }
 
+/* CONTACT-US */
+
+.contact-container {
+    margin-bottom: 150px;
+}
+
+.contact-list-info {
+    background-color: #A3CFCD;
+}
+
+.message-created {
+    background-color: #000000;
+    color: #F9F871;
+    padding: 3px;
+    width: fit-content;
+    margin-bottom: 5px;
+}
+
+#send-button {
+    font-family: 'Catamaran', sans-serif;
+}
+
+/* NEWSLETTER */
+
+#subscribe-button {
+    font-family: 'Catamaran', sans-serif;
+}
+
 /* FOOTER */
 
 .footer-container {
