@@ -194,14 +194,14 @@
     <div class="row">
         <div class="col-12 col-lg-7 text-right mt-2">
             {% if from_profile %}
-                    <a href="{% url 'profile' %}" class="btn btn-shopping-basket">
+                    <a href="{% url 'profile' %}" class="btn btn-shopping-basket" aria-label="takes user back to profile page">
                         <span class="icon mr-2">
                             <i class="fas fa-angle-left"></i>
                         </span>
                         <span class="text-uppercase">Back to Profile</span>
                     </a>
                 {% else %}
-                    <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" class="btn btn-shopping-basket">
+                    <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" class="btn btn-shopping-basket" aria-label="takes user to all games page">
                         <span class="icon mr-2">
                             <i class="fa-solid fa-gamepad"></i>
                         </span>

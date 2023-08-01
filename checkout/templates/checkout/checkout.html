@@ -39,11 +39,11 @@
             {% for item in basket_items %}
                 <div class="row mb-1 small">
                     <div class="col-2 mb-1">
-                        <a href="{% url 'game_detail' item.game.id %}">
+                        <a href="{% url 'game_detail' item.game.id %}" aria-label="takes user to {{ item.game.name }} detail page">
                             {% if item.game.image %}
-                                <img class="w-100 rounded" src="{{ item.game.image.url }}" alt="{{ game.name }}">
+                                <img class="w-100 rounded" src="{{ item.game.image.url }}" alt="{{ item.game.name }}">
                             {% else %}
-                                <img class="w-100 rounded" src="{% static 'images/default-image.webp' %}" alt="{{ game.name }}">
+                                <img class="w-100 rounded" src="{% static 'images/default-image.webp' %}" alt="no image available">
                             {% endif %}
                         </a>
                     </div>
@@ -114,13 +114,13 @@
                 </fieldset>
                 
                 <div class="submit-button text-right mt-5 mb-2">                    
-                    <a href="{% url 'basket_summary' %}" class="btn btn-shopping-basket rounded mr-2">
+                    <a href="{% url 'basket_summary' %}" class="btn btn-shopping-basket rounded mr-2" aria-label="takes user back to their shopping page">
                         <span class="icon">
                             <i class="fas fa-chevron-left"></i>
                         </span>
                         <span class="font-weight-bold">Adjust Basket</span>
                     </a>
-                    <button id="submit-button" class="btn btn-shopping-basket rounded">
+                    <button id="submit-button" class="btn btn-shopping-basket rounded" aria-label="completes purchase">
                         <span class="font-weight-bold">Complete Order</span>
                         <span class="icon">
                             <i class="fas fa-lock"></i>

@@ -504,6 +504,10 @@ input[name='q']::placeholder {
     border: transparent;
 }
 
+.all-buttons-font {
+    font-family: 'Catamaran', sans-serif!important;
+}
+
 /* DELETE GAME */
 
 .delete-container {
@@ -552,6 +556,13 @@ input[name='q']::placeholder {
 
 #subscribe-button {
     font-family: 'Catamaran', sans-serif;
+}
+
+/* PROFILE */
+
+#order-history-link:hover {
+    color: #F9F871!important;
+    text-decoration: underline!important;
 }
 
 /* FOOTER */
