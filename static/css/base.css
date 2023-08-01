@@ -51,6 +51,7 @@ a {
     height: -webkit-fill-available;
     padding: 15px;
     border-radius: 15px;
+    width: fit-content;
 }
 
 #jumbo-a {
@@ -135,6 +136,17 @@ input[name='q']::placeholder {
     color: #FFF5F9;
 }
 
+#mobile-basket {
+    right: 0;
+    position: absolute;
+    margin-top: 12px;
+    font-size: larger;
+}
+
+.active-link {
+    text-decoration: underline!important;
+}
+
 /* MESSAGES */
 
 .all-messages{
@@ -188,6 +200,15 @@ input[name='q']::placeholder {
 
 .separator {
     max-width: 12em;
+}
+
+.index-info-para {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.index-info-links:hover {
+    color: #F9F871!important;
+    text-decoration: underline!important;
 }
 
 /* GAMES */
@@ -430,7 +451,7 @@ input[name='q']::placeholder {
 }
 
 .basket-total-mobile {
-    background-color: #FFF5F9;
+    background-color: #FFFFFF;
     margin-right: auto;
     margin-left: auto;
     color: #000000;
@@ -454,11 +475,10 @@ input[name='q']::placeholder {
 .free-delivery {
     color: #F9F871;
     background-color: black;
-    width: 80%;
-    margin: 0 auto;
+    width: fit-content;
     padding: 2px;
     border-radius: 3px;
-    text-align: center;
+    float: right;
 }
 
 .no-games-basket {
@@ -743,7 +763,6 @@ input[name='q']::placeholder {
     }
 }
 
-
 @media (max-width:520px){
     .checkout-container {
         width: 94%!important;
@@ -870,3 +889,13 @@ input[name='q']::placeholder {
     }
 }
 
+@media (max-width:374px) {
+    .input-width{
+        max-width: 45%!important;
+    }
+
+    .small-buttons {
+        font-size: .675rem;
+        line-height: 1;
+    }
+}
