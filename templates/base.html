@@ -191,7 +191,8 @@
             <div class="dropdown-menu border-0">
               {% if request.user.is_authenticated %}
               {% if request.user.is_superuser %}
-              <a href="{% url 'add_game' %}" class="dropdown-item">Games Management</a>
+              <a href="{% url 'add_game' %}" class="dropdown-item" aria-label="takes user to add game page">Games Management</a>
+              <a href="{% url 'contact_list' %}" class="dropdown-item" aria-label="takes user to contact list page">Contact List</a>
               {% endif %}
               <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
               <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
