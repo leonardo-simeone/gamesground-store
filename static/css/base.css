@@ -5,14 +5,14 @@ html {
 }
 
 body {
-    color: white;
+    color: #FFFFFF;
     background-color: #677381; /* Matching Gradient from base color #000000 */
     font-family: 'Merriweather Sans', sans-serif;
     overflow-x: hidden;
 }
 
 a {
-    color: white!important;
+    color: #FFFFFF!important;
 }
 
 /* BACK TO TOP BUTTON */
@@ -22,7 +22,7 @@ a {
     bottom: 55px;
     right: 20px;
     display: none;
-    background-color: white;
+    background-color: #FFFFFF;
     border: none;
     color: #000000; /* base color #000000 */
     z-index: 1;
@@ -61,7 +61,7 @@ a {
 }
 
 #jumbo-a:hover {
-    background-color: white!important;
+    background-color: #FFFFFF!important;
 }
 
 /* HEADINGS */
@@ -120,7 +120,7 @@ a:hover {
 }
 
 .basket-icon {
-    color: white;
+    color: #FFFFFF;
 }
 
 input[name='q']::placeholder {
@@ -191,7 +191,7 @@ input[name='q']::placeholder {
 }
 
 .index-hr {
-    border-color: #FFF5F9; /* Natural Palette from base color #000000 */
+    border-color: #FFF5F9;
 }
 
 .hr-width {
@@ -231,7 +231,7 @@ input[name='q']::placeholder {
 }
 
 .platform-badge:hover {
-    background-color: white;
+    background-color: #FFFFFF;
     color: #000000!important;
 }
 
@@ -401,7 +401,7 @@ input[name='q']::placeholder {
 
 .btn-inc-dec {
     background: #000000!important;
-    color: white;
+    color: #FFFFFF;
 }
 
 .btn-inc-dec:hover {
@@ -544,14 +544,14 @@ input[name='q']::placeholder {
     height: 3vh;
     margin: 1% 0%;
     padding: 0.6% 0%;
-    color: white;
+    color: #FFFFFF;
     font-size: 0.8em;
     display: block;
 }
 
 .footer .row a {
     text-decoration: none;
-    color: white;
+    color: #FFFFFF;
     transition: 0.5s;
 }
 
