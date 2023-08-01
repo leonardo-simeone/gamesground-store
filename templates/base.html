@@ -84,9 +84,10 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Mobile navbar inline search bar and shopping basket -->
-      <li class="list-inline-item">
-        <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
+      <menu class="menu-style">
+      <li class="list-inline-item mr-4">
+        <a class="text-black nav-link d-block d-lg-none pl-0" href="#" id="mobile-search" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" aria-label="opens up search bar">
           <div class="text-center">
             <div><i class="fas fa-search fa-lg"></i></div>
             <p class="my-0">Search</p>
@@ -107,9 +108,9 @@
           </form>
         </div>
       </li>
-      <li class="list-inline-item">
+      <li class="list-inline-item" id="mobile-basket">
         <a class="{% if game_count %}game-count-color{% endif %} nav-link d-block d-lg-none"
-          href="{% url 'basket_summary' %}">
+          href="{% url 'basket_summary' %}" aria-label="takes user to their shopping basket page">
           <div class="text-center basket-icon{% if game_count %} game-count-color{% endif %}">
             <div><span class="my-0">
               {% if game_count %}
@@ -122,6 +123,7 @@
           </div>
         </a>
       </li>
+    </menu>
       <!-- Responsive navbar -->
       <div class="collapse navbar-collapse" id="navbarText">
         <menu class="menu-style">
@@ -129,82 +131,82 @@
 
           <li class="nav-item">
             <a class="logo-font font-weight-bold nav-link text-white mr-3 nav-hover {% if request.resolver_match.view_name == 'home' %}active-link{% endif %}"
-              href="{% url 'home' %}">Home</a>
+              href="{% url 'home' %}" aria-label="takes user to home page">Home</a>
           </li>
           <li class="nav-item">
             <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover {% if request.resolver_match.view_name == 'about_us' %}active-link{% endif %}"
-              href="#">About Us</a>
+              href="#" aria-label="takes user to about us page">About Us</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-products-link"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-games-links"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="all games options dropdown menu">
               All Games
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-              <a href="{% url 'games' %}?platform=PS5" class="dropdown-item">PS5 Games</a>
-              <a href="{% url 'games' %}?platform=PS4" class="dropdown-item ">PS4 Games</a>
-              <a href="{% url 'games' %}?platform=XBOX ONE" class="dropdown-item ">XBOX ONE Games</a>
-              <a href="{% url 'games' %}?platform=XBOX SERIES X/S" class="dropdown-item ">XBOX X/S Games</a>
-              <a href="{% url 'games' %}?platform=NINTENDO SWITCH" class="dropdown-item ">NINTENDO Games</a>
-              <a href="{% url 'games' %}?platform=PC" class="dropdown-item ">PC Games</a>
-              <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" class="dropdown-item">All Games</a>
+            <div class="dropdown-menu border-0" aria-labelledby="all-games-link">
+              <a href="{% url 'games' %}?platform=PS5" class="dropdown-item" aria-label="takes user to ps5 games page">PS5 Games</a>
+              <a href="{% url 'games' %}?platform=PS4" class="dropdown-item" aria-label="takes user to ps4 games page">PS4 Games</a>
+              <a href="{% url 'games' %}?platform=XBOX ONE" class="dropdown-item" aria-label="takes user to xbox one games page">XBOX ONE Games</a>
+              <a href="{% url 'games' %}?platform=XBOX SERIES X/S" class="dropdown-item" aria-label="takes user to xbox series x/s games page">XBOX X/S Games</a>
+              <a href="{% url 'games' %}?platform=NINTENDO SWITCH" class="dropdown-item" aria-label="takes user to nintendo switch games page">NINTENDO Games</a>
+              <a href="{% url 'games' %}?platform=PC" class="dropdown-item" aria-label="takes user to pc games page">PC Games</a>
+              <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" class="dropdown-item" aria-label="takes user to all games page">All Games</a>
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-products-link"
+            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-genres-links"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Genre
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-              <a href="{% url 'games' %}?genre=Action" class="dropdown-item">Action</a>
-              <a href="{% url 'games' %}?genre=Adventure" class="dropdown-item">Adventure</a>
-              <a href="{% url 'games' %}?genre=Fantasy" class="dropdown-item">Fantasy</a>
-              <a href="{% url 'games' %}?genre=Horror" class="dropdown-item">Horror</a>
-              <a href="{% url 'games' %}?genre=Shooter" class="dropdown-item">Shooter</a>
-              <a href="{% url 'games' %}?genre=Racing" class="dropdown-item">Racing</a>
-              <a href="{% url 'games' %}?genre=Rpg" class="dropdown-item">Rpg</a>
-              <a href="{% url 'games' %}?genre=Sports" class="dropdown-item">Sports</a>
+            <div class="dropdown-menu border-0" aria-labelledby="all-genres-link" aria-label="all genres options dropdown menu">
+              <a href="{% url 'games' %}?genre=Action" class="dropdown-item" aria-label="takes user to action games page">Action</a>
+              <a href="{% url 'games' %}?genre=Adventure" class="dropdown-item" aria-label="takes user to adventure games page">Adventure</a>
+              <a href="{% url 'games' %}?genre=Fantasy" class="dropdown-item" aria-label="takes user to fantasy games page">Fantasy</a>
+              <a href="{% url 'games' %}?genre=Horror" class="dropdown-item" aria-label="takes user to horror games page">Horror</a>
+              <a href="{% url 'games' %}?genre=Shooter" class="dropdown-item" aria-label="takes user to shooter games page">Shooter</a>
+              <a href="{% url 'games' %}?genre=Racing" class="dropdown-item" aria-label="takes user to racing games page">Racing</a>
+              <a href="{% url 'games' %}?genre=Rpg" class="dropdown-item" aria-label="takes user to rpg games page">Rpg</a>
+              <a href="{% url 'games' %}?genre=Sports" class="dropdown-item" aria-label="takes user to sports games page">Sports</a>
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-products-link"
+            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-pegi-ratings-links"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               PEGI Rating
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-              <a href="{% url 'games' %}?pegi_rating=3" class="dropdown-item">3</a>
-              <a href="{% url 'games' %}?pegi_rating=7" class="dropdown-item">7</a>
-              <a href="{% url 'games' %}?pegi_rating=12" class="dropdown-item">12</a>
-              <a href="{% url 'games' %}?pegi_rating=16" class="dropdown-item">16</a>
-              <a href="{% url 'games' %}?pegi_rating=18" class="dropdown-item">18</a>
+            <div class="dropdown-menu border-0" aria-labelledby="all-pegi-ratings-link" aria-label="all pegi ratings options dropdown menu">
+              <a href="{% url 'games' %}?pegi_rating=3" class="dropdown-item" aria-label="takes user to ages 3 and over games page">3</a>
+              <a href="{% url 'games' %}?pegi_rating=7" class="dropdown-item" aria-label="takes user to ages 7 and over games page">7</a>
+              <a href="{% url 'games' %}?pegi_rating=12" class="dropdown-item" aria-label="takes user to ages 12 and over games page">12</a>
+              <a href="{% url 'games' %}?pegi_rating=16" class="dropdown-item" aria-label="takes user to ages 16 and over games page">16</a>
+              <a href="{% url 'games' %}?pegi_rating=18" class="dropdown-item" aria-label="takes user to ages 18 and over games page">18</a>
             </div>
           </li>
           <li class="nav-item">
             <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover {% if request.resolver_match.view_name == 'contact' %}active-link{% endif %}"
-              href="{% url 'contact' %}">Contact Us</a>
+              href="{% url 'contact' %}" aria-label="takes user to contact us page">Contact Us</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-products-link"
+            <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover {% if request.resolver_match.view_name == 'profile' or request.resolver_match.view_name == 'add_game' or request.resolver_match.view_name == 'contact_list' or request.resolver_match.view_name == 'order_history'%}active-link{% endif %}" href="#" id="my-account-links"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               My Account
             </a>
-            <div class="dropdown-menu border-0">
+            <div class="dropdown-menu border-0" aria-label="all my account options dropdown menu">
               {% if request.user.is_authenticated %}
               {% if request.user.is_superuser %}
               <a href="{% url 'add_game' %}" class="dropdown-item" aria-label="takes user to add game page">Games Management</a>
               <a href="{% url 'contact_list' %}" class="dropdown-item" aria-label="takes user to contact list page">Contact List</a>
               {% endif %}
-              <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-              <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+              <a href="{% url 'profile' %}" class="dropdown-item" aria-label="takes user to my profile page">My Profile</a>
+              <a href="{% url 'account_logout' %}" class="dropdown-item" aria-label="takes user to logout page">Logout</a>
               {% else %}
-              <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-              <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+              <a href="{% url 'account_signup' %}" class="dropdown-item" aria-label="takes user to signup page">Register</a>
+              <a href="{% url 'account_login' %}" class="dropdown-item" aria-label="takes user to login page">Login</a>
               {% endif %}
             </div>
           </li>
           <li class="nav-item d-none d-lg-block">
             <a class="nav-link logo-font font-weight-bold mr-3"
-              href="{% url 'basket_summary' %}">
+              href="{% url 'basket_summary' %}" aria-label="takes user to their basket page">
               <div class="text-center nav-hover basket-icon{% if game_count %} game-count-color h5{% endif %}">
                 <div><span class="my-0">
                   {% if game_count %}
@@ -263,10 +265,10 @@
 
         <div class="row">
             <ul>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#privacy-policy">Privacy Policy</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#terms-conditions">Terms & Conditions</a></li>
+                <li><a href="#" aria-label="takes user to about us page">About us</a></li>
+                <li><a href="{% url 'contact' %}" aria-label="takes user to contact us page">Contact Us</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#privacy-policy" aria-label="takes user to privacy policy modal">Privacy Policy</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#terms-conditions" aria-label="takes user to terms and conditions modal">Terms & Conditions</a></li>
             </ul>
         </div>
 
