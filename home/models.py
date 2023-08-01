@@ -18,3 +18,20 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
+
+class Newsletter(models.Model):
+
+    """
+    A model to create a newsletter subscribers database table.
+    """
+
+    name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(null=False, blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Newsletter subscribers'
+        ordering = ['created']
+
+    def __str__(self):
+        return self.name

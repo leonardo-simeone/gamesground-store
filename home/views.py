@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse
-from .forms import ContactForm
+from .forms import ContactForm, NewsletterForm
 from django.contrib import messages
 from .models import Contact
 from django.contrib.auth.decorators import login_required
@@ -53,3 +53,23 @@ def contact_list(request):
     }
     return render(request, template, context)
 
+
+# --------------------------------------------------------------------------
+def newsletter(request):
+    """
+    A view for users to contact the site admin
+    """
+    form = NewsletterForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, 'Thanks for subscribing to our newsletter!'
+                )
+            return redirect('home')
+        messages.error(request, 'An error has occurred. Please try again.')
+    template = 'home/newsletter.html'
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
