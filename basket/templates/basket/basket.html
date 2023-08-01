@@ -50,13 +50,13 @@
                         <div class="col">
                             <!-- Basket checkout buttons mobile -->
                             <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC"
-                                class="btn btn-shopping-basket rounded btn-sm mr-2">
+                                class="btn btn-shopping-basket rounded btn-sm mr-2 small-buttons" aria-label="takes user to all games page">
                                 <span class="icon">
                                     <i class="fas fa-chevron-left"></i>
                                 </span>
                                 <span class="text-uppercase">Keep Shopping</span>
                             </a>
-                            <a href="{% url 'checkout' %}" class="btn btn-shopping-basket rounded btn-sm">
+                            <a href="{% url 'checkout' %}" class="btn btn-shopping-basket rounded btn-sm small-buttons" aria-label="takes user to checkout page">
                                 <span class="text-uppercase">Secure Checkout</span>
                                 <span class="icon">
                                     <i class="fas fa-lock"></i>
@@ -97,16 +97,16 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <button class="decrement-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="decrement-qty_{{ item.game_id }}">
+                                                <button class="decrement-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="decrement-qty_{{ item.game_id }}" aria-label="decreases amount of {{item.game.name}} to update to in the shopping basket by 1">
                                                     <span>
                                                         <i class="fas fa-minus fa-sm"></i>
                                                     </span>
                                                 </button>
                                             </div>
                                             <input class="form-control form-control-sm qty_input" type="number" name="quantity"
-                                                value="{{ item.quantity }}" min="1" max="99" data-game_id="{{ item.game_id }}" id="id_qty_{{ item.game_id }}">
+                                                value="{{ item.quantity }}" min="1" max="99" data-game_id="{{ item.game_id }}" id="id_qty_{{ item.game_id }}" aria-label="shows current amount of {{item.game.name}} in the shopping basket">
                                             <div class="input-group-append">
-                                                <button class="increment-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="increment-qty_{{ item.game_id }}">
+                                                <button class="increment-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="increment-qty_{{ item.game_id }}" aria-label="increases amount of {{item.game.name}} to update to in the shopping basket by 1">
                                                     <span>
                                                         <i class="fas fa-plus fa-sm"></i>
                                                     </span>
@@ -115,8 +115,8 @@
                                         </div>
                                     </div>
                                 </form>
-                                <a class="update-link"><small>Update</small></a>
-                                <a class="remove-item float-right" id="remove_{{ item.game_id }}"><small>Remove</small></a>
+                                <a class="update-link" aria-label="updates amount of {{item.game.name}} in the shopping basket"><small>Update</small></a>
+                                <a class="remove-item float-right" id="remove_{{ item.game_id }}" aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></a>
                             </div>
                         </div>
                         <div class="row">
@@ -170,16 +170,16 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <button class="decrement-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="decrement-qty-basket_{{ item.game_id }}">
+                                                    <button class="decrement-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="decrement-qty-basket_{{ item.game_id }}" aria-label="decreases amount of {{item.game.name}} to update to in the shopping basket by 1">
                                                         <span>
                                                             <i class="fas fa-minus fa-sm"></i>
                                                         </span>
                                                     </button>
                                                 </div>
                                                 <input class="form-control form-control-sm qty_input" type="number"
-                                                    name="quantity" value="{{ item.quantity }}" min="1" max="99" data-game_id="{{ item.game_id }}" id="id_qty_basket_{{ item.game_id }}">
+                                                    name="quantity" value="{{ item.quantity }}" min="1" max="99" data-game_id="{{ item.game_id }}" id="id_qty_basket_{{ item.game_id }}" aria-label="shows current amount of {{item.game.name}} in the shopping basket">
                                                 <div class="input-group-append">
-                                                    <button class="increment-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="increment-qty-basket_{{ item.game_id }}">
+                                                    <button class="increment-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="increment-qty-basket_{{ item.game_id }}" aria-label="increases amount of {{item.game.name}} to update to in the shopping basket by 1">
                                                         <span>
                                                             <i class="fas fa-plus fa-sm"></i>
                                                         </span>
@@ -188,8 +188,8 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <a class="update-link"><small>Update</small></a>
-                                    <a class="remove-item float-right" id="remove_{{ item.game_id }}"><small>Remove</small></a>
+                                    <a class="update-link" aria-label="updates amount of {{item.game.name}} in the shopping basket"><small>Update</small></a>
+                                    <a class="remove-item float-right" id="remove_{{ item.game_id }}" aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></a>
                                 </td>
                                 <td class="py-3">
                                     <p class="my-0">{{ item.game.price | calc_subtotal:item.quantity }}</p>
@@ -218,13 +218,13 @@
                             <td colspan="5" class="text-right pt-3 pr-0">
                                 <!-- Basket Checkout Buttons -->
                                 <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC"
-                                    class="btn btn-shopping-basket rounded btn-lg mr-2">
+                                    class="btn btn-shopping-basket rounded btn-lg mr-2" aria-label="takes user to all games page">
                                     <span class="icon">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="text-uppercase">Keep Shopping</span>
                                 </a>
-                                <a href="{% url 'checkout' %}" class="btn btn-shopping-basket rounded btn-lg">
+                                <a href="{% url 'checkout' %}" class="btn btn-shopping-basket rounded btn-lg" aria-label="takes user to checkout page">
                                     <span class="text-uppercase">Secure Checkout</span>
                                     <span class="icon">
                                         <i class="fas fa-lock"></i>
@@ -245,7 +245,7 @@
             <div class="col no-games-basket">
 
                 <p class="mb-5">You have no games in your basket</p>
-                <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" class="btn btn-shopping-basket rounded btn-lg mr-2">
+                <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" class="btn btn-shopping-basket rounded btn-lg mr-2" aria-label="takes user to all games page">
                     <span class="icon">
                         <i class="fas fa-chevron-left"></i>
                     </span>
