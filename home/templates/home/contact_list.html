@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact list{% endblock %}
+
+{% block content %}
+
+<div class="container contact-container">
+
+    <div class="row">
+        <div class="col">
+            <br>
+            <h2 class="mb-4">Contact Us List</h2>
+            <hr class="checkout-hr">
+            <h3 class="mb-4 add-game-heading">A list of all the users that have contacted store Owner/Admin</h3>
+            <hr class="checkout-hr">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+
+            <!-- Contact list for mobile view -->
+
+            <div class="d-block d-md-none">
+
+                <!-- Start of mobile for loop -->
+                {% for contact in contacts %}
+                    <div class="row game-info-mobile rounded mb-3">
+                        <!-- Contact name mobile -->
+                        <div class="col-12 mt-2">
+                            <p class="mb-0"><strong>Name: </strong>{{ contact.name }}</p>
+                        </div>
+                        <!-- Contact email mobile -->
+                        <div class="col-12 mb-2 mt-2">
+                            <p class="my-0"><strong>Email: </strong>{{ contact.email }}</p>
+                        </div>
+                        <!-- Contact message mobile -->
+                        <div class="col-12 order-sm-last">
+                            <p class="text-justify mb-0"><strong>Message: </strong>{{ contact.body }}</p>
+                            <p class="message-created rounded">This message was written on {{ contact.created }}</p>
+                        </div>
+                    </div>
+                    <hr>
+
+                {% endfor %}
+                <!-- End of mobile for loop -->
+            </div>
+
+            <div class="table-responsive rounded d-none d-md-block">
+
+                <table class="table table-borderless tmb rounded">
+                    <!-- Start of desktop for loop -->
+                    {% for contact in contacts %}
+                        <thead class="table-head">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Message</th>
+                            </tr>
+                        </thead>
+
+                        <tr class="contact-list-info">
+                            <td class="p-3">
+                                <!-- Contact name -->
+                                <p>{{ contact.name }}</p>
+                            </td>
+                            <td class="py-3">
+                                <!-- Contact email -->
+                                <p class="my-0">{{ contact.email }}</p>
+                            </td>
+                            <td class="py-3">
+                                <!-- Contact message -->
+                                <p class="text-justify mb-0">{{ contact.body }}</p>
+                                <p class="message-created rounded">This message was written on {{ contact.created }}</p>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
