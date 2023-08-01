@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Home{% endblock %}
 
 {% block content %}
 
@@ -12,7 +13,7 @@
             <hr class="my-4 index-hr">
             <p><span><strong><em>We have games for every console, niche, genre, age and
                             taste.</em></strong></span></p>
-            <a class="btn btn-primary btn-lg" id="jumbo-a" href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" role="button">Shop Now</a>
+            <a class="btn btn-primary btn-lg" id="jumbo-a" href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" role="button" aria-label="takes user to all games page">Shop Now</a>
         </div>
     </div>
 </section>
@@ -25,7 +26,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card mb-4">
-                            <a href="{% url 'games' %}?platform=PS5,PS4">
+                            <a href="{% url 'games' %}?platform=PS5,PS4" aria-label="takes user to playstation games page">
                                 <div class="card-body index-card">
                                     <div class="image-container">
                                         <img class="card-img-top rounded" src="{% static 'images/ps-controller.webp' %}"
@@ -43,7 +44,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card mb-4">
-                            <a href="{% url 'games' %}?platform=XBOX SERIES X/S,XBOX ONE">
+                            <a href="{% url 'games' %}?platform=XBOX SERIES X/S,XBOX ONE" aria-label="takes user to xbox games page">
                                 <div class="card-body index-card">
                                     <div class="image-container">
                                         <img class="card-img-top rounded"
@@ -62,7 +63,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card mb-4">
-                            <a href="{% url 'games' %}?platform=PC">
+                            <a href="{% url 'games' %}?platform=PC" aria-label="takes user to pc games page">
                                 <div class="card-body index-card">
                                     <div class="image-container">
                                         <img class="card-img-top rounded" src="{% static 'images/pc-controller.webp' %}"
@@ -90,19 +91,25 @@
 <section id="info-section">
     <div class="row mt-4 mb-4 info-headings bg-dark rounded">
         <div class="col-md-4 mt-2 info-border" id="top-info">
-            <h3><i class="fa-solid fa-euro-sign"></i> best prices in the market</h3>
-            <p>Most Competitive Prices On All Video Games</p>
+            <a class="index-info-links" href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" aria-label="takes user to all games page">
+                <h3><i class="fa-solid fa-euro-sign"></i> best prices in the market</h3>
+                <p>Most Competitive Prices On All Video Games</p>
+            </a>
             <hr class="index-hr separator d-sm-block d-md-none">
         </div>
 
         <div class="col-md-4 mt-2 info-border">
-            <h3><i class="fa-solid fa-lock"></i> Secure checkout</h3>
-            <p>Your Payment and Data Will Be Handled Securely</p>
+            <a class="index-info-links" href="{% url 'newsletter' %}" aria-label="takes user to subscribe to newsletter page">
+                <h3><i class="fa-regular fa-newspaper"></i> Newsletter</h3>
+                <p class="index-info-para">Subscribe & receive our most up to date special offers, news & more</p>
+            </a>
             <hr class="index-hr separator d-sm-block d-md-none">
         </div>
         <div class="col-md-4 mt-2">
-            <h3><i class="fa-solid fa-envelope"></i></i> Customer support</h3>
-            <p class="mr-1">Should You Have Any Issues You Can Contact Us</p>
+            <a class="index-info-links" href="{% url 'contact' %}" aria-label="takes user to contact us page">
+                <h3><i class="fa-solid fa-envelope"></i></i> Customer support</h3>
+                <p class="mr-1 index-info-para">Should You Have Any Issues You Can Contact Us</p>
+            </a>
         </div>
     </div>
 </section>
