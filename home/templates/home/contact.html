@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+
+    <div class="row">
+        <div class="col">
+            <br>
+            <h2 class="mb-4">To contact site administrator, please fill out the form</h2>
+            <hr class="checkout-hr">
+            <h3 class="mb-4 add-game-heading">We'll get back to you as soon as possible</h3>
+            <hr class="checkout-hr">
+        </div>
+    </div>
+    <div class="row add-edit-game-row">
+        <div class="col-12 col-md-6 add-game-form-style rounded">
+            <form method="POST" class="form mb-2 mt-2">
+                {% csrf_token %}
+
+                {{ form|crispy }}
+                <div class="text-right">
+                    <a class="btn btn-shopping-basket rounded mr-2" href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC">Cancel</a>
+                    <button class="btn btn-shopping-basket rounded" type="submit">Send</button>
+                </div>
+            </form>
+        </div>            
+    </div>
+</div>
+
+{% endblock %}

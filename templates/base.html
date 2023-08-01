@@ -181,7 +181,7 @@
           </li>
           <li class="nav-item">
             <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover {% if request.resolver_match.view_name == 'contact' %}active-link{% endif %}"
-              href="#">Contact</a>
+              href="{% url 'contact' %}">Contact Us</a>
           </li>
           <li class="nav-item dropdown">
             <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-products-link"
