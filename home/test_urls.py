@@ -3,7 +3,7 @@ from django.urls import reverse, resolve
 from . import views
 
 
-class TestUrls(TestCase):
+class TestHomeUrls(TestCase):
 
     """
     We have four test methods: test_home_url, test_contact_url,
