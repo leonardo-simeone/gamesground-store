@@ -194,7 +194,7 @@
               {% if request.user.is_authenticated %}
               {% if request.user.is_superuser %}
               <a href="{% url 'add_game' %}" class="dropdown-item" aria-label="takes user to add game page">Games Management</a>
-              <a href="{% url 'contact_list' %}" class="dropdown-item" aria-label="takes user to contact list page">Contact List</a>
+              <a href="{% url 'contact_list' %}" class="dropdown-item" aria-label="takes user to contact list page">Contact List ({{ contacts_count }})</a>
               {% endif %}
               <a href="{% url 'profile' %}" class="dropdown-item" aria-label="takes user to my profile page">My Profile</a>
               <a href="{% url 'account_logout' %}" class="dropdown-item" aria-label="takes user to logout page">Logout</a>
