@@ -23,8 +23,13 @@ class TestGamesView(TestCase):
     - test_search_name: Tests search result of a game by name.
     - test_search_description: Tests search result of a game by description.
     - test_search_platform: Tests search result of a game by platform.
+    - test_search_pegi_rating: Tests search result of a game by pegi rating.
     - test_search_genre: Tests search result of a game by genre.
-    - test_sorting_view: Tests sorting of games in this case by name.
+    - test_sorting_by_game_name: Tests sorting of games in this case by name.
+    - test_sorting_by_platform_name: Tests sorting of games in this case by
+    platform name.
+    - test_sorting_by_num_likes: Tests sorting of games in this case by
+    number of likes(popularity).
     - test_filtering_view: Tests filtering of games in this case by platform.
     """
 
@@ -120,9 +125,14 @@ class TestGamesView(TestCase):
         self.assertContains(response, 'Test Game 1')
         self.assertNotContains(response, 'Test Game 2')
 
+    # Test game search by pegi_rating
+    def test_search_pegi_rating(self):
+        request = self.mock_request({'pegi_rating': '18'})
+        response = games(request)
+
     # Test game search by genre
     def test_search_genre(self):
-        request = self.mock_request({'q': 'Action'})
+        request = self.mock_request({'genre': 'Action'})
         response = games(request)
 
         self.assertEqual(response.status_code, 200)
@@ -134,6 +144,38 @@ class TestGamesView(TestCase):
         request = self.mock_request({'sort': 'name', 'direction': 'asc'})
         response = games(request)
 
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(
+            response.content.index(b'Test Game 1')
+            < response.content.index(b'Test Game 2')
+            )
+
+    # Test sorting game by platform name
+    def test_sorting_by_platform_name(self):
+        request = self.mock_request({'sort': 'platform', 'direction': 'desc'})
+        response = games(request)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(
+            response.content.index(b'Test Game 2')
+            < response.content.index(b'Test Game 1')
+            )
+
+    # Test sorting game by likes
+    def test_sorting_by_num_likes(self):
+        # Create test data
+        user1 = User.objects.create_user(
+            username='user1', password='password1'
+            )
+        user2 = User.objects.create_user(
+            username='user2', password='password2'
+            )
+
+        # add likes to game 2
+        self.game2.likes.add(user1, user2)
+
+        request = self.mock_request({'sort': 'likes', 'direction': 'asc'})
+        response = games(request)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
             response.content.index(b'Test Game 1')
@@ -463,6 +505,9 @@ class TestEditGameView(TestCase):
         self.assertTemplateUsed(response, 'games/edit_game.html')
         self.assertIsInstance(response.context['form'], GameForm)
         self.assertEqual(response.context['game'], self.game)
+        self.assertContains(
+            response, f'You are editing {self.game.name}'
+            )
 
     def test_edit_game_authenticated_superuser_post_valid_form(self):
         # Simulate an authenticated superuser's POST request
