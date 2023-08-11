@@ -1,5 +1,6 @@
 from django import forms
 from .models import Contact, Newsletter
+from django.contrib.auth import get_user_model
 
 
 class ContactForm(forms.ModelForm):
@@ -12,12 +13,16 @@ class ContactForm(forms.ModelForm):
         model = Contact
         fields = ['name', 'email', 'body']
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
         """
         Add placeholders, remove auto-generated
-        labels and set autofocus on first field
+        labels, set autofocus on first field and
+        auto fills name and email fields if user
+        is authenticated
         """
         super().__init__(*args, **kwargs)
+
         placeholders = {
             'name': 'Full Name',
             'email': 'E-mail address',
@@ -32,6 +37,10 @@ class ContactForm(forms.ModelForm):
 
         self.fields['name'].widget.attrs['autofocus'] = True
 
+        if user and user.is_authenticated:
+            self.fields['name'].initial = user.get_full_name()
+            self.fields['email'].initial = user.email
+
 
 class NewsletterForm(forms.ModelForm):
 
@@ -43,10 +52,12 @@ class NewsletterForm(forms.ModelForm):
         model = Newsletter
         fields = ['name', 'email']
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
         """
         Add placeholders, remove auto-generated
-        labels and set autofocus on first field
+        labels, set autofocus on first field and auto
+        fills name and email fields if user is authenticated
         """
         super().__init__(*args, **kwargs)
         placeholders = {
@@ -61,3 +72,8 @@ class NewsletterForm(forms.ModelForm):
             self.fields[field].label = False
 
         self.fields['name'].widget.attrs['autofocus'] = True
+        
+        if user and user.is_authenticated:
+            self.fields['name'].initial = user.get_full_name()
+            self.fields['email'].initial = user.email
+
