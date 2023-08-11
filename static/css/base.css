@@ -629,6 +629,37 @@ input[name='q']::placeholder {
     margin: 0% 1%;
 }
 
+/* MODALS */
+
+.modal-body {
+    color: #000000;
+}
+
+#pp-modal h1 {
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+#pp-modal h1 p {
+    text-align: center;
+}
+
+#pp-modal h2 {
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+.modal-contact {
+    color: #3A2F0B!important; /* Classy Palette from base color #000000 */
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.modal-contact:hover {
+    color: #005B60!important;
+    text-decoration: underline!important;
+}
+
+
 /* ALLAUTH FORMS */
 
 .allauth-form-inner-content input {
