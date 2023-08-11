@@ -7,20 +7,20 @@
 
 
 
-  <div class="container contact-container">
+  <div class="container newsletter-container">
 
     <div class="row">
         <div class="col">
             <br>
-            <h2 class="mb-4">Newsletter</h2>
+            <h2 class="mb-4 other-headings">Newsletter</h2>
             <hr class="checkout-hr">
-            <h3 class="mb-4 add-game-heading">Subscribe to our newsletter and get the latest news, special offers and more on all our games!</h3>
+            <h3 class="mb-4 add-game-heading other-headings">Subscribe to our newsletter and get the latest news, special offers and more on all our games!</h3>
             <hr class="checkout-hr">
         </div>
     </div>
     <div class="row add-edit-game-row">
         <div class="col-12 col-md-6 add-game-form-style rounded">
-            <form method="POST" class="form mb-2 mt-2">
+            <form method="POST" class="form mb-3 mt-3">
                 {% csrf_token %}
 
                 {{ form|crispy }}
