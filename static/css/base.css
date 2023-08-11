@@ -448,6 +448,22 @@ input[name='q']::placeholder {
     text-transform: capitalize!important;
 }
 
+.basket-total-heading {
+    font-size: 1.6rem;
+}
+
+.basket-total-heading-mobile {
+    font-size: 1.4rem;
+}
+
+.basket-subtotal-headings {
+    font-size: 1.3rem;
+}
+
+.basket-subtotal-headings-mobile {
+    font-size: 1rem;
+}
+
 .game-count-color {
     color: #F9F871!important;
 }
