@@ -34,9 +34,9 @@
                     <div class="row basket-total-mobile mb-2 rounded">
                         <div class="col pl-2 pt-2 pr-2">
                             <!-- Basket total mobile -->
-                            <h6 class="basket-headings"><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h6>
-                            <h6 class="basket-headings">Delivery: €{{ delivery|floatformat:2 }}</h6>
-                            <h4 class="mt-4 basket-headings"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong>
+                            <h4 class="basket-headings basket-subtotal-headings-mobile"><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h4>
+                            <h4 class="basket-headings basket-subtotal-headings-mobile">Delivery: €{{ delivery|floatformat:2 }}</h4>
+                            <h4 class="mt-3 basket-headings basket-total-heading-mobile"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong>
                             </h4>
                             {% if free_delivery_delta > 0 %}
                                 <p class="mb-1 free-delivery">
@@ -91,7 +91,7 @@
                                 </p>
                             </div>
                             <!-- Game Quantity mobile -->
-                            <div class="col-12 col-sm-6">
+                            <div class="col-12 col-sm-6 mb-2">
                                 <form class="form update-form" method="POST" action="{% url 'adjust_basket' item.game_id %}">
                                     {% csrf_token %}
                                     <div class="form-group">
@@ -203,9 +203,9 @@
                         <tr class="table-total">
                             <td colspan="5" class="pt-5 text-right rounded-bottom">
                                 <!-- Basket Total -->
-                                <h6 class="basket-headings"><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h6>
-                                <h6 class="basket-headings">Delivery: €{{ delivery|floatformat:2 }}</h6>
-                                <h4 class="mt-4 basket-headings"><strong>Grand Total:
+                                <h4 class="basket-headings basket-subtotal-headings"><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h4>
+                                <h4 class="basket-headings basket-subtotal-headings">Delivery: €{{ delivery|floatformat:2 }}</h4>
+                                <h4 class="mt-4 basket-headings basket-total-heading"><strong>Grand Total:
                                         €{{ grand_total|floatformat:2 }}</strong></h4>
                                 {% if free_delivery_delta > 0 %}
                                     <p class="mb-1 free-delivery">
