@@ -424,30 +424,10 @@ input[name='q']::placeholder {
 
 .update-link{
     font-family: 'Merriweather Sans', sans-serif!important;
-    color: #000000!important;
-    cursor: pointer;
 }
 
 .remove-item{
     font-family: 'Merriweather Sans', sans-serif!important;
-    color: #000000!important;
-    cursor: pointer;
-}
-
-.update-link:hover {
-    color: #005B60!important; /* Friend palette from base color #000000 */
-    text-decoration: underline!important;
-    background-color: #FFF5F9;
-    border-radius: 3px;
-    padding: 3px;
-}
-
-.remove-item:hover {
-    color: #FB4F93!important;
-    text-decoration: underline!important;
-    background-color: #FFF5F9;
-    border-radius: 3px;
-    padding: 2px;
 }
 
 .basket-total-mobile {
