@@ -26,10 +26,7 @@ class ContactForm(forms.ModelForm):
 
         for field in self.fields:
 
-            if self.fields[field].required:
-                placeholder = f'{placeholders[field]} *'
-            else:
-                placeholder = placeholders[field]
+            placeholder = f'{placeholders[field]} *'
             self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].label = False
 
@@ -59,10 +56,7 @@ class NewsletterForm(forms.ModelForm):
 
         for field in self.fields:
 
-            if self.fields[field].required:
-                placeholder = f'{placeholders[field]} *'
-            else:
-                placeholder = placeholders[field]
+            placeholder = f'{placeholders[field]} *'
             self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].label = False
 
