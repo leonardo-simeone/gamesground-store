@@ -115,8 +115,9 @@
                                         </div>
                                     </div>
                                 </form>
-                                <a class="update-link" aria-label="updates amount of {{item.game.name}} in the shopping basket"><small>Update</small></a>
-                                <a class="remove-item float-right" id="remove_{{ item.game_id }}" aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></a>
+                                <button class="update-link btn btn-shopping-basket rounded" aria-label="updates amount of {{item.game.name}} in the shopping basket"><small>Update</small></button>
+                                <button class="remove-item float-right btn btn-shopping-basket rounded" id="remove_{{ item.game_id }}" aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></button>
+                                
                             </div>
                         </div>
                         <div class="row">
@@ -188,8 +189,9 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <a class="update-link" aria-label="updates amount of {{item.game.name}} in the shopping basket"><small>Update</small></a>
-                                    <a class="remove-item float-right" id="remove_{{ item.game_id }}" aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></a>
+                                    <button class="update-link btn btn-shopping-basket rounded" aria-label="updates amount of {{item.game.name}} in the shopping basket"><small>Update</small></button>
+                                    <button class="remove-item float-right btn btn-shopping-basket rounded" id="remove_{{ item.game_id }}" aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></button>
+                                    
                                 </td>
                                 <td class="py-3">
                                     <p class="my-0">{{ item.game.price | calc_subtotal:item.quantity }}</p>
