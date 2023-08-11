@@ -72,8 +72,7 @@ class NewsletterForm(forms.ModelForm):
             self.fields[field].label = False
 
         self.fields['name'].widget.attrs['autofocus'] = True
-        
+
         if user and user.is_authenticated:
             self.fields['name'].initial = user.get_full_name()
             self.fields['email'].initial = user.email
-
