@@ -1,5 +1,6 @@
 from django.test import TestCase
 from .forms import *
+from django.contrib.auth import get_user_model
 
 
 class TestContactForm(TestCase):
@@ -16,6 +17,8 @@ class TestContactForm(TestCase):
     all fields are set to False.
     - In test_form_autofocus, we test if the autofocus attribute is set
     for the "name" field.
+    - In test_form_auto_fill_authenticated_user: we test that if the user
+    is authenticated the name and email fields are auto filled.
     """
 
     def test_form_required_fields(self):
@@ -62,6 +65,27 @@ class TestContactForm(TestCase):
         self.assertIsNone(form.fields['email'].widget.attrs.get('autofocus'))
         self.assertIsNone(form.fields['body'].widget.attrs.get('autofocus'))
 
+    def test_form_auto_fill_authenticated_user(self):
+        # Create a user
+        User = get_user_model()
+        user = User.objects.create_user(
+            username='testuser',
+            password='testpassword',
+            email='test@test.com',
+            first_name='John',
+            last_name='Doe'
+        )
+
+        # Log the user in
+        self.client.login(username='testuser', password='testpassword')
+
+        # Initialize the form with the authenticated user
+        form = ContactForm(user=user)
+
+        # Assert that the 'name' and 'email' fields are auto-filled
+        self.assertEqual(form.fields['name'].initial, 'John Doe')
+        self.assertEqual(form.fields['email'].initial, 'test@test.com')
+
 
 class TestNewsletterForm(TestCase):
 
@@ -77,6 +101,8 @@ class TestNewsletterForm(TestCase):
     all fields are set to False.
     - In test_form_autofocus, we test if the autofocus attribute is set
     for the "name" field.
+    - In test_form_auto_fill_authenticated_user: we test that if the user
+    is authenticated the name and email fields are auto filled.
     """
 
     def test_form_required_fields(self):
@@ -114,3 +140,24 @@ class TestNewsletterForm(TestCase):
         form = NewsletterForm()
         self.assertTrue(form.fields['name'].widget.attrs.get('autofocus'))
         self.assertIsNone(form.fields['email'].widget.attrs.get('autofocus'))
+
+    def test_form_auto_fill_authenticated_user(self):
+        # Create a user
+        User = get_user_model()
+        user = User.objects.create_user(
+            username='testuser',
+            password='testpassword',
+            email='test@test.com',
+            first_name='John',
+            last_name='Doe'
+        )
+
+        # Log the user in
+        self.client.login(username='testuser', password='testpassword')
+
+        # Initialize the form with the authenticated user
+        form = NewsletterForm(user=user)
+
+        # Assert that the 'name' and 'email' fields are auto-filled
+        self.assertEqual(form.fields['name'].initial, 'John Doe')
+        self.assertEqual(form.fields['email'].initial, 'test@test.com')
