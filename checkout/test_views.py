@@ -5,7 +5,9 @@ from decimal import Decimal
 from unittest.mock import patch, Mock
 from checkout.views import *
 from checkout.forms import OrderForm
+from profiles.forms import UserProfileForm
 from checkout.models import Order, OrderLineGame
+from checkout.views import checkout_success
 from profiles.models import UserProfile
 from basket.contexts import basket_contents
 from games.models import *
@@ -30,6 +32,11 @@ class TestCheckoutView(TestCase):
     user can complete checkout with valid form data.
     - test_checkout_view_post_valid_form_authenticated_user: Tests an
     authenticated user can complete checkout with valid form data.
+    - test_game_not_found: Tests that the response in case of game not existent
+    in the database is correct (response code, url and error message).
+    - test_user_profile_not_found: Tests that the response in case of user
+    profile not existent in the database is correct
+    (response code).
     Since the intent object is directly referenced in a possible
     test_checkout_view_post_invalid_form method, and the view
     structure heavily depends on it, it seems difficult to test
@@ -172,6 +179,64 @@ class TestCheckoutView(TestCase):
         self.assertEqual(order_line_game.game, self.game)
         self.assertEqual(order_line_game.quantity, 2)
 
+    @patch('checkout.views.messages')
+    @patch('games.views.Game.objects.get')
+    def test_game_not_found(self, mock_game_get, mock_messages):
+        # Mock Game.objects.get to raise Game.DoesNotExist exception
+        mock_game_get.side_effect = Game.DoesNotExist()
+
+        request = self.factory.post(reverse('checkout'), {
+            'full_name': 'John Doe',
+            'email': 'john@example.com',
+            'phone_number': '1234567890',
+            'country': 'US',
+            'postcode': '12345',
+            'town_or_city': 'Test City',
+            'street_address1': '123 Test St',
+            'street_address2': 'Apt 2',
+            'county': 'Test County',
+        })
+
+        request.session = {'basket': {'1': 2}}  # Sample basket data
+        request.user = self.user
+        request._messages = FallbackStorage(request)
+
+        response = checkout(request)
+
+        # Assert that the response is a redirect
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('basket_summary'))
+
+        # Assert that the correct message was added to the messages
+        mock_messages.error.assert_called_once()
+
+    @patch('profiles.views.UserProfile.objects.get')
+    def test_user_profile_not_found(self, mock_user_profile_get):
+        # Mock UserProfile.objects.get
+        # to raise UserProfile.DoesNotExist exception
+        mock_user_profile_get.side_effect = UserProfile.DoesNotExist()
+
+        request = self.factory.post(reverse('checkout'), {
+            'full_name': 'John Doe',
+            'email': 'john@example.com',
+            'phone_number': '1234567890',
+            'country': 'US',
+            'postcode': '12345',
+            'town_or_city': 'Test City',
+            'street_address1': '123 Test St',
+            'street_address2': 'Apt 2',
+            'county': 'Test County',
+        })
+
+        # Sample basket data
+        request.session = {'basket': {'1': 2}}
+        request.user = self.user
+
+        response = checkout(request)
+
+        # Assert that the response is successful
+        self.assertEqual(response.status_code, 302)
+
 
 class TestCheckoutSuccessView(TestCase):
 
@@ -197,6 +262,10 @@ class TestCheckoutSuccessView(TestCase):
     checkout success view/template is correct.
     - test_checkout_success_template_used: Tests that the correct template
     is used for checkout success view.
+    - test_save_user_info: Tests that when save_info equals True, the user
+    info will be stored, we assert the response code is correct(200) and
+    that the user info fields are correct for checkout_success.
+    - test_basket_deleted: Tests that basket is deleted in checkout success.
     """
 
     def setUp(self):
@@ -391,3 +460,62 @@ class TestCheckoutSuccessView(TestCase):
             response = checkout_success(request, self.order_number)
 
         self.assertEqual(response.status_code, 200)
+
+    @patch('checkout.views.messages')
+    @patch('profiles.views.UserProfileForm')
+    def test_save_user_info(
+         self,
+         mock_user_profile_form, mock_messages):
+        # Mock form validation
+        mock_user_profile_form.return_value.is_valid.return_value = True
+
+        checkout_success_url = reverse(
+            'checkout_success', args=['56E3AC1F12814832AB8397205867DCB5']
+            )
+        request = self.factory.get(checkout_success_url)
+        request.user = self.user
+        request.session = {'save_info': True}
+        request._messages = FallbackStorage(request)
+
+        self.order_number = '56E3AC1F12814832AB8397205867DCB5'
+        self.order = Order.objects.create(
+            order_number=self.order_number,
+            full_name='Test User',
+            email='test@example.com',
+            phone_number='1234567890',
+            country='US',
+            postcode='12345',
+            town_or_city='Test City',
+            street_address1='123 Test St',
+            street_address2='Apt 2',
+            county='Test County',
+        )
+        response = checkout_success(
+            request, '56E3AC1F12814832AB8397205867DCB5'
+            )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.order.full_name)
+        self.assertContains(response, self.order.email)
+        self.assertContains(response, self.order.phone_number)
+
+    def test_basket_deleted(self):
+        request = self.factory.get('/')
+        request.user = self.user
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+
+        # Add a 'basket' to the session
+        request.session['basket'] = self.basket
+        request.session.save()
+
+        # Apply MessageMiddleware
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+
+        # Call the checkout_success view
+        response = checkout_success(request, order_number=self.order_number)
+
+        # Check if the 'basket' is deleted from the session
+        self.assertNotIn('basket', request.session)
