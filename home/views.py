@@ -18,7 +18,8 @@ def contact(request):
     """
     A view for users to contact the site admin
     """
-    form = ContactForm(request.POST or None)
+    form = ContactForm(request.POST or None, user=request.user)
+
     if request.method == 'POST':
         if form.is_valid():
             form.save()
@@ -57,9 +58,9 @@ def contact_list(request):
 # --------------------------------------------------------------------------
 def newsletter(request):
     """
-    A view for users to contact the site admin
+    A view for users to subscribe to the site's newsletter
     """
-    form = NewsletterForm(request.POST or None)
+    form = NewsletterForm(request.POST or None, user=request.user)
     if request.method == 'POST':
         if form.is_valid():
             form.save()
