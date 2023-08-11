@@ -824,16 +824,29 @@ input[name='q']::placeholder {
         width: 100%;
     }
 
-    .update-link:hover {
-        padding: 0;
-    }
-    
-    .remove-item:hover {
-        padding: 0;
-    }
-
     #top-info{
         margin-top: 15px!important;
+    }
+
+    #top-info-external {
+        margin-top: 15px!important;
+    }
+
+    .other-headings {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    input[type=number] {
+        text-align: center;
+    }
+
+    #pp-modal h1 {
+        font-size: 1.4rem;
+    }
+
+    #pp-modal h2 {
+        font-size: 1.1rem;
     }
 
 }
