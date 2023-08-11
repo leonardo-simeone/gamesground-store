@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
+from django.shortcuts import render, redirect
+from django.shortcuts import reverse, HttpResponse, get_object_or_404
 from django.contrib import messages
 from games.models import *
 
@@ -29,7 +30,9 @@ def add_to_basket(request, game_id):
         basket[game_id] = quantity
 
     if game.platform:
-        messages.success(request, f'Added {game.name} {game.platform} to your basket')
+        messages.success(
+            request, f'Added {game.name} {game.platform} to your basket'
+            )
     else:
         messages.success(request, f'Added {game.name} to your basket')
     request.session['basket'] = basket
@@ -38,7 +41,9 @@ def add_to_basket(request, game_id):
 
 # ----------------------------------------------------------------
 def adjust_basket(request, game_id):
-    """Adjust the quantity of the specified game to the specified amount"""
+    """
+    Adjust the quantity of the specified game to the specified amount
+    """
 
     game = get_object_or_404(Game, pk=game_id)
     quantity = int(request.POST.get('quantity'))
@@ -48,13 +53,22 @@ def adjust_basket(request, game_id):
     if quantity > 0:
         basket[game_id] = quantity
         if game.platform:
-            messages.success(request, f'Updated {game.name} {game.platform} quantity to {basket[game_id]}')
+            messages.success(
+                request,
+                f'Updated {game.name} {game.platform} quantity \
+                  to {basket[game_id]}'
+                )
         else:
-            messages.success(request, f'Updated {game.name} quantity to {basket[game_id]}')
+            messages.success(
+                request,
+                f'Updated {game.name} quantity to {basket[game_id]}')
     else:
         basket.pop(game_id)
         if game.platform:
-            messages.success(request, f'Removed {game.name} {game.platform} from your basket')
+            messages.success(
+                request,
+                f'Removed {game.name} {game.platform} from your basket'
+                )
         else:
             messages.success(request, f'Removed {game.name} from your basket')
 
@@ -64,14 +78,19 @@ def adjust_basket(request, game_id):
 
 # ----------------------------------------------------------------
 def remove_from_basket(request, game_id):
-    """Remove the game from the shopping basket"""
+    """
+    Remove the game from the shopping basket
+    """
 
     try:
         game = get_object_or_404(Game, pk=game_id)
         basket = request.session.get('basket', {})
         basket.pop(game_id)
         if game.platform:
-            messages.success(request, f'Removed {game.name} {game.platform} from your basket')
+            messages.success(
+                request,
+                f'Removed {game.name} {game.platform} from your basket'
+                )
         else:
             messages.success(request, f'Removed {game.name} from your basket')
 
