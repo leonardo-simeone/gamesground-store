@@ -6,8 +6,9 @@ from . import views
 class TestHomeUrls(TestCase):
 
     """
-    We have four test methods: test_home_url, test_contact_url,
-    test_contact_list_url_resolves, and test_newsletter_url.
+    We have five test methods: test_home_url, test_contact_url,
+    test_contact_list_url_resolves, test_newsletter_url and
+    test_about_us_url.
     For each test method (except for test_contact_list_url_resolves):
     - We use the reverse function to generate
     the URL for the given view name.
@@ -42,3 +43,9 @@ class TestHomeUrls(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/newsletter.html')
+
+    def test_about_us_url(self):
+        url = reverse('about_us')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'home/about_us.html')

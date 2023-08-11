@@ -2,6 +2,8 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
+from django.shortcuts import render
+from home.views import about_us
 from .models import *
 from .forms import *
 
@@ -227,3 +229,17 @@ class TestNewsletterView(TestCase):
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
+
+
+class TestAboutUsView(TestCase):
+
+    """
+    Tests that the response code is correct(200)
+    and that the correct template is used.
+    """
+
+    def test_about_us_view(self):
+        url = reverse('about_us')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'home/about_us.html')
