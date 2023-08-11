@@ -135,7 +135,7 @@
           </li>
           <li class="nav-item">
             <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover {% if request.resolver_match.view_name == 'about_us' %}active-link{% endif %}"
-              href="#" aria-label="takes user to about us page">About Us</a>
+              href="{% url 'about_us' %}" aria-label="takes user to about us page">About Us</a>
           </li>
           <li class="nav-item dropdown">
             <a class="logo-font font-weight-bold nav-link text-black mr-3 nav-hover" href="#" id="all-games-links"
@@ -265,7 +265,7 @@
 
         <div class="row">
             <ul>
-                <li><a href="#" aria-label="takes user to about us page">About us</a></li>
+                <li><a href="{% url 'about_us' %}" aria-label="takes user to about us page">About us</a></li>
                 <li><a href="{% url 'contact' %}" aria-label="takes user to contact us page">Contact Us</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#privacy-policy" aria-label="takes user to privacy policy modal">Privacy Policy</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#terms-conditions" aria-label="takes user to terms and conditions modal">Terms & Conditions</a></li>
@@ -342,6 +342,9 @@ $('#sort-selector').change(function() {
 {% block postloadjs %}
 
 {% endblock %}
+
+<!-- Modals -->
+{% include 'home/modals.html' %}
 
 </body>
 
