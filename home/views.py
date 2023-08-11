@@ -73,3 +73,14 @@ def newsletter(request):
         'form': form,
     }
     return render(request, template, context)
+
+
+# --------------------------------------------------------------------------
+def about_us(request):
+
+    """
+    The about_us function takes request as an argument
+    and it renders the about_us template.
+    """
+
+    return render(request, 'home/about_us.html')
