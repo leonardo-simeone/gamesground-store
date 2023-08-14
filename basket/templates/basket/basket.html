@@ -30,7 +30,7 @@
 
             <!-- Bag total for mobile view -->
             {% if basket_items %}
-                <div class="d-block d-md-none">
+                <section id="basket-summary-mobile-section" class="d-block d-md-none">
                     <div class="row basket-total-mobile mb-2 rounded">
                         <div class="col pl-2 pt-2 pr-2">
                             <!-- Basket total mobile -->
@@ -128,11 +128,11 @@
                     {% endfor %}
                     <!-- End of mobile for loop -->
 
-                </div>
+                </section>
 
                 <!-- End of Bag total for mobile view -->
 
-                <div class="table-responsive rounded d-none d-md-block">
+                <section id="basket-summary-section" class="table-responsive rounded d-none d-md-block">
 
                     <table class="table table-sm table-borderless tmb rounded">
                         <!-- Start of desktop for loop -->
@@ -236,7 +236,7 @@
                             </td>
                         </tr>
                     </table>
-                </div>
+                </section>
             </div>
         </div>
 

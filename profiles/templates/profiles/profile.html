@@ -10,7 +10,7 @@
 {% block content %}
 
 
-<div class="container checkout-container">
+<section id="my-profile-section" class="container checkout-container">
 
 
     <div class="row">
@@ -33,6 +33,7 @@
         </div>
         <div class="col-12 col-lg-6">
             <p class="mt-2">Order History</p>
+            <hr class="index-hr">
             <div class="order-history table-responsive">
                 <table class="table table-sm table-borderless order-history-table">
                     <thead>
@@ -62,7 +63,7 @@
                                         {% endfor %}
                                     </ul>
                                 </td>
-                                <td>${{ order.grand_total }}</td>
+                                <td>€{{ order.grand_total }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -70,7 +71,7 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
 {% endblock %}
 

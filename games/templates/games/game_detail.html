@@ -7,106 +7,125 @@
 
 {% block content %}
 
-<div class="site-wide-alert alert alert-warning rounded-0 text-center">
+<div class="site-wide-alert alert alert-warning rounded-0 text-center" aria-label="Free delivery offer">
     <strong>Free delivery</strong> when you spend over €{{ free_delivery_threshold }}
 </div>
 
 <div class="container-fluid" id="game-detail-container">
-    <div class="row align-items-center">
+    <section id="main-game-info-section" class="row align-items-center">
 
         <div class="col-md-5 p-2 align-self-start">
             {% if game.image %}
-            <img src="{{ game.image.url }}" class="card-img-top game-detail-img img-fluid" id="{{game.name}}" alt="{{game.name}}">
+            <img src="{{ game.image.url }}" class="card-img-top game-detail-img img-fluid" id="{{game.name}}"
+                alt="{{game.name}}">
             {% else %}
-            <img src="{% static 'images/default-image.webp' %}" class="card-img-top game-detail-img img-fluid" id="{{game.name}}" alt="no image available">
+            <img src="{% static 'images/default-image.webp' %}" class="card-img-top game-detail-img img-fluid"
+                id="{{game.name}}" alt="no image available">
             {% endif %}
         </div>
         <div class="col-md-7 p-4 align-self-lg-start">
             <h2 class=" game-detail-headings">
                 {{game.name}} </h2>
-                <div>
-                    <p><strong>Price:</strong> <i class="fa-solid fa-euro-sign"></i> {{game.price}}</p>
-                </div>
-                
-            
+            <div>
+                <p><strong>Price:</strong> <i class="fa-solid fa-euro-sign"></i> {{game.price}}</p>
+            </div>
+
+
 
             <!-- Quantity/Add to basket Form -->
-        <form class="form" action="{% url 'add_to_basket' game.id %}" method="POST">
-            {% csrf_token %}
-            <div class="col-12 pl-0">
-                <p class="mt-3"><strong>Quantity:</strong></p>
-                <div class="form-group input-width">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <button class="decrement-qty btn-inc-dec btn btn-sm" data-game_id="{{ game.id }}"
-                                id="decrement-qty_{{ game.id }}" aria-label="decreases amount of {{game.name}} to add to shopping basket by 1">
-                                <span>
-                                    <i class="fas fa-minus fa-sm"></i>
-                                </span>
-                            </button>
-                        </div>
-                        <input class="form-control form-control-sm qty_input" type="number"
-                            name="quantity" value="1" min="1" max="99" data-game_id="{{ game.id }}" id="id_qty_{{ game.id }}" aria-label="shows current amount of {{game.name}} selected to add to shopping basket">
-                        <div class="input-group-append">
-                            <button class="increment-qty btn-inc-dec btn btn-sm" data-game_id="{{ game.id }}"
-                                id="increment-qty_{{ game.id }}" aria-label="increases amount of {{game.name}} to add to shopping basket by 1">
-                                <span>
-                                    <i class="fas fa-plus fa-sm"></i>
-                                </span>
-                            </button>
+            <form class="form" action="{% url 'add_to_basket' game.id %}" method="POST">
+                {% csrf_token %}
+                <div class="col-12 pl-0">
+                    <p class="mt-3"><strong>Quantity:</strong></p>
+                    <div class="form-group input-width">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button class="decrement-qty btn-inc-dec btn btn-sm" data-game_id="{{ game.id }}"
+                                    id="decrement-qty_{{ game.id }}"
+                                    aria-label="decreases amount of {{game.name}} to add to shopping basket by 1">
+                                    <span>
+                                        <i class="fas fa-minus fa-sm"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <input class="form-control form-control-sm qty_input" type="number" name="quantity"
+                                value="1" min="1" max="99" data-game_id="{{ game.id }}" id="id_qty_{{ game.id }}"
+                                aria-label="shows current amount of {{game.name}} selected to add to shopping basket">
+                            <div class="input-group-append">
+                                <button class="increment-qty btn-inc-dec btn btn-sm" data-game_id="{{ game.id }}"
+                                    id="increment-qty_{{ game.id }}"
+                                    aria-label="increases amount of {{game.name}} to add to shopping basket by 1">
+                                    <span>
+                                        <i class="fas fa-plus fa-sm"></i>
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-12 mt-2 pl-0">
-                
-                <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" class="btn btn-shopping-basket rounded btn-lg mr-2 small-buttons" aria-label="takes user to all games page">
-                    <span class="icon">
-                        <i class="fas fa-chevron-left"></i>
-                    </span>
-                    <span class="text-uppercase">Keep Shopping</span>
-                </a>
+                <div class="col-12 mt-2 pl-0">
 
-                <input type="submit" class="text-uppercase add-input btn btn-shopping-basket rounded btn-lg small-buttons" value="Add to Basket" aria-label="adds {{game.name}} to shopping basket">
+                    <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC"
+                        class="btn btn-shopping-basket rounded btn-lg mr-2 small-buttons"
+                        aria-label="takes user to all games page">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span class="text-uppercase">Keep Shopping</span>
+                    </a>
 
-            </div>
-            <input type="hidden" name="redirect_url" value="{{ request.path }}">
-        </form>
-        {% if game.platform %}
+                    <input type="submit"
+                        class="text-uppercase add-input btn btn-shopping-basket rounded btn-lg small-buttons"
+                        value="Add to Basket" aria-label="adds {{game.name}} to shopping basket">
+
+                </div>
+                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+            </form>
+            {% if game.platform %}
             <p class="mb-0 mt-3 mb-1"><strong>Platform:</strong></p>
-            <div><a class="btn-shopping-basket genre-style rounded p-1" href="{% url 'games' %}?platform={{ game.platform }}" aria-label="takes user to {{ game.platform }} games page"><span class="mr-2"><i class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></a></div>
-        {% endif %}
-
-        {% if game.pegi_rating %}
-            <p class="mb-0 mt-3 mb-1"><strong>Pegi Rating:</strong></p>
-            <div><a class="btn-shopping-basket genre-style rounded p-1" href="{% url 'games' %}?pegi_rating={{ game.pegi_rating.age }}" aria-label="takes user to ages {{ game.pegi_rating.age }} and over games page"><span class="mr-2"><i class="fa-regular fa-address-card"></i> </span><strong>{{game.pegi_rating}}</strong></a></div>
-        {% endif %}
-        
-        <div class="mt-3">
-            {% if game.genre %}
-            <p class="mb-0 mt-1"><strong>Genres:</strong></p>
-            {% for g in game.genre %}
-            <a href="{% url 'games' %}?genre={{g}}" class="btn-shopping-basket genre-style mr-2 rounded" aria-label="takes user to {{ g }} games page">{{g}}</a>
-            {% endfor %}
+            <div><a class="btn-shopping-basket genre-style rounded p-1"
+                    href="{% url 'games' %}?platform={{ game.platform }}"
+                    aria-label="takes user to {{ game.platform }} games page"><span class="mr-2"><i
+                            class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></a></div>
             {% endif %}
-            
-        </div>
 
-        <p class="mb-0 mt-3"><strong>Year:</strong></p>
-        <div><span class="mr-2"><i class="fa-solid fa-calendar-days"></i> </span><strong>{{game.year}}</strong></div>
+            {% if game.pegi_rating %}
+            <p class="mb-0 mt-3 mb-1"><strong>Pegi Rating:</strong></p>
+            <div><a class="btn-shopping-basket genre-style rounded p-1"
+                    href="{% url 'games' %}?pegi_rating={{ game.pegi_rating.age }}"
+                    aria-label="takes user to ages {{ game.pegi_rating.age }} and over games page"><span class="mr-2"><i
+                            class="fa-regular fa-address-card"></i> </span><strong>{{game.pegi_rating}}</strong></a>
+            </div>
+            {% endif %}
 
-        <form action="{% url 'like_game' game.pk %}" method="POST" class="mt-2">
-            {% csrf_token %}
-            {% if user.is_authenticated %}
-            {% if liked %}
-            
-                <button type="submit" name="game_id" value="{{ game_id }}" id="liked-button"
-                    class="btn liked-game pl-0" aria-label="Like Button">
+            <div class="mt-3">
+                {% if game.genre %}
+                <p class="mb-0 mt-1"><strong>Genres:</strong></p>
+                {% for g in game.genre %}
+                <a href="{% url 'games' %}?genre={{g}}" class="btn-shopping-basket genre-style mr-2 rounded"
+                    aria-label="takes user to {{ g }} games page">{{g}}</a>
+                {% endfor %}
+                {% endif %}
+
+            </div>
+
+            <p class="mb-0 mt-3"><strong>Year:</strong></p>
+            <div><span class="mr-2"><i class="fa-solid fa-calendar-days"></i> </span><strong>{{game.year}}</strong>
+            </div>
+
+            <form action="{% url 'like_game' game.pk %}" method="POST" class="mt-2">
+                {% csrf_token %}
+                {% if user.is_authenticated %}
+                {% if liked %}
+
+                <button type="submit" name="game_id" value="{{ game_id }}" id="liked-button" class="btn liked-game pl-0"
+                    aria-label="Like Button">
                     <i class="fa-solid fa-heart"></i>
                 </button>
-                <span><strong>{{ game.total_likes }}</strong> Likes <small class="ml-1"><em>(you like this game)</em></small></span>
-            {% else %}
+                <span><strong>{{ game.total_likes }}</strong> Likes <small class="ml-1"><em>(you like this
+                            game)</em></small></span>
+                {% else %}
 
                 <span>Like this game ? <i class="fa-solid fa-arrow-right-long ml-1"></i></span>
                 <button type="submit" name="game_id" value="{{ game_id }}" id="unliked-button"
@@ -114,51 +133,56 @@
                     <i class="fa-regular fa-heart ml-1"></i>
                 </button>
                 <span><strong>{{ game.total_likes }}</strong> Likes</span>
+                {% endif %}
+
+                {% else %}
+
+                <p>Login to like <i class="fa-regular fa-heart ml-2 mr-2"></i>
+                    <span><strong>{{ game.total_likes }}</strong> Likes</span></p>
+                {% endif %}
+            </form>
+
+
+            <div class="mt-2">
+                {% if game.available_in_other_consoles %}
+                <p><em>This game is available in other platforms</em></p>
+                {% else %}
+                <p><em>This game is exclusive for this platform</em></p>
+                {% endif %}
+
+            </div>
+
+            {% if request.user.is_superuser %}
+            <small>
+                <a class="btn-shopping-basket genre-style rounded" href="{% url 'edit_game' game.id %}"
+                    aria-label="takes user to edit {{game.name}} page">Edit</a> |
+                <a class="btn-shopping-basket genre-style rounded" href="{% url 'delete_game' game.id %}"
+                    aria-label="takes user to delete {{game.name}} page">Delete</a>
+            </small>
             {% endif %}
-
-            {% else %}
-            
-                <p>Login to like <i class="fa-regular fa-heart ml-2 mr-2"></i> <span><strong>{{ game.total_likes }}</strong> Likes</span></p>
-            {% endif %}
-        </form>
-
-
-        <div class="mt-2">
-            {% if game.available_in_other_consoles %}
-            <p><em>This game is available in other platforms</em></p>
-            {% else %}
-            <p><em>This game is exclusive for this platform</em></p>
-            {% endif %}
-
         </div>
 
-        {% if request.user.is_superuser %}
-            <small>
-                <a class="btn-shopping-basket genre-style rounded" href="{% url 'edit_game' game.id %}" aria-label="takes user to edit {{game.name}} page">Edit</a> | 
-                <a class="btn-shopping-basket genre-style rounded" href="{% url 'delete_game' game.id %}" aria-label="takes user to delete {{game.name}} page">Delete</a>
-            </small>
-        {% endif %}
-    </div>
-        
-        
-    </div>
-    <hr class="mt-4 game-detail-hr">
-    <h2 class="text-center game-detail-headings">Additional game information</h2>
-    <div class="game-description">
-        <p>{{game.description}}</p>
-    </div>
-    <hr class="mt-4 game-detail-hr">
-    
-    <h2 class="text-center mt-3 game-detail-headings">Game Trailer</h2>
-        
-    
-    <div class="row justify-content-center mb-4 video-background" id="iframe-div">
-        <div class="col-md-6 embed-responsive embed-responsive-16by9 game-trailer">
-        {% video game.trailer 'small' %}
-    </div>
-        
-    </div>
-    
+
+    </section>
+    <section id="additional-game-info-section">
+        <hr class="mt-4 game-detail-hr">
+        <h2 class="text-center game-detail-headings">Additional game information</h2>
+        <div class="game-description">
+            <p>{{game.description}}</p>
+        </div>
+        <hr class="mt-4 game-detail-hr">
+
+        <h2 class="text-center mt-3 game-detail-headings">Game Trailer</h2>
+
+
+        <div class="row justify-content-center mb-4 video-background" id="iframe-div">
+            <div class="col-md-6 embed-responsive embed-responsive-16by9 game-trailer">
+                {% video game.trailer 'small' %}
+            </div>
+
+        </div>
+    </section>
+
 </div>
 
 {% endblock %}
