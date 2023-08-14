@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = ['8000-leonardosim-gamesground-vz2zi4ejqx3.ws-eu101.gitpod.io', 'localhost', 'gamesground-store-6596e524f29e.herokuapp.com']
 
