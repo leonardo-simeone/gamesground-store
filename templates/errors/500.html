@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}500{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid h-100">
+    <div class="row h-100">
+        <div id="wrapper-500" class="col-12 d-flex flex-column align-items-center justify-content-center text-center">
+            <h1 class="text-danger">500</h1>
+            <p class="fs-5 fw-bold">
+                Server error encountered.
+            </p>
+            <div id="image-wrapper-500">
+                <img src="{% static 'images/500.webp' %}" id="image-500" class="img-fluid"
+                    alt="mario bros video game 500 page">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

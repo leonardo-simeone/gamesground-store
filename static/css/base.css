@@ -659,6 +659,34 @@ input[name='q']::placeholder {
     text-decoration: underline!important;
 }
 
+/* 404 & 500 PAGES */
+
+#wrapper-404 {
+    margin-top: 50px;
+    margin-bottom: 80px;
+}
+
+#image-wrapper-404 {
+    width: 80%;
+}
+
+#image-404 {
+    border-radius: 10px;
+}
+
+#wrapper-500 {
+    margin-top: 50px;
+    margin-bottom: 80px;
+}
+
+#image-wrapper-500 {
+    width: 80%;
+}
+
+#image-500 {
+    border-radius: 10px;
+}
+
 
 /* ALLAUTH FORMS */
 
