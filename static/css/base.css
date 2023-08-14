@@ -687,6 +687,12 @@ input[name='q']::placeholder {
     border-radius: 10px;
 }
 
+.custom-404-500-headings {
+    background-color: #FFFFFF;
+    border-radius: 0.25rem;
+    padding: 5px;
+}
+
 
 /* ALLAUTH FORMS */
 
