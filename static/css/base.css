@@ -344,7 +344,7 @@ input[name='q']::placeholder {
     border-top: 1px solid #FFF5F9;
 }
 
-/* games form */
+/* GAMES FORM */
 
 .btn-file {
     position: relative;
@@ -563,13 +563,6 @@ input[name='q']::placeholder {
 
 .newsletter-container {
     margin-bottom: 310px;
-}
-
-/* PROFILE */
-
-#order-history-link:hover {
-    color: #F9F871!important;
-    text-decoration: underline!important;
 }
 
 /* ABOUT-US */
