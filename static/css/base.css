@@ -263,6 +263,13 @@ input[name='q']::placeholder {
     border-top: 1px solid #FFF5F9;
 }
 
+#games-home {
+    font-size: 1rem;
+    text-transform: none;
+    font-family: 'Merriweather Sans', sans-serif;
+
+}
+
 /* GAME DETAIL */
 
 #game-detail-container {
