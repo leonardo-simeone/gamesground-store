@@ -662,7 +662,7 @@ input[name='q']::placeholder {
 /* 404 & 500 PAGES */
 
 #wrapper-404 {
-    margin-top: 50px;
+    margin-top: 15px;
     margin-bottom: 80px;
 }
 
@@ -675,7 +675,7 @@ input[name='q']::placeholder {
 }
 
 #wrapper-500 {
-    margin-top: 50px;
+    margin-top: 15px;
     margin-bottom: 80px;
 }
 
@@ -823,6 +823,12 @@ input[name='q']::placeholder {
 
     .game-detail-headings{
         font-size: 1.5rem;
+    }
+}
+
+@media (max-width:955px){
+    .custom-error-pages-row {
+        margin-bottom: 228px;
     }
 }
 
