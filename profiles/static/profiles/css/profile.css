@@ -1,6 +1,8 @@
 .order-history {
     max-height: 416px; /* height of profile form + submit button */
     overflow-y: auto;
+    background-color: rgba(0,0,0,.5);
+    border-radius: 0.25rem;
 }
 
 #profile-update-form .form-control {
@@ -14,6 +16,11 @@
 
 .order-history-table {
     color: #FFF5F9;
+}
+
+#order-history-link:hover {
+    color: #F9F871!important;
+    text-decoration: underline!important;
 }
 
 .profile-form-style {
