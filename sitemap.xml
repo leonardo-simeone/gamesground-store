@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/basket/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/about_us/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?platform=PS5</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?platform=PS4</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?platform=XBOX%20ONE</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?platform=XBOX%20SERIES%20X/S</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?platform=NINTENDO%20SWITCH</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?platform=PC</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?platform=PS5,PS4,XBOX%20ONE,XBOX%20SERIES%20X/S,NINTENDO%20SWITCH,PC</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?genre=Action</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?genre=Adventure</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?genre=Fantasy</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?genre=Horror</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?genre=Shooter</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?genre=Racing</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?genre=Rpg</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?genre=Sports</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?pegi_rating=3</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?pegi_rating=7</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?pegi_rating=12</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?pegi_rating=16</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?pegi_rating=18</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/contact/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/accounts/signup/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/accounts/login/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?platform=PS5,PS4</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/?platform=XBOX%20SERIES%20X/S,XBOX%20ONE</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/newsletter/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/25/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/22/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/14/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/2/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/1/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/31/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/26/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/21/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/13/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/12/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/11/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/32/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/27/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/23/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/16/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/15/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/8/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/28/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/24/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/20/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/19/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/7/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/30/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/6/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/5/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/4/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/3/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/29/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/18/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/17/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/10/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/games/9/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gamesground-store-6596e524f29e.herokuapp.com/accounts/password/reset/</loc>
+  <lastmod>2023-08-15T10:17:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>

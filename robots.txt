@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /basket/
+Disallow: /checkout/
+Disallow: /checkout_success/
+Sitemap: https://gamesground-store-6596e524f29e.herokuapp.com/sitemap.xml
