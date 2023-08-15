@@ -9,6 +9,15 @@
   <meta http-equiv="X-UA-Complatible" content="ie=edge">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description"
+        content="Gamesground Store, a video games store where gamers will find games and just games,
+        without having to browse through endless amounts of different products, here you will find the game you're looking for quick and easy,
+        add it to your basket and checkout wihtout hassle. You can create your account with us if you like, subscribe to our newsletter,
+        watch game trailers, like our games and more">
+  <meta name="keywords"
+        content="video games, video games store, video games shop, best price games, video games trailers, gamers, xbox games, playstation games, pc games,
+        nintendo switch games, games, online games, latest games, popular games, video games store online, best online store of video, best place to buy pc games,
+        best video games store">
   {% endblock %}
 
   {% block extra_meta %}
@@ -51,7 +60,7 @@
   {% block extra_js %}  
   {% endblock %}
 
-  <title>Gamesground {% block title %}{% endblock %}</title>
+  <title>Gamesground | Video Games Online Store {% block title %}{% endblock %}</title>
 </head>
 
 <body>
@@ -60,7 +69,7 @@
     <!-- Desktop logo and search bar -->
     <div id="topnav" class="row pt-lg-2 d-none d-lg-flex navbar-dark bg-dark topnav-margin">
       <div class="col-12 col-lg-6 my-auto py-1 py-lg-0 text-center text-lg-left">
-        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.webp' %}" class="logo-img" width="100" height="94" alt="Website logo"></a>
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.webp' %}" class="logo-img" width="100" height="94" alt="Gamesground Video Games Online Store logo"></a>
       </div>
       <div class="col-12 col-lg-6 my-auto py-1 py-lg-0">
         <form method="GET" action="{% url 'games' %}" class="search-form">
