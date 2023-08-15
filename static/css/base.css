@@ -211,6 +211,10 @@ input[name='q']::placeholder {
     text-decoration: underline!important;
 }
 
+.lead {
+    text-transform: none;
+}
+
 /* GAMES */
 
 .game-title {
