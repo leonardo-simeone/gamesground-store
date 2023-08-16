@@ -653,6 +653,11 @@ input[name='q']::placeholder {
     text-align: left;
 }
 
+#tc-modal h1 {
+    font-size: 1.8rem;
+    text-align: center;
+}
+
 .modal-contact {
     color: #3A2F0B!important; /* Classy Palette from base color #000000 */
     font-family: 'Merriweather Sans', sans-serif;
@@ -891,6 +896,10 @@ input[name='q']::placeholder {
 
     #pp-modal h2 {
         font-size: 1.1rem;
+    }
+
+    #tc-modal h1 {
+        font-size: 1.4rem;
     }
 
 }
