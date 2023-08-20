@@ -115,8 +115,7 @@ a:hover {
 }
 
 .topnav-margin {
-    margin-right: 0;
-    margin-left: 0;
+    margin: 0;
 }
 
 .basket-icon {
@@ -948,6 +947,14 @@ input[name='q']::placeholder {
     .allauth-container{
         margin-top: 125px;
         margin-bottom: 135px;
+    }
+
+    #navbar-padding {
+        padding-right: 70px;
+    }
+
+    #topnav {
+        padding-left: 0;
     }
 }
 
