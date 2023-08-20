@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
+{% load url_filter %}
 
 {% block title %}Games{% endblock %}
 
 
 
 {% block content %}
-<div class="site-wide-alert alert alert-warning rounded-0 text-center" aria-label="Free delivery offer">
+<div class="site-wide-alert alert alert-warning rounded-0 text-center">
   <strong>Free delivery</strong> when you spend over €{{ free_delivery_threshold }}
 </div>
 
@@ -17,12 +18,12 @@
       <h2>Games</h2>
       
       {% for s in selected_platforms %}
-        <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1 d-none d-md-inline" href="{% url 'games' %}?platform={{ s.name }}" aria-label="takes user to {{s.name}} games page">
+        <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1 d-none d-md-inline" href="{% url 'games' %}?platform={{ s.name|href_fix }}" aria-label="takes user to {{s.name}} games page">
           <span class="p-2 mt-2">{{ s.name }}</span>
         </a>
 
         <div class="d-sm-block d-md-none mb-1">
-          <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1" href="{% url 'games' %}?platform={{ s.name }}" aria-label="takes user to {{s.name}} games page">
+          <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1" href="{% url 'games' %}?platform={{ s.name|href_fix }}" aria-label="takes user to {{s.name}} games page">
             <span class="p-2 mt-2">{{ s.name }}</span>
           </a>
         </div>
@@ -84,12 +85,12 @@
             <div class="col-md-4 col-lg-3 mb-4">
               <div class="card mb-4 h-100">
                 
-                <a href="{% url 'game_detail' game.id %}" class="card-body games-cards-font-color" id="{{game.id}}" aria-label="takes user to {{game.name}} detail page">
+                <a href="{% url 'game_detail' game.id %}" class="card-body games-cards-font-color" id="{{game.name|href_fix}}{% if game.platform %}{{game.platform.name|href_fix}}{% endif %}" aria-label="takes user to {{game.name}} detail page">
                   <div class="image-container">
                     {% if game.image %}
-                      <img class="card-img-top rounded img-fluid" id="{{game.name}}" src="{{ game.image.url }}" alt="{{game.name}}">
+                      <img class="card-img-top rounded img-fluid" id="{{game.id}}" src="{{ game.image.url }}" alt="{{game.name}}{% if game.platform %} {{game.platform.name}}{% endif %}">
                     {% else %}
-                      <img class="card-img-top rounded img-fluid" id="{{game.name}}" src="{% static 'images/default-image.webp' %}"
+                      <img class="card-img-top rounded img-fluid" id="{{game.id}}" src="{% static 'images/default-image.webp' %}"
                       alt="no image available">
                     {% endif %}
                   </div>
