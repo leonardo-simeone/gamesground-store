@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% load embed_video_tags %}
 {% load static %}
-
+{% load url_filter %}
 
 {% block title %}{{game.name}}{% endblock %}
 
 {% block content %}
 
-<div class="site-wide-alert alert alert-warning rounded-0 text-center" aria-label="Free delivery offer">
+<div class="site-wide-alert alert alert-warning rounded-0 text-center">
     <strong>Free delivery</strong> when you spend over €{{ free_delivery_threshold }}
 </div>
 
@@ -16,11 +16,11 @@
 
         <div class="col-md-5 p-2 align-self-start">
             {% if game.image %}
-            <img src="{{ game.image.url }}" class="card-img-top game-detail-img img-fluid" id="{{game.name}}"
+            <img src="{{ game.image.url }}" class="card-img-top game-detail-img img-fluid" id="{{game.name|href_fix}}"
                 alt="{{game.name}}">
             {% else %}
             <img src="{% static 'images/default-image.webp' %}" class="card-img-top game-detail-img img-fluid"
-                id="{{game.name}}" alt="no image available">
+                id="{{game.name|href_fix}}" alt="no image available">
             {% endif %}
         </div>
         <div class="col-md-7 p-4 align-self-lg-start">
@@ -66,7 +66,7 @@
 
                 <div class="col-12 mt-2 pl-0">
 
-                    <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC"
+                    <a href="{% url 'games' %}?platform=PS5,PS4,XBOX%20ONE,XBOX%20SERIES%20X/S,NINTENDO%20SWITCH,PC"
                         class="btn btn-shopping-basket rounded btn-lg mr-2 small-buttons"
                         aria-label="takes user to all games page">
                         <span class="icon">
@@ -85,7 +85,7 @@
             {% if game.platform %}
             <p class="mb-0 mt-3 mb-1"><strong>Platform:</strong></p>
             <div><a class="btn-shopping-basket genre-style rounded p-1"
-                    href="{% url 'games' %}?platform={{ game.platform }}"
+                    href="{% url 'games' %}?platform={{ game.platform.name|href_fix }}"
                     aria-label="takes user to {{ game.platform }} games page"><span class="mr-2"><i
                             class="fa-solid fa-gamepad"></i> </span><strong>{{game.platform}}</strong></a></div>
             {% endif %}
