@@ -193,8 +193,22 @@
 {{ block.super }}
 {% include 'games/includes/quantity_input_script.html' %}
 <!-- ADDS TITLE ATTRIBUTE TO GAME TRAILER IFRAME -->
-<script type="text/javascript">
+<script>
     const iframes = document.getElementById("iframe-div");
     iframes.getElementsByTagName("iframe")[0].setAttribute("title", "{{game.name}} trailer");
+</script>
+
+<!-- REMOVES THE FRAMEBORDER ATTRIBUTE IN GAME TRAILER IFRAME -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Find all dynamically generated iframes within your specific container
+        var iframes = document.querySelectorAll("#iframe-div iframe[src^='https://www.youtube.com']");
+
+        // Loop through each iframe and modify attributes
+        iframes.forEach(function(iframe) {
+            iframe.removeAttribute("frameborder");
+            iframe.style.border = "none";
+        });
+    });
 </script>
 {% endblock %}
