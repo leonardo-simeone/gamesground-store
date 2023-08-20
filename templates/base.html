@@ -6,16 +6,14 @@
 <head>
 
   {% block meta %}
-  <meta http-equiv="X-UA-Complatible" content="ie=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description"
-        content="Gamesground Store, a video games store where gamers will find games and just games,
+  <meta name="description" content="Gamesground Store, a video games store where gamers will find games and just games,
         without having to browse through endless amounts of different products, here you will find the game you're looking for quick and easy,
         add it to your basket and checkout wihtout hassle. You can create your account with us if you like, subscribe to our newsletter,
         watch game trailers, like our games and more">
-  <meta name="keywords"
-        content="video games, video games store, video games shop, best price games, video games trailers, gamers, xbox games, playstation games, pc games,
+  <meta name="keywords" content="video games, video games store, video games shop, best price games, video games trailers, gamers, xbox games, playstation games, pc games,
         nintendo switch games, games, online games, latest games, popular games, video games store online, best online store of video, best place to buy pc games,
         best video games store">
   {% endblock %}
@@ -33,7 +31,9 @@
   <!-- Google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600&family=Merriweather+Sans:wght@300&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600&family=Merriweather+Sans:wght@300&display=swap"
+    rel="stylesheet">
   <!-- Base css -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   {% endblock %}
@@ -57,7 +57,7 @@
   <script src="https://js.stripe.com/v3/"></script>
   {% endblock %}
 
-  {% block extra_js %}  
+  {% block extra_js %}
   {% endblock %}
 
   <title>Gamesground | Video Games Online Store {% block title %}{% endblock %}</title>
@@ -65,18 +65,21 @@
 
 <body>
   <header>
-    
+
     <!-- Desktop logo and search bar -->
-    <div id="topnav" class="row pt-lg-2 d-none d-lg-flex navbar-dark bg-dark topnav-margin">
-      <div class="col-12 col-lg-6 my-auto py-1 py-lg-0 text-center text-lg-left">
-        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.webp' %}" class="logo-img" width="100" height="94" alt="Gamesground Video Games Online Store logo"></a>
-      </div>
-      <div class="col-12 col-lg-6 my-auto py-1 py-lg-0">
+    <menu id="topnav" class="row pt-lg-2 d-none d-lg-flex navbar-dark bg-dark topnav-margin">
+      <li class="col-12 col-lg-6 my-auto py-1 py-lg-0 text-center text-lg-left d-block">
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.webp' %}" class="logo-img"
+            width="100" height="94" alt="Gamesground Video Games Online Store logo"></a>
+      </li>
+      <li class="col-12 col-lg-6 my-auto py-1 py-lg-0 d-block">
         <form method="GET" action="{% url 'games' %}" class="search-form">
           <div class="input-group w-50 ml-auto">
-            <input class="form-control border border-black" type="text" name="q" placeholder="Search" aria-label="search bar">
+            <input class="form-control border border-black" type="text" name="q" placeholder="Search"
+              aria-label="search bar">
             <div class="input-group-append">
-              <button id="search-submit-desk" class="search-icon form-control btn btn-black border-black" type="submit" aria-label="search bar submit button">
+              <button id="search-submit-desk" class="search-icon form-control btn btn-black border-black" type="submit"
+                aria-label="search bar submit button">
                 <span class="icon">
                   <i class="fas fa-search"></i>
                 </span>
@@ -84,55 +87,57 @@
             </div>
           </div>
         </form>
-      </div>
-    </div>
+      </li>
+    </menu>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-3 pb-3">
+    <nav id="navbar-padding" class="navbar navbar-expand-lg navbar-dark bg-dark pt-3 pb-3">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Mobile navbar inline search bar and shopping basket -->
       <menu class="menu-style">
-      <li class="list-inline-item mr-4">
-        <a class="text-black nav-link d-block d-lg-none pl-0" href="#" id="mobile-search" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false" aria-label="opens up search bar">
-          <div class="text-center">
-            <div><i class="fas fa-search fa-lg"></i></div>
-            <p class="my-0">Search</p>
-          </div>
-        </a>
-        <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
-          <form class="form" method="GET" action="{% url 'games' %}">
-            <div class="input-group w-100">
-              <input class="form-control border border-black" type="text" name="q" placeholder="Search" aria-label="search bar">
-              <div class="input-group-append">
-                <button class="form-control btn btn-black border border-black" type="submit" aria-label="search bar submit button">
-                  <span class="icon">
-                    <i class="fas fa-search"></i>
-                  </span>
-                </button>
-              </div>
+        <li class="list-inline-item mr-4">
+          <a class="text-black nav-link d-block d-lg-none pl-0" href="#" id="mobile-search" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" aria-label="opens up search bar">
+            <div class="text-center">
+              <div><i class="fas fa-search fa-lg"></i></div>
+              <p class="my-0">Search</p>
             </div>
-          </form>
-        </div>
-      </li>
-      <li class="list-inline-item" id="mobile-basket">
-        <a class="{% if game_count %}game-count-color{% endif %} nav-link d-block d-lg-none"
-          href="{% url 'basket_summary' %}" aria-label="takes user to their shopping basket page">
-          <div class="text-center basket-icon{% if game_count %} game-count-color{% endif %}">
-            <div><span class="my-0">
-              {% if game_count %}
-                    {{ game_count }}
-                  {% else %}
-                    0
-                  {% endif %}
-            </span> <i class="fa-solid fa-basket-shopping"></i></div>
-
+          </a>
+          <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
+            <form class="form" method="GET" action="{% url 'games' %}">
+              <div class="input-group w-100">
+                <input class="form-control border border-black" type="text" name="q" placeholder="Search"
+                  aria-label="search bar">
+                <div class="input-group-append">
+                  <button class="form-control btn btn-black border border-black" type="submit"
+                    aria-label="search bar submit button">
+                    <span class="icon">
+                      <i class="fas fa-search"></i>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
-        </a>
-      </li>
-    </menu>
+        </li>
+        <li class="list-inline-item" id="mobile-basket">
+          <a class="{% if game_count %}game-count-color{% endif %} nav-link d-block d-lg-none"
+            href="{% url 'basket_summary' %}" aria-label="takes user to their shopping basket page">
+            <div class="text-center basket-icon{% if game_count %} game-count-color{% endif %}">
+              <div><span class="my-0">
+                  {% if game_count %}
+                  {{ game_count }}
+                  {% else %}
+                  0
+                  {% endif %}
+                </span> <i class="fa-solid fa-basket-shopping"></i></div>
+
+            </div>
+          </a>
+        </li>
+      </menu>
       <!-- Responsive navbar -->
       <div class="collapse navbar-collapse" id="navbarText">
         <menu class="menu-style">
