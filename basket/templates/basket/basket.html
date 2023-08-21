@@ -116,7 +116,7 @@
                                     </div>
                                 </form>
                                 <button class="update-link btn btn-shopping-basket rounded" aria-label="updates amount of {{item.game.name}} in the shopping basket"><small>Update</small></button>
-                                <button class="remove-item float-right btn btn-shopping-basket rounded" id="remove_{{ item.game_id }}" aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></button>
+                                <button class="remove-item float-right btn btn-shopping-basket rounded" data-game-id="{{ item.game_id }}" aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></button>
                                 
                             </div>
                         </div>
@@ -190,7 +190,7 @@
                                         </div>
                                     </form>
                                     <button class="update-link btn btn-shopping-basket rounded" aria-label="updates amount of {{item.game.name}} in the shopping basket"><small>Update</small></button>
-                                    <button class="remove-item float-right btn btn-shopping-basket rounded" id="remove_{{ item.game_id }}" aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></button>
+                                    <button class="remove-item float-right btn btn-shopping-basket rounded" data-game-id="{{ item.game_id }}" aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></button>
                                     
                                 </td>
                                 <td class="py-3">
@@ -276,7 +276,7 @@
     // Remove game and reload on click
     $('.remove-item').click(function(e) {
         var csrfToken = "{{ csrf_token }}";
-        var gameId = $(this).attr('id').split('remove_')[1];
+        var gameId = $(this).data('game-id');
         var url = `/basket/remove/${gameId}/`;
         var data = {'csrfmiddlewaretoken': csrfToken,};
 
