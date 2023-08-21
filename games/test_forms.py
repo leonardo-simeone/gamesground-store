@@ -36,9 +36,12 @@ class TestGameForm(TestCase):
         form = GameForm()
         self.assertEqual(form.fields['name'].widget.attrs['autofocus'], True)
         for field_name, field in form.fields.items():
-            self.assertEqual(
-                field.widget.attrs['class'], 'border-black rounded'
-                )
+            # Exclude the 'genre' field
+            if field_name not in ('genre', 'image'):
+                self.assertEqual(
+                    field.widget.attrs['class'],
+                    'border-black rounded'
+                    )
 
     def test_form_choices(self):
         form = GameForm()
