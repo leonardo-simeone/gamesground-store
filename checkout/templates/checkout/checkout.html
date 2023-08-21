@@ -96,7 +96,7 @@
                             <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
                             <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
                         {% else %}
-                            <label class="form-check-label" for="id-save-info">
+                            <label class="form-check-label">
                                 <a class="save-info-cta" href="{% url 'account_signup' %}">Create an account</a> or 
                                 <a class="save-info-cta" href="{% url 'account_login' %}">login</a> to save this information
                             </label>
@@ -136,6 +136,7 @@
 </div>
 <div id="loading-overlay">
     <h2 class="text-light logo-font loading-spinner">
+        <span class="mr-2">PROCESSING...</span>
         <span class="icon">
             <i class="fa-solid fa-3x fa-spin fa-gear"></i>
         </span>
