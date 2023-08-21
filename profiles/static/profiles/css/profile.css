@@ -18,7 +18,7 @@
     color: #FFF5F9;
 }
 
-#order-history-link:hover {
+.order-history-link:hover {
     color: #F9F871!important;
     text-decoration: underline!important;
 }
