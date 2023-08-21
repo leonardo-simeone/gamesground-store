@@ -84,7 +84,96 @@ To wireframe the website I used [Whimsical](https://whimsical.com/wireframes).
 | Checkout success | ![screenshot](documentation/wireframe-checkout-success.png) |
 | Contact/Newsletter | ![screenshot](documentation/wireframe-contact-newsletter.png) |
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## Features
+
+### Existing Features
+
+- **Navagation Bar**
+
+    - The navigation bar is located at the top of the screen and it's centered both vertically and horizontally. It has the site logo on the left side and the search bar on the right side, below these two elements we find the navigation links for Home, About Us, all games (dropdown menu), genre (dropdown menu), pegi rating (dropdown menu), contact us and my account (dropdown menu).
+    - The navigation bar is fully responsive thanks to the use of Bootstrap, also the layout changes to expandable and fully vertical once small screens are used.
+	- When small screens are used the search icon is clickable and once clicked on, it drops down a search bar.
+    - All links in the navigation menu have visual cues (except for platform, genre and pegi, given these are gotten via filtering) regarding where the user currently is on the site, as well as which links are they about to click on, making it easier to navigate.
+    - The navigation menu is identical across all the pages on the site which provides quick navigation learning.
+
+![NavBar](documentation/nav-bar.png)
+
+- **Home/Index**
+
+    - The home page welcomes the user (new or returning) to the site, it subtly and intuitively shows the user what the site is about via a jumbotron with image/text and what it offers, which is a site about video games where users can easily find video games for different consoles, genres and ages, giving them as well a call to action button to start shopping. Below the jumbotron the home page lets the user quickly go to three different consoles games array should they choose to and on the third section, three links are porvided to lead the user to the games page, the newsletter and the contact us page.
+
+![Home](documentation/home.png)
+
+- **Register**
+
+    - The register page allows the user as its name indicates to register to the site. The user needs to supply a first name, last name, username, email and confirm email, password and confirm password, once the sign up button is clicked on, the user will be shown a message indicating a confirmation email has been sent to the email provided and that they need to confirm their email in order to complete the registration process.
+	- The register page also provides a link for the user to go to the login page in case they're already registered as well as a back to login button.
+    - This functionality is achieved thanks to the power of Django allauth.
+
+![Register](documentation/register.png)
+
+- **Register confirmation email**
+
+    - Once the user is registered a confirmation email is sent to the email address provided, when the user clicks on the link provided in the confirmation email, the user is taken back to the site with a confirm email message, once the user clicks confirm, a success message is displayed and the user is taken to the login page.
+
+![Register confirmation email](documentation/sign-up-email-confirmation.png)
+
+- **Login**
+
+    - The login page allows a registered user to login with their username and password.
+	- The form contains a checkbox which is unchecked by default, this option will allow the user to remember their session or not.
+    - Once logged in, the user can avail of the features that an authenticated user is allowed, such as create their own profile, view their order history and like games.
+    - Should the user not be registered yet, the option to do so is provided at the top of the form with a link.
+	- At the the bottom of the form the user has 2 buttons, one to login and another to go home.
+	- If the user forgot their password they have the option to reset it via a link provided at the end of the form.
+    - As all the forms in the site, the login form was design to provide optimal UX. 
+
+![Login](documentation/login.png)
+
+- **Logout**
+
+    - The logout page allows a logged in user to logout.
+    - A confirmation question will asked to the user before logging out.
+    - There are two buttons at the bottom, one to confirm the logout action and one to cancel which will bring the user back home.
+
+![Logout](documentation/logout.png)
+
+- **About Us**
+
+    - The about us page is an informational page where the user can find more detailed information regarding the website and its purpose.
+    - There are three informative paragraphs, one for about us, one for our mission and one for what we offer.
+    - At the end of the page there is a final section with external links for other potential interests the user might have such as games guides, reviews blogs and games accessories shops.
+
+![About-Us](documentation/about-us.png)
+
+- **Games**
+
+    - The games page is where the games the store is selling are displayed, they're displayed in cards that contain the game's image, name, price, platform and likes count.
+	- Thanks to bootstrap for large screens the cards are laid out in rows of four columns, for medium screens in rows of three columns and for small in rows of one column.
+	- At the top of the screen a free delivery banner is shown to the user to let them know that delivery is free once they spend €30 or more.
+	- After the free delivery offer banner, we find the heading and a series of badges indicating the available games groups by platform, should the user click on one of them, they will be brought to the games page filtered by the specific platform games group.
+	- Next on the left side, there is a 'Games Home' link which will bring the user back to 'all games' meaning all games will be displayed without sorting or filtering and next to the 'Games Home' link, the amount of games rendered at any given time will be displayed.
+	- On the right side there is a 'Sort by' drop down menu that allows the user to sort the games they're looking at by price (low-high, high-low), popularity (low-high, high-low), pegi rating (low-high, high-low), name (A-Z, Z-A) and Platform (A-Z, Z-A), thanks to a combination of python code in the view and Django template logic.
+
+![Games](documentation/games.png)
+
+- **Games by genre**
+
+    - The games page is basically the same, except for the fact that the badge will be the selected genre and the games displayed will contain the selected genre.
+
+![Games by genre](documentation/games-by-genre.png)
+
+- **Games by pegi rating**
+
+    - The games page is basically the same, except for the fact that the badge will be the selected pegi rating and the games displayed will contain the selected pegi rating.
+
+![Games by pegi rating](documentation/games-by-pegi.png)
+
+- **Games as admin**
+
+    - The games page is basically the same, except for the fact that when a user with superuser privileges is logged in, the option to edit and delete the games will be shown.
+
+![Games by pegi rating](documentation/games-as-admin.png)
 
 You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
 
