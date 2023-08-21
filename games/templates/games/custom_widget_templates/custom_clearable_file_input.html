@@ -12,6 +12,7 @@
     {{ widget.input_text }}
 {% endif %}
 <span class="btn-shopping-basket rounded btn-file">
-    Select Image <input id="new-image" type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+    <label for="id_image" class="sr-only">Select Image</label>
+    Select Image <input class="change-img" data-img-target="filename" type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
 </span>
 <strong><p class="img-widget mt-2" id="filename"></p></strong>
