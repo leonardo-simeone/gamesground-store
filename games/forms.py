@@ -15,17 +15,21 @@ class GameForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         platforms = Platform.objects.all()
-        names = [(p.id, p.name) for p in platforms]
+        platform_names = [(p.id, p.name) for p in platforms]
 
-        self.fields['platform'].choices = names
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'border-black rounded'
+        self.fields['platform'].choices = platform_names
 
         pegi_ratings = Pegi.objects.all()
-        ages = [(pr.id, pr.age) for pr in pegi_ratings]
+        pegi_ages = [(pr.id, pr.age) for pr in pegi_ratings]
 
-        self.fields['pegi_rating'].choices = ages
+        self.fields['pegi_rating'].choices = pegi_ages
+
+        # Remove the genre field from the loop
+        # that adds classes to other fields
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'border-black rounded'
+            if field_name != 'genre':
+                # Check if the field is not the image field
+                if field_name != 'image':
+                    field.widget.attrs['class'] = 'border-black rounded'
 
         self.fields['name'].widget.attrs['autofocus'] = True
