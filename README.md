@@ -753,3 +753,80 @@ This created my [erd-django.png](documentation/erd-django.png) entity relationsh
 \* source: [medium.com](https://medium.com/@yathomasi1/1-using-django-extensions-to-visualize-the-database-diagram-in-django-application-c5fa7e710e16)
 
 **Note**: I do not plan to keep `django-extensions` or `pygraphviz` on this project, so I've removed from the INSTALLED_APPS and uninstalled them using: `pip3 uninstall django-extensions pygraphviz -y`.
+
+## Agile Development Process
+
+### GitHub Projects
+
+[GitHub Projects](https://github.com/leonardo-simeone/gamesground-store/projects?query=is%3Aclosed) served as an Agile tool for this project.
+It isn't a specialized tool, but with the right tags and project creation/issue assignments, it can be made to work.
+
+Through it, user stories, issues, and milestone tasks were planned, then tracked on a weekly basis using the basic Kanban board.
+
+#### Project Iteration 1 board
+
+The [Project Iteration 1 board](https://github.com/users/leonardo-simeone/projects/18) was the first board I created to coordinate, track and update Iteration 1.
+
+![screenshot](documentation/iteration1-board.png)
+
+#### Project Iteration 2 board
+
+The [Project Iteration 2 board](https://github.com/users/leonardo-simeone/projects/19) was the second board I created to coordinate, track and update Iteration 2.
+
+![screenshot](documentation/iteration2-board.png)
+
+#### Project Iteration 3 board
+
+The [Project Iteration 3 board](https://github.com/users/leonardo-simeone/projects/20) was the third board I created to coordinate, track and update Iteration 3.
+
+![screenshot](documentation/iteration3-board.png)
+
+#### Project Iteration 4 board
+
+The [Project Iteration 4 board](https://github.com/users/leonardo-simeone/projects/21) was the fourth board I created to coordinate, track and update Iteration 4.
+
+![screenshot](documentation/iteration4-board.png)
+
+#### Project Iteration 5 board
+
+The [Project Iteration 5 board](https://github.com/users/leonardo-simeone/projects/23) was the fifth board I created to coordinate, track and update Iteration 5.
+
+![screenshot](documentation/iteration5-board.png)
+
+#### Project Iteration 6 board
+
+The [Project Iteration 6 board](https://github.com/users/leonardo-simeone/projects/24) was the sixth board I created to coordinate, track and update Iteration 6.
+
+![screenshot](documentation/iteration6-board.png)
+
+#### Project Iteration 7 board
+
+The [Project Iteration 7 board](https://github.com/users/leonardo-simeone/projects/25) was the seventh and last board I created to coordinate, track and update Iteration 7.
+
+![screenshot](documentation/iteration7-board.png)
+
+### GitHub Issues
+
+[GitHub Issues](https://github.com/leonardo-simeone/gamesground-store/issues?q=is%3Aissue+is%3Aclosed) served as an another Agile tool.
+There, I used my own **User Story Template** to manage user stories.
+
+It also helped with milestone iterations on a weekly basis.
+
+- [Open Issues](https://github.com/leonardo-simeone/gamesground-store/issues?q=is%3Aopen+is%3Aissue), no open issues remaining.
+
+![screenshot](documentation/gh-issues-open.png)
+
+- [Closed Issues](https://github.com/leonardo-simeone/gamesground-store/issues?q=is%3Aissue+is%3Aclosed)
+
+![screenshot](documentation/gh-issues-closed.png)
+
+
+### MoSCoW Prioritization
+
+I've decomposed my Epics into stories prior to prioritizing and implementing them.
+Using this approach, I was able to apply the MoSCow prioritization and labels to my user stories within the Issues tab.
+
+- **Must Have**: guaranteed to be delivered (*max 60% of stories*)
+- **Should Have**: adds significant value, but not vital (*the rest ~20% of stories*)
+- **Could Have**: has small impact if left out (*20% of stories*)
+- **Won't Have**: not a priority for this iteration
