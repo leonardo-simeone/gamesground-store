@@ -24,237 +24,271 @@
             <hr>
         </div>
     </div>
-
+    
+    {% if basket_items %}
     <div class="row">
         <div class="col">
 
             <!-- Bag total for mobile view -->
-            {% if basket_items %}
-                <section id="basket-summary-mobile-section" class="d-block d-md-none">
-                    <div class="row basket-total-mobile mb-2 rounded">
-                        <div class="col pl-2 pt-2 pr-2">
-                            <!-- Basket total mobile -->
-                            <h4 class="basket-headings basket-subtotal-headings-mobile"><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h4>
-                            <h4 class="basket-headings basket-subtotal-headings-mobile">Delivery: €{{ delivery|floatformat:2 }}</h4>
-                            <h4 class="mt-3 basket-headings basket-total-heading-mobile"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong>
-                            </h4>
-                            {% if free_delivery_delta > 0 %}
-                                <p class="mb-1 free-delivery">
-                                    You could get <em>free delivery</em><i class="fa-solid fa-truck mr-1 ml-2"></i> by spending just <strong>${{ free_delivery_delta }}</strong>
-                                    more!
-                                </p>
-                            {% endif %}
-                        </div>
+            <section id="basket-summary-mobile-section" class="d-block d-md-none">
+                <div class="row basket-total-mobile mb-2 rounded">
+                    <div class="col pl-2 pt-2 pr-2">
+                        <!-- Basket total mobile -->
+                        <h4 class="basket-headings basket-subtotal-headings-mobile"><strong>Basket Total:
+                                €{{ total|floatformat:2 }}</strong></h4>
+                        <h4 class="basket-headings basket-subtotal-headings-mobile">Delivery:
+                            €{{ delivery|floatformat:2 }}</h4>
+                        <h4 class="mt-3 basket-headings basket-total-heading-mobile"><strong>Grand Total:
+                                €{{ grand_total|floatformat:2 }}</strong>
+                        </h4>
+                        {% if free_delivery_delta > 0 %}
+                        <p class="mb-1 free-delivery">
+                            You could get <em>free delivery</em><i class="fa-solid fa-truck mr-1 ml-2"></i> by spending
+                            just <strong>${{ free_delivery_delta }}</strong>
+                            more!
+                        </p>
+                        {% endif %}
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <!-- Basket checkout buttons mobile -->
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- Basket checkout buttons mobile -->
+                        <a href="{% url 'games' %}?platform=PS5,PS4,XBOX%20ONE,XBOX%20SERIES%20X/S,NINTENDO%20SWITCH,PC"
+                            class="btn btn-shopping-basket rounded btn-sm mr-2 small-buttons"
+                            aria-label="takes user to all games page">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="text-uppercase">Keep Shopping</span>
+                        </a>
+                        <a href="{% url 'checkout' %}" class="btn btn-shopping-basket rounded btn-sm small-buttons"
+                            aria-label="takes user to checkout page">
+                            <span class="text-uppercase">Secure Checkout</span>
+                            <span class="icon">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </a>
+                        <p class="mb-4 mt-3">You can find your basket contents below</p>
+                    </div>
+                </div>
+
+
+                <!-- Start of mobile for loop -->
+                {% for item in basket_items %}
+                <div class="row game-info-mobile rounded">
+                    <!-- Game Image mobile -->
+                    <div class="col-12 col-sm-6 mb-2 mt-2">
+                        {% if item.game.image %}
+                        <img class="img-fluid rounded" src="{{ item.game.image.url }}" alt="{{ item.game.name }}">
+                        {% else %}
+                        <img class="img-fluid rounded" src="{% static 'images/default-image.webp' %}"
+                            alt="no image available">
+                        {% endif %}
+                    </div>
+                    <!-- Game Name mobile -->
+                    <div class="col-12 col-sm-6 mb-2">
+                        <p class="my-0 mobile-game-name"><strong>{{ item.game.name }}</strong>
+                            <span>{{ item.game.platform }}</span></p>
+                    </div>
+                    <!-- Game Price mobile -->
+                    <div class="col-12 col-sm-6 order-sm-last">
+                        <p class="my-0">Price Each: €{{ item.game.price }}</p>
+                        <p><strong>Subtotal: </strong>{{ item.game.price | calc_subtotal:item.quantity }}
+
+                        </p>
+                    </div>
+                    <!-- Game Quantity mobile -->
+                    <div class="col-12 col-sm-6 mb-2">
+                        <form class="form update-form" method="POST" action="{% url 'adjust_basket' item.game_id %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="decrement-qty btn-inc-dec btn btn-sm"
+                                            data-game_id="{{ item.game_id }}" id="decrement-qty_{{ item.game_id }}"
+                                            aria-label="decreases amount of {{item.game.name}} to update to in the shopping basket by 1">
+                                            <span>
+                                                <i class="fas fa-minus fa-sm"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <input class="form-control form-control-sm qty_input" type="number" name="quantity"
+                                        value="{{ item.quantity }}" min="1" max="99" data-game_id="{{ item.game_id }}"
+                                        id="id_qty_{{ item.game_id }}"
+                                        aria-label="shows current amount of {{item.game.name}} in the shopping basket">
+                                    <div class="input-group-append">
+                                        <button class="increment-qty btn-inc-dec btn btn-sm"
+                                            data-game_id="{{ item.game_id }}" id="increment-qty_{{ item.game_id }}"
+                                            aria-label="increases amount of {{item.game.name}} to update to in the shopping basket by 1">
+                                            <span>
+                                                <i class="fas fa-plus fa-sm"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <button class="update-link btn btn-shopping-basket rounded"
+                            aria-label="updates amount of {{item.game.name}} in the shopping basket"><small>Update</small></button>
+                        <button class="remove-item float-right btn btn-shopping-basket rounded"
+                            data-game-id="{{ item.game_id }}"
+                            aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></button>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <hr>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- End of mobile for loop -->
+
+            </section>
+
+            <!-- End of Bag total for mobile view -->
+
+            <section id="basket-summary-section" class="table-responsive rounded d-none d-md-block">
+
+                <table class="table table-sm table-borderless tmb rounded">
+                    <!-- Start of desktop for loop -->
+                    {% for item in basket_items %}
+                    <thead class="table-head">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Subtotal</th>
+                        </tr>
+                    </thead>
+
+                    <tr class="table-game-info">
+                        <td class="p-3 w-25">
+                            <!-- Game Image -->
+                            {% if item.game.image %}
+                            <img class="img-fluid rounded" src="{{ item.game.image.url }}" alt="{{ item.game.name }}">
+                            {% else %}
+                            <img class="img-fluid rounded" src="{% static 'images/default-image.webp' %}"
+                                alt="no image available">
+                            {% endif %}
+                        </td>
+                        <td class="py-3">
+                            <!-- Game Name -->
+                            <p class="my-0"><strong>{{item.game.name}}</strong> <span>{{item.game.platform}}</span></p>
+                        </td>
+                        <td class="py-3">
+                            <p class="my-0">€{{item.game.price}}</p>
+                        </td>
+                        <td class="py-3 w-25">
+                            <!-- Game Quantity -->
+                            <form class="form update-form" method="POST"
+                                action="{% url 'adjust_basket' item.game_id %}">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <button class="decrement-qty btn-inc-dec btn btn-sm"
+                                                data-game_id="{{ item.game_id }}"
+                                                id="decrement-qty-basket_{{ item.game_id }}"
+                                                aria-label="decreases amount of {{item.game.name}} to update to in the shopping basket by 1">
+                                                <span>
+                                                    <i class="fas fa-minus fa-sm"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        <input class="form-control form-control-sm qty_input" type="number"
+                                            name="quantity" value="{{ item.quantity }}" min="1" max="99"
+                                            data-game_id="{{ item.game_id }}" id="id_qty_basket_{{ item.game_id }}"
+                                            aria-label="shows current amount of {{item.game.name}} in the shopping basket">
+                                        <div class="input-group-append">
+                                            <button class="increment-qty btn-inc-dec btn btn-sm"
+                                                data-game_id="{{ item.game_id }}"
+                                                id="increment-qty-basket_{{ item.game_id }}"
+                                                aria-label="increases amount of {{item.game.name}} to update to in the shopping basket by 1">
+                                                <span>
+                                                    <i class="fas fa-plus fa-sm"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <button class="update-link btn btn-shopping-basket rounded"
+                                aria-label="updates amount of {{item.game.name}} in the shopping basket"><small>Update</small></button>
+                            <button class="remove-item float-right btn btn-shopping-basket rounded"
+                                data-game-id="{{ item.game_id }}"
+                                aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></button>
+
+                        </td>
+                        <td class="py-3">
+                            <p class="my-0">{{ item.game.price | calc_subtotal:item.quantity }}</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <!-- End of desktop for loop -->
+
+                    <tr class="table-total">
+                        <td colspan="5" class="pt-5 text-right rounded-bottom">
+                            <!-- Basket Total -->
+                            <h4 class="basket-headings basket-subtotal-headings"><strong>Basket Total:
+                                    €{{ total|floatformat:2 }}</strong></h4>
+                            <h4 class="basket-headings basket-subtotal-headings">Delivery: €{{ delivery|floatformat:2 }}
+                            </h4>
+                            <h4 class="mt-4 basket-headings basket-total-heading"><strong>Grand Total:
+                                    €{{ grand_total|floatformat:2 }}</strong></h4>
+                            {% if free_delivery_delta > 0 %}
+                            <p class="mb-1 free-delivery">
+                                You could get <em>free delivery</em><i class="fa-solid fa-truck mr-1 ml-2"></i> by
+                                spending just <strong>${{ free_delivery_delta }}</strong>
+                                more!
+                            </p>
+                            {% endif %}
+                            <!-- End of Basket Total -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="text-right pt-3 pr-0">
+                            <!-- Basket Checkout Buttons -->
                             <a href="{% url 'games' %}?platform=PS5,PS4,XBOX%20ONE,XBOX%20SERIES%20X/S,NINTENDO%20SWITCH,PC"
-                                class="btn btn-shopping-basket rounded btn-sm mr-2 small-buttons" aria-label="takes user to all games page">
+                                class="btn btn-shopping-basket rounded btn-lg mr-2"
+                                aria-label="takes user to all games page">
                                 <span class="icon">
                                     <i class="fas fa-chevron-left"></i>
                                 </span>
                                 <span class="text-uppercase">Keep Shopping</span>
                             </a>
-                            <a href="{% url 'checkout' %}" class="btn btn-shopping-basket rounded btn-sm small-buttons" aria-label="takes user to checkout page">
+                            <a href="{% url 'checkout' %}" class="btn btn-shopping-basket rounded btn-lg"
+                                aria-label="takes user to checkout page">
                                 <span class="text-uppercase">Secure Checkout</span>
                                 <span class="icon">
                                     <i class="fas fa-lock"></i>
                                 </span>
                             </a>
-                            <p class="mb-4 mt-3">You can find your basket contents below</p>
-                        </div>
-                    </div>
-
-
-                    <!-- Start of mobile for loop -->
-                    {% for item in basket_items %}
-                        <div class="row game-info-mobile rounded">
-                            <!-- Game Image mobile -->
-                            <div class="col-12 col-sm-6 mb-2 mt-2">
-                                {% if item.game.image %}
-                                    <img class="img-fluid rounded" src="{{ item.game.image.url }}" alt="{{ item.game.name }}">
-                                {% else %}
-                                    <img class="img-fluid rounded" src="{% static 'images/default-image.webp' %}"
-                                    alt="no image available">
-                                {% endif %}
-                            </div>
-                            <!-- Game Name mobile -->
-                            <div class="col-12 col-sm-6 mb-2">
-                                <p class="my-0 mobile-game-name"><strong>{{ item.game.name }}</strong> <span>{{ item.game.platform }}</span></p>
-                            </div>
-                            <!-- Game Price mobile -->
-                            <div class="col-12 col-sm-6 order-sm-last">
-                                <p class="my-0">Price Each: €{{ item.game.price }}</p>
-                                <p><strong>Subtotal: </strong>{{ item.game.price | calc_subtotal:item.quantity }}
-                                    
-                                </p>
-                            </div>
-                            <!-- Game Quantity mobile -->
-                            <div class="col-12 col-sm-6 mb-2">
-                                <form class="form update-form" method="POST" action="{% url 'adjust_basket' item.game_id %}">
-                                    {% csrf_token %}
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <button class="decrement-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="decrement-qty_{{ item.game_id }}" aria-label="decreases amount of {{item.game.name}} to update to in the shopping basket by 1">
-                                                    <span>
-                                                        <i class="fas fa-minus fa-sm"></i>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                            <input class="form-control form-control-sm qty_input" type="number" name="quantity"
-                                                value="{{ item.quantity }}" min="1" max="99" data-game_id="{{ item.game_id }}" id="id_qty_{{ item.game_id }}" aria-label="shows current amount of {{item.game.name}} in the shopping basket">
-                                            <div class="input-group-append">
-                                                <button class="increment-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="increment-qty_{{ item.game_id }}" aria-label="increases amount of {{item.game.name}} to update to in the shopping basket by 1">
-                                                    <span>
-                                                        <i class="fas fa-plus fa-sm"></i>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <button class="update-link btn btn-shopping-basket rounded" aria-label="updates amount of {{item.game.name}} in the shopping basket"><small>Update</small></button>
-                                <button class="remove-item float-right btn btn-shopping-basket rounded" data-game-id="{{ item.game_id }}" aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></button>
-                                
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <hr>
-                            </div>
-                        </div>
-                    {% endfor %}
-                    <!-- End of mobile for loop -->
-
-                </section>
-
-                <!-- End of Bag total for mobile view -->
-
-                <section id="basket-summary-section" class="table-responsive rounded d-none d-md-block">
-
-                    <table class="table table-sm table-borderless tmb rounded">
-                        <!-- Start of desktop for loop -->
-                        {% for item in basket_items %}
-                            <thead class="table-head">
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Qty</th>
-                                    <th scope="col">Subtotal</th>
-                                </tr>
-                            </thead>
-
-                            <tr class="table-game-info">
-                                <td class="p-3 w-25">
-                                    <!-- Game Image -->
-                                    {% if item.game.image %}
-                                        <img class="img-fluid rounded" src="{{ item.game.image.url }}" alt="{{ item.game.name }}">
-                                    {% else %}
-                                        <img class="img-fluid rounded" src="{% static 'images/default-image.webp' %}"
-                                        alt="no image available">
-                                    {% endif %}
-                                </td>
-                                <td class="py-3">
-                                    <!-- Game Name -->
-                                    <p class="my-0"><strong>{{item.game.name}}</strong> <span>{{item.game.platform}}</span></p>
-                                </td>
-                                <td class="py-3">
-                                    <p class="my-0">€{{item.game.price}}</p>
-                                </td>
-                                <td class="py-3 w-25">
-                                    <!-- Game Quantity -->
-                                    <form class="form update-form" method="POST" action="{% url 'adjust_basket' item.game_id %}">
-                                        {% csrf_token %}
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <button class="decrement-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="decrement-qty-basket_{{ item.game_id }}" aria-label="decreases amount of {{item.game.name}} to update to in the shopping basket by 1">
-                                                        <span>
-                                                            <i class="fas fa-minus fa-sm"></i>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                                <input class="form-control form-control-sm qty_input" type="number"
-                                                    name="quantity" value="{{ item.quantity }}" min="1" max="99" data-game_id="{{ item.game_id }}" id="id_qty_basket_{{ item.game_id }}" aria-label="shows current amount of {{item.game.name}} in the shopping basket">
-                                                <div class="input-group-append">
-                                                    <button class="increment-qty btn-inc-dec btn btn-sm" data-game_id="{{ item.game_id }}" id="increment-qty-basket_{{ item.game_id }}" aria-label="increases amount of {{item.game.name}} to update to in the shopping basket by 1">
-                                                        <span>
-                                                            <i class="fas fa-plus fa-sm"></i>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <button class="update-link btn btn-shopping-basket rounded" aria-label="updates amount of {{item.game.name}} in the shopping basket"><small>Update</small></button>
-                                    <button class="remove-item float-right btn btn-shopping-basket rounded" data-game-id="{{ item.game_id }}" aria-label="deletes {{item.game.name}} from the shopping basket"><small>Remove</small></button>
-                                    
-                                </td>
-                                <td class="py-3">
-                                    <p class="my-0">{{ item.game.price | calc_subtotal:item.quantity }}</p>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        <!-- End of desktop for loop -->
-
-                        <tr class="table-total">
-                            <td colspan="5" class="pt-5 text-right rounded-bottom">
-                                <!-- Basket Total -->
-                                <h4 class="basket-headings basket-subtotal-headings"><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h4>
-                                <h4 class="basket-headings basket-subtotal-headings">Delivery: €{{ delivery|floatformat:2 }}</h4>
-                                <h4 class="mt-4 basket-headings basket-total-heading"><strong>Grand Total:
-                                        €{{ grand_total|floatformat:2 }}</strong></h4>
-                                {% if free_delivery_delta > 0 %}
-                                    <p class="mb-1 free-delivery">
-                                        You could get <em>free delivery</em><i class="fa-solid fa-truck mr-1 ml-2"></i> by spending just <strong>${{ free_delivery_delta }}</strong>
-                                        more!
-                                    </p>
-                                {% endif %}
-                                <!-- End of Basket Total -->
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5" class="text-right pt-3 pr-0">
-                                <!-- Basket Checkout Buttons -->
-                                <a href="{% url 'games' %}?platform=PS5,PS4,XBOX%20ONE,XBOX%20SERIES%20X/S,NINTENDO%20SWITCH,PC"
-                                    class="btn btn-shopping-basket rounded btn-lg mr-2" aria-label="takes user to all games page">
-                                    <span class="icon">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="text-uppercase">Keep Shopping</span>
-                                </a>
-                                <a href="{% url 'checkout' %}" class="btn btn-shopping-basket rounded btn-lg" aria-label="takes user to checkout page">
-                                    <span class="text-uppercase">Secure Checkout</span>
-                                    <span class="icon">
-                                        <i class="fas fa-lock"></i>
-                                    </span>
-                                </a>
-                                <!-- End of Basket Checkout Buttons -->
-                            </td>
-                        </tr>
-                    </table>
-                </section>
-            </div>
+                            <!-- End of Basket Checkout Buttons -->
+                        </td>
+                    </tr>
+                </table>
+            </section>
         </div>
+    </div>
 
     {% else %}
 
-        <!-- No games in basket -->
-        <div class="row">
-            <div class="col no-games-basket">
+    <!-- No games in basket -->
+    <div class="row">
+        <div class="col no-games-basket">
 
-                <p class="mb-5">You have no games in your basket</p>
-                <a href="{% url 'games' %}?platform=PS5,PS4,XBOX ONE,XBOX SERIES X/S,NINTENDO SWITCH,PC" class="btn btn-shopping-basket rounded btn-lg mr-2" aria-label="takes user to all games page">
-                    <span class="icon">
-                        <i class="fas fa-chevron-left"></i>
-                    </span>
-                    <span class="text-uppercase">Keep Shopping</span>
-                </a>
-            </div>
+            <p class="mb-5">You have no games in your basket</p>
+            <a href="{% url 'games' %}?platform=PS5,PS4,XBOX%20ONE,XBOX%20SERIES%20X/S,NINTENDO%20SWITCH,PC"
+                class="btn btn-shopping-basket rounded btn-lg mr-2" aria-label="takes user to all games page">
+                <span class="icon">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+                <span class="text-uppercase">Keep Shopping</span>
+            </a>
         </div>
+    </div>
 
 
     {% endif %}
