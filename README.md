@@ -394,15 +394,362 @@ To wireframe the website I used [Whimsical](https://whimsical.com/wireframes).
 - [Adobe Photoshop](https://www.adobe.com/ie/products/photoshop.html) used to resize/edit images as well as framing several images together into one.
 - [Stripe](https://stripe.com) used for online secure payments of ecommerce products/services.
 - [AWS S3](https://aws.amazon.com/s3) used for online static and media file storage.
+
+## Database Design
+
+Entity Relationship Diagrams (ERD) help to visualize database architecture before creating models.
+Understanding the relationships between different tables can save time later in the project.
+
+### Home
+
+```python
+from django.db import models
+
+
+class Contact(models.Model):
+
+    """
+    A model to create a contacts database table.
+    """
+
+    name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(null=False, blank=False)
+    body = models.TextField(null=False, blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created']
+
+    def __str__(self):
+        return self.name
+
+
+class Newsletter(models.Model):
+
+    """
+    A model to create a newsletter subscribers database table.
+    """
+
+    name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(null=False, blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Newsletter subscribers'
+        ordering = ['created']
+
+    def __str__(self):
+        return self.name
+
 ```
-pkill uptime.sh
-rm .vscode/uptime.sh
+
+### Games
+
+```python
+from django.db import models
+from django.contrib.auth.models import User
+from multiselectfield import MultiSelectField
+from embed_video.fields import EmbedVideoField
+
+
+class Platform(models.Model):
+
+    name = models.CharField(max_length=254)
+
+    def __str__(self):
+        return self.name
+
+
+class Pegi(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Pegi Rating'
+
+    age = models.IntegerField()
+
+    def __str__(self):
+        return 'Ages ' + str(self.age) + ' and over'
+
+
+class Game(models.Model):
+
+    GENRE_OPTIONS = (
+        ('Action', 'Action'), ('Adventure', 'Adventure'),
+        ('Fantasy', 'Fantasy'), ('Horror', 'Horror'),
+        ('Shooter', 'Shooter'), ('Racing', 'Racing'), ('Rpg', 'Rpg'),
+        ('Sports', 'Sports'),
+        )
+
+    name = models.CharField(max_length=254)
+    genre = MultiSelectField(max_length=120, choices=GENRE_OPTIONS, null=True, blank=True)
+    description = models.TextField()
+    year = models.CharField(max_length=4)
+    platform = models.ForeignKey('Platform', null=True, blank=True, on_delete=models.SET_NULL)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    pegi_rating = models.ForeignKey('Pegi', null=True, blank=True, on_delete=models.SET_NULL)
+    image = models.ImageField(null=True, blank=True)
+    available_in_other_consoles = models.BooleanField(default=False, null=True, blank=True)
+    likes = models.ManyToManyField(User, related_name='game_likes', blank=True)
+    trailer = EmbedVideoField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
+
+    def total_likes(self):
+        return self.likes.count()
+
+    def __str__(self):
+        return self.name + ' ' + self.platform.name
+
 ```
 
-**Anything more?**
+### Checkout
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+```python
+import uuid
 
----
+from django.db import models
+from django.db.models import Sum
+from django.conf import settings
 
-Happy coding!
+from django_countries.fields import CountryField
+
+
+from games.models import Game
+from profiles.models import UserProfile
+
+
+class Order(models.Model):
+    order_number = models.CharField(max_length=32, null=False, editable=False)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
+    full_name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(max_length=254, null=False, blank=False)
+    phone_number = models.CharField(max_length=20, null=False, blank=False)
+    country = CountryField(blank_label='Country *', null=False, blank=False)
+    postcode = models.CharField(max_length=20, null=True, blank=True)
+    town_or_city = models.CharField(max_length=40, null=False, blank=False)
+    street_address1 = models.CharField(max_length=80, null=False, blank=False)
+    street_address2 = models.CharField(max_length=80, null=True, blank=True)
+    county = models.CharField(max_length=80, null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
+    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+    grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+
+    def _generate_order_number(self):
+        """
+        Generate a random, unique order number using UUID
+        """
+        return uuid.uuid4().hex.upper()
+
+    def update_total(self):
+        """
+        Update grand total each time a line game is added,
+        accounting for delivery costs.
+        """
+        self.order_total = self.linegames.aggregate(Sum('linegame_total'))['linegame_total__sum'] or 0
+        if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
+            if self.order_total == 0:
+                self.delivery_cost = 0
+            else:
+                self.delivery_cost = settings.STANDARD_DELIVERY_CHARGE
+        else:
+            self.delivery_cost = 0
+        self.grand_total = self.order_total + self.delivery_cost
+        self.save()
+
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the order number
+        if it hasn't been set already.
+        """
+        if not self.order_number:
+            self.order_number = self._generate_order_number()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.order_number
+
+
+class OrderLineGame(models.Model):
+    order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='linegames')
+    game = models.ForeignKey(Game, null=False, blank=False, on_delete=models.CASCADE)
+    quantity = models.IntegerField(null=False, blank=False, default=0)
+    linegame_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the linegame total
+        and update the order total.
+        """
+        self.linegame_total = self.game.price * self.quantity
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.game.name}, id number: {self.game.id} on order {self.order.order_number}'
+
+```
+
+### Profiles
+
+```python
+from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+from django_countries.fields import CountryField
+
+
+class UserProfile(models.Model):
+    """
+    A user profile model for maintaining default
+    delivery information and order history
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    default_phone_number = models.CharField(max_length=20, null=True, blank=True)
+    default_street_address1 = models.CharField(max_length=80, null=True, blank=True)
+    default_street_address2 = models.CharField(max_length=80, null=True, blank=True)
+    default_town_or_city = models.CharField(max_length=40, null=True, blank=True)
+    default_county = models.CharField(max_length=80, null=True, blank=True)
+    default_postcode = models.CharField(max_length=20, null=True, blank=True)
+    default_country = CountryField(blank_label='Country', null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    """
+    Create or update the user profile
+    """
+    if created:
+        UserProfile.objects.create(user=instance)
+    # Existing users: just save the profile
+    instance.userprofile.save()
+
+```
+
+![screenshot](documentation/erd.png)
+
+- Table: **Contact**
+
+    | **PK** | **id** (unique) | Type | Notes |
+    | --- | --- | --- | --- |
+    | | name | CharField | |
+    | | email | EmailField | |
+    | | body | TextField | |
+    | | created | DateTimeField | |
+
+- Table: **Newsletter**
+
+    | **PK** | **id** (unique) | Type | Notes |
+    | --- | --- | --- | --- |
+    | | name | CharField | |
+    | | email | EmailField | |
+	| | created | DateTimeField | |
+
+- Table: **Platform**
+
+    | **PK** | **id** (unique) | Type | Notes |
+    | --- | --- | --- | --- |
+    | | name | CharField | |
+
+- Table: **Pegi**
+
+    | **PK** | **id** (unique) | Type | Notes |
+    | --- | --- | --- | --- |
+    | | age | IntegerField | |
+
+- Table: **Game**
+
+    | **PK** | **id** (unique) | Type | Notes |
+    | --- | --- | --- | --- |
+    | | name | CharField | |
+	| | genre | MultiSelectField | |
+    | | description | TextField | |
+    | | instructions | HTMLfield | |
+    | | year | CharField | max length 4 char |
+    | **FK** | platform | ForeignKey | FK to **Platform** model |
+	| | price | DecimalField | |
+	| **FK** | pegi_rating | ForeignKey | FK to **Pegi** model |
+    | | image | ImageField | |
+    | | available_in_other_consoles | BooleanField | |
+    | **M2M** | likes | ManyToManyField | M2M to **User** model |
+	| | trailer | EmbedVideoField | |
+	| | created | DateTimeField | |
+
+- Table: **Order**
+
+    | **PK** | **id** (unique) | Type | Notes |
+    | --- | --- | --- | --- |
+    | | order_number | CharField | |
+	| **FK** | user_profile | ForeignKey | FK to **UserProfile** model |
+    | | full_name | CharField | |
+	| | email | EmailField | |
+	| | phone_number | CharField | |
+    | | country | CountryField | |
+	| | postcode | CharField | |
+	| | town_or_city | CharField | |
+	| | street_address1 | CharField | |
+	| | street_address2 | CharField | |
+	| | county | CharField | |
+	| | date | DateTimeField | |
+	| | delivery_cost | DecimalField | |
+	| | order_total | DecimalField | |
+	| | grand_total | DecimalField | |
+
+- Table: **OrderLineGame**
+
+    | **PK** | **id** (unique) | Type | Notes |
+    | --- | --- | --- | --- |
+	| **FK** | order | ForeignKey | FK to **Order** model |
+	| **FK** | game | ForeignKey | FK to **Game** model |
+	| | quantity | IntegerField | |
+	| | linegame_total | DecimalField | |
+
+- Table: **UserProfile**
+
+    | **PK** | **id** (unique) | Type | Notes |
+    | --- | --- | --- | --- |
+	| **One-to-One** | user | One to One | One-to-One to **User** model |
+    | | default_phone_number | CharField | |
+	| | default_street_address1 | CharField | |
+	| | default_street_address2 | CharField | |
+	| | default_town_or_city | CharField | |
+	| | default_county | CharField | |
+	| | default_postcode | CharField | |
+	| | default_country | CountryField | |
+
+### Graphviz ERD
+
+I used `graphviz` and `django-extensions` to auto-generate the full Django ERD.
+
+Steps taken were:
+
+1. `sudo apt update`
+2. `sudo apt-get install python3-dev graphviz libgraphviz-dev pkg-config`
+3. Type `Y` to confirm.
+4. `pip3 install django-extensions pygraphviz`
+
+Then in my [settings.py](gamesground_store/settings.py) file, within the `INSTALLED_APPS` variable, I included `django_extensions`:
+
+```python
+INSTALLED_APPS = [
+    ...
+    'django_extensions',
+    ...
+]
+```
+
+Finally, I ran the `graph_models` command in the CLI: `python3 manage.py graph_models -a -o erd-django.png`
+
+This created my [erd-django.png](documentation/erd-django.png) entity relationship diagram below.
+
+![erd-django](documentation/erd-django.png)
+
+\* source: [medium.com](https://medium.com/@yathomasi1/1-using-django-extensions-to-visualize-the-database-diagram-in-django-application-c5fa7e710e16)
+
+**Note**: I do not plan to keep `django-extensions` or `pygraphviz` on this project, so I've removed from the INSTALLED_APPS and uninstalled them using: `pip3 uninstall django-extensions pygraphviz -y`.
