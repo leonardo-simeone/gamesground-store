@@ -173,7 +173,7 @@ To wireframe the website I used [Whimsical](https://whimsical.com/wireframes).
 
     - The games page is basically the same, except for the fact that when a user with superuser privileges is logged in, the option to edit and delete the games will be shown.
 
-![Games by pegi rating](documentation/games-as-admin.png)
+![Games as admin](documentation/games-as-admin.png)
 
 - **Game detail**
 
@@ -836,3 +836,100 @@ Using this approach, I was able to apply the MoSCow prioritization and labels to
 - **Should Have**: adds significant value, but not vital (*the rest ~20% of stories*)
 - **Could Have**: has small impact if left out (*20% of stories*)
 - **Won't Have**: not a priority for this iteration
+
+## Ecommerce Business Model
+
+This site sells games to individual customers, and therefore follows a `Business to Customer` model.
+It is of the simplest **B2C** forms, as it focuses on individual transactions, and doesn't need anything
+such as monthly/annual subscriptions.
+
+It is still in its early development stages, although it already has a newsletter, and links for social media marketing.
+
+Social media can potentially build a community of users around the business, and boost site visitor numbers,
+especially when using larger platforms such a Facebook.
+
+A newsletter list can be used by the business to send regular messages to site users.
+For example, what items are on special offer, new items in stock,
+updates to business hours, notifications of events, and much more!
+
+## Search Engine Optimization (SEO) & Social Media Marketing
+
+### Keywords
+
+I've identified some appropriate keywords to align with my site, that should help users
+when searching online to find my page easily from a search engine.
+This included a series of the following keyword types
+
+- Short-tail (head terms) keywords
+- Long-tail keywords
+
+![screenshot](documentation/keywords-selection.png)
+
+I also played around with [Word Tracker](https://www.wordtracker.com) a bit
+to check the frequency of some of my site's primary keywords (only until the free trial expired).
+
+![screenshot](documentation/wordtracker.png)
+
+### Sitemap
+
+I've used [XML-Sitemaps](https://www.xml-sitemaps.com) to generate a sitemap.xml file.
+This was generated using my deployed site URL: https://gamesground-store-6596e524f29e.herokuapp.com
+
+After it finished crawling the entire site, it created a
+[sitemap.xml](sitemap.xml) which I've downloaded and included in the repository.
+
+### Robots
+
+I've created the [robots.txt](robots.txt) file at the root-level.
+Inside, I've included the default settings:
+
+```
+User-agent: *
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /basket/
+Disallow: /checkout/
+Disallow: /checkout_success/
+Sitemap: https://gamesground-store-6596e524f29e.herokuapp.com/sitemap.xml
+```
+
+Further links for future implementation:
+- [Google search console](https://search.google.com/search-console)
+- [Creating and submitting a sitemap](https://developers.google.com/search/docs/advanced/sitemaps/build-sitemap)
+- [Managing your sitemaps and using sitemaps reports](https://support.google.com/webmasters/answer/7451001)
+- [Testing the robots.txt file](https://support.google.com/webmasters/answer/6062598)
+
+### Social Media Marketing
+
+Creating a strong social base (with participation) and linking that to the business site can help drive sales.
+Using more popular providers with a wider user base, such as Facebook, typically maximizes site views.
+
+I've created a mockup Facebook business account using the
+[Balsamiq template](https://code-institute-org.github.io/5P-Assessments-Handbook/files/Facebook_Mockups.zip)
+provided by Code Institute.
+
+![screenshot](documentation/mockup-facebook.png)
+
+### Newsletter Marketing
+
+I have incorporate a newsletter sign-up form on my application, to allow users to supply their name and
+email address if they are interested in learning more.
+
+```python
+class Newsletter(models.Model):
+
+    """
+    A model to create a newsletter subscribers database table.
+    """
+
+    name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(null=False, blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Newsletter subscribers'
+        ordering = ['created']
+
+    def __str__(self):
+        return self.name
+```
