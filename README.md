@@ -175,95 +175,202 @@ To wireframe the website I used [Whimsical](https://whimsical.com/wireframes).
 
 ![Games by pegi rating](documentation/games-as-admin.png)
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+- **Game detail**
 
-## Gitpod Reminders
+    - The game detail page shows the user all the game's attributes.
+	- At the top of the screen the free delivery banner is displayed again the same as in the games page.
+	- Next we find on the left of the screen the game's image and on the right side the name, price, quantity which can be adjusted by the user thanks to JS, a button to keep shopping which will bring the user back to 'all games' and a button to 'add to basket' which will indeed add the game to the basket.
+	- Platform which is clickable and will bring the user to that particular platform games group.
+	- Pegi rating which has the same fuctionality as platform (clickable).
+	- Genre again with the same functionality as the previous two.
+	- Next we have year and likes count, in the likes count the user is shown how many likes the game has and if they're not logged in that they need to in order be able to like it, once they like the game by clicking on the heart icon, there will be an indicator letting them know they like the game.
+	- Last on this section the user will be informed whether this game is available in other platforms or if it is exclusive.
+	- On the next section below, the description of the game will be displayed as 'additional game information' and on the section after, there will be a game trailer video specific to the game being viewed.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+![Game detail](documentation/game-detail.png)
 
-`python3 -m http.server`
+- **Shooping basket**
 
-A blue button should appear to click: _Make Public_,
+    - The shopping basket page is where the user will put all the games they want to purchase before proceeding with the checkout process.
+	- Once a game is added to the basket the basket icon in the navbar will change in color, slightly in size and will show the amount of games in it at any given page the user decides to go.
+	- In the basket page we see two headings, one to indicate it is the 'shopping basket' and the other one 'product info'.
+	- The product info section is where all the info for the game or games added to the basket will be, this section was built as a table for large and medium screens and with bootstrap rows and columns for small screens.
+	- The product info section shows the game's image, its name, price, quantity which can be adjusted by the user thanks to JS and the subtotal for that particular game (based on quantity).
+	- Below the quantity amount there are two buttons one to update the quantity should the user decides to change it and one to remove the game altogether from the basket.
+	- Next the user can see the 'basket total', the 'delivery' cost should there be any and the 'grand total' which is what the user will ultimately pay. Below the 'grand total' there will be a message for the user is the 'basket total' is below the free delivery threshold, this message will let the user know exactly how much more they will need to spend to avail of the free delivery offer.
+	- Lastly there two buttons, one to 'keep shopping' which will bring the user back to 'all games' and one for 'secure checkout' which will take the user to the checkout page to start the checkout process.
 
-Another blue button should appear to click: _Open Browser_.
+![Shooping basket](documentation/shopping-basket.png)
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+- **Shooping basket empty**
 
-A blue button should appear to click: _Make Public_,
+    - Should the shopping basket be empty, a paragraph letting the user know will be displayed and there will be a button to 'keep shopping' which will take the user to 'all games' page.
 
-Another blue button should appear to click: _Open Browser_.
+![Shooping basket empty](documentation/shopping-basket-empty.png)
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+- **Checkout**
 
-To log into the Heroku toolbelt CLI:
+    - The checkout page is where the user will input their delivery/payment details to complete the order.
+	- Checkout is comprised by two sections, one is a form where the user will input their details such as full name, email address, phone number, street address, town, county, postal code, country, and card details, Should the user be registred and logged in, full name and email address will be prefilled and if they saved/updated their profile information the rest of the fields will also be prefilled (except for the card details). At the end of the form there will be two buttons and a message for the user. One button is to 'adjust basket' which brings the user back to the shopping basket and the other is to complete the order and the message is to indicate the user excatly how much their card will be charged.
+	- The 'save info' checkbox in the form right after 'country' field, is for the user to save their info in their profile for future transactions and it is checked by default, in the case the user is annonymous then a message will show instead letting the user know that in order to save their info they need to register/login.
+	- The second section will contain the order summary indicating the amount of games in the order, the game or games name, platform, quantity and subtotal and lastly the 'order total', 'delivery' cost and 'grand total'.
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+![Checkout](documentation/checkout.png)
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+- **Loading spinner**
 
-------
+    - Once the user clicks on complete order, while the backend code and the stripe API do their job to process the payment, the user will see a friendly loading spinner indicating the payment is being processed.
 
-## Release History
+![Loading spinner](documentation/loading-spinner.png)
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+- **Checkout success**
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+    - The checkout success page is where the user will be able to see the confirmation and summary of their just completed order.
+	- In the checkout success page there is a heading thanking the user for their purchase, then a paragraph letting the user know that an order confirmation email will be sent to the email provided.
+	- Below, the user can see a pseudo table with the 'order info' which contains 'order number' and 'order date', 'order details' containing game or games name, platform, quantity and price, then all the delivery information and lastly the billing info containing 'order total', 'delivery' and 'grand total'.
+	- At the bottom there is a button 'check out all our games' which takes the user to the 'all games' page.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+![Checkout success](documentation/checkout-success.png)
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+- **Oder confirmation email**
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+    - Once the order is successfully processed and completed a confirmation email will be sent to the user with the order details.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+![Oder confirmation email](documentation/order-confirmation-email.png)
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+- **Profile**
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+    - The profile page shows the user their saved profile/delivery information and their order history.
+	- At the top there is a heading indicating the user this is the 'my profile' page.
+	- Below, the profile page is comprised of two sections, one with a form prefilled if the user decided to save their info in a previous purchase or if they updated their info in the profile page or empty otherwise, at the end of the form a button 'update information' which saves the information in the user profile.
+	- The other section is the order history which is table containing the order or orders number, date, game or games name and quantity and the order total.
+	- The order number is hoverable (shows the complete order number) and clickable, it takes the user to the order history view for that particular order number.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+![Profile](documentation/profile.png)
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+- **Order history**
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+    - The Order history page shows the user the information of a previous completed order.
+	- Once the user clicks on the order number in their order history section in the profile page, the user is takes to the order history for that order.
+	- The information shown in the order history is excatly to the information shown in the checkout success page given the same template is used, the difference thanks to some python code in the view and a little of Django template logic, is that for the order history, the user is shown an info message at the top indicating that 'This is a past confirmation for order number (order number). A confirmation email was sent on the order date.'
+	- At the end of the page there is a button to go back to profile.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+![Order history](documentation/order-history.png)
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+- **Add game**
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+    - The add game page allows authenticated users with superuser privileges to add a new game to the store.
+	- There are two headings, one indicating you're in games management and a second one indicating that this is to add a game.
+	- This page comprises a form with all the relevant fields to add a new game, such as name, genre, description, year, platform, price, pegi rating, image (a button to open a directory to select the image from), available in other consoles and trailer.
+	- At the end of the form there are to buttons, one to cancel the action which will bring the user to 'all games page' and another to add game.
+	- Once the game is added the user will be taken to the game detail view for the newly added game with a success message at the top.
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+![Add game](documentation/add-game.png)
 
-------
+- **Edit game**
 
-## FAQ about the uptime script
+    - The edit game page allows authenticated users with superuser privileges to edit an existing game in the store.
+	- There are two headings, one indicating you're in games management and a second one indicating that this is to edit a game, also at the top of the page below the nav bar the user will see an info message indicating that they are editing the game.
+	- This page comprises a form exactly the same as the add game form, the diference is that all the fields will be prefilled and the image (if any) will be shown as well as a checkbox to remove the image if the user chooses to.
+	- At the end of the form there are to buttons, one to cancel the action which will bring the user to 'all games page' and another to update game.
+	- Once the game is updated the user will be taken to the game detail view for the newly updated game with a success message at the top.
 
-**Why have you added this script?**
+![Edit game](documentation/edit-game.png)
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+- **Delete game**
 
-**How will this affect me?**
+    - The delete game page allows authenticated users with superuser privileges to delete an existing game in the store.
+	- There are two headings, one indicating you're in games management and a second one asking the user to confirm they are sure they want to delete the game.
+	- There are to buttons at the bottom, one to cancel the action which will bring the user to 'all games page' and another to delete game.
+	- Once the game is deleted the user will be taken to the 'games' page.
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+![Delete game](documentation/delete-game.png)
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+- **Forms errors**
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+    - As with every form across the entire site, should there be an error or missing information on a form, the user will be informed.
 
-**So….?**
+![Forms errors](documentation/forms-errors.png)
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+- **Contact us**
 
-**Can I opt out?**
+    - The contact us page allows the user should they have any question, concern or suggestion, to contact the site's admin.
+	- There are two headings, one indicating the user they need to fill out the form to contact the site's admin and a second one letting the user know the admin will get back to them as soon as possible.
+	- This page comprises a form where the user needs to input their name, email address and message, should the user be logged in, the name and email fields will be prefilled.
+	- There are to buttons at the bottom, one to cancel the action which will bring the user to 'all games page' and another to send the message.
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+![Contact us](documentation/contact.png)
+
+- **Amount of contact messages**
+
+    - The user with superuser privileges will be able to see in the 'my account' dropdown menu a 'contact list' link with the amount of messages from users that have contacted the site's admin.
+
+![Amount of contact messages](documentation/number-of-contact-messages.png)
+
+- **Contact us list**
+
+    - The contact list page allows authenticated users with superuser privileges to view a list of the users and their messages that have contacted the site's admin.
+	- There are two headings, one indicating the user this is the contact us list page and a second one letting the user know that this is a list of the users that have contacted the site's admin.
+	- The page has a table for large and medium screens and a bootstrap rows and columns structure for small screens that contain the name, email address, message and date when the message was written for the user or users that have contacted the site's admin.
+
+![Contact us list](documentation/contact-us-list.png)
+
+- **Newsletter**
+
+    - The newsletter page allows the user to subscribe to the site's newsletter.
+	- There are two headings, one indicating the user this is the newsletter page and a second one asking the user to subscribe to the newsletter to get the latest news, special offers and more on all the site's games.
+	- This page comprises a form where the user needs to input their name and email address, should the user be logged in, the name and email fields will be prefilled.
+	- There are to buttons at the bottom, one to cancel the action which will bring the user to 'all games page' and another to subscribe.
+
+![Newsletter](documentation/newsletter.png)
+
+- **Messages**
+
+    - Every time the user completes an action whether it be register, login, logout, like a game, create a game, update a game, delete a game, add a game to the shopping basket and all the rest, a relevant message will be displayed at the top of the screen to inform the user about the action being completed successfully.
+    - Also should the user perform an unauthorized action such as trying to force their way to a page that requires permission, a message will also show.
+
+![Messages](documentation/messages.png)
+
+- **404/500 Custom Pages**
+
+    - The 404 and 500 custom error pages show said errors in a user friendly way.
+    - The custom pages allow the user to avail of the navbar and footer present in all the other pages, making it easier for the user to go anywhere they want in the site after getting the error.
+
+![404/500](documentation/404-500.png)
+
+- **Modals**
+
+    - Privacy Policy and Terms & Conditions were included in modals.
+    - A Bootstrap 4 scrolling long content modal was used for Terms & Conditions and Privacy Policy given the large content.
+	- The [Privacy Policy Generator](https://www.termsfeed.com/privacy-policy-generator/) was used to created the privacy policy.
+
+![Modals](documentation/modals.png)
+
+- **Back to Top Button**
+
+    - A back to top button was included across the site to improve UX. The user will be able to go back to the top of the page with the click of a button instead of manually doing so.
+    - The back to top button will show up only when the user starts to scroll down, when the user is located at the very top of the page the button will not be visible.
+
+![Back-To-Top](documentation/back-to-top.png)
+
+- **Footer**
+
+    - The footer the same as the navbar, is identical across the site.
+    - The footer contains several links. Links to social media such as Facebook, Instagram, YouTube and Twitter which open in a different tab. It also contains links to Privacy Policy and Terms & Conditions, which are both modals. Also links to the about us and contact us pages.
+    - At the end of the footer there is the name of the site and the programmer's credits.
+
+![Footer](documentation/footer.png)
+
+### Future Features
+
+- Comment on games
+    - Offer the user the option to comment on games.
+- Edit/Update and delete own comments.
+    - Offer the user the option to edit/update and delete their own comments.
+- Create a blog app.
+    - Create a blog app where the site's admin/owner can create content and the user can read on games news, reviews, tips and more.
+- Add webhooks to checkout process.
+    - Implement the use of webhooks during the checkout process.
 
 ```
 pkill uptime.sh
