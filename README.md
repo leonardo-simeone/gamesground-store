@@ -189,6 +189,12 @@ To wireframe the website I used [Whimsical](https://whimsical.com/wireframes).
 
 ![Game detail](documentation/game-detail.png)
 
+- **Game detail as admin**
+
+    - The game detail page is basically the same, except for the fact that when a user with superuser privileges is logged in, the option to edit and delete the game will be shown.
+
+![Game detail as admin](documentation/game-detail-as-admin.png)
+
 - **Shooping basket**
 
     - The shopping basket page is where the user will put all the games they want to purchase before proceeding with the checkout process.
