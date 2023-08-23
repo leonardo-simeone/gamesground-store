@@ -70,7 +70,10 @@ class TestNewsletterModel(TestCase):
         self.assertIsInstance(self.subscriber.created, datetime)
 
     def test_verbose_name_plural(self):
-        self.assertEqual(str(Newsletter._meta.verbose_name_plural), 'Newsletter subscribers')
+        self.assertEqual(
+            str(Newsletter._meta.verbose_name_plural),
+            'Newsletter subscribers'
+            )
 
     def test_subscriber_ordering(self):
         subscriber2 = Newsletter.objects.create(

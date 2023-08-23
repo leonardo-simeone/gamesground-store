@@ -60,9 +60,17 @@ def games(request):
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, 'Opps! You need to write something in the search bar...')
+                messages.error(
+                    request,
+                    'Opps! You need to write something in the search bar...'
+                    )
                 return redirect(reverse('games'))
-            queries = Q(name__icontains=query) | Q(description__icontains=query) | Q(genre__icontains=query) | Q(platform__name__icontains=query)
+            queries = (
+                Q(name__icontains=query) |
+                Q(description__icontains=query) |
+                Q(genre__icontains=query) |
+                Q(platform__name__icontains=query)
+            )
             games = games.filter(queries)
 
     selected_sorting = f'{sort}_{direction}'
@@ -135,7 +143,10 @@ def add_game(request):
             messages.success(request, 'Successfully added game!')
             return redirect(reverse('game_detail', args=[game.id]))
         else:
-            messages.error(request, 'Failed to add game. Please ensure the form is valid.')
+            messages.error(
+                request,
+                'Failed to add game. Please ensure the form is valid.'
+                )
     else:
         form = GameForm()
 
@@ -163,11 +174,16 @@ def edit_game(request, game_id):
             messages.success(request, 'Successfully updated game!')
             return redirect(reverse('game_detail', args=[game.id]))
         else:
-            messages.error(request, 'Failed to update game. Please ensure the form is valid.')
+            messages.error(
+                request,
+                'Failed to update game. Please ensure the form is valid.'
+                )
     else:
         form = GameForm(instance=game)
         if game.platform:
-            messages.info(request, f'You are editing {game.name} {game.platform}')
+            messages.info(
+                request, f'You are editing {game.name} {game.platform}'
+                )
         else:
             messages.info(request, f'You are editing {game.name}')
 
@@ -192,7 +208,9 @@ def delete_game(request, game_id):
     if request.method == 'POST':
         game.delete()
         if game.platform:
-            messages.success(request, f'{game.name} {game.platform} has been deleted!')
+            messages.success(
+                request, f'{game.name} {game.platform} has been deleted!'
+                )
         else:
             messages.success(request, f'{game.name} has been deleted!')
         return redirect(reverse('games'))

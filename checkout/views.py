@@ -49,14 +49,17 @@ def checkout(request):
 
                 except Game.DoesNotExist:
                     messages.error(request, (
-                        "One of the games in your basket wasn't found in our database. "
+                        "One of the games in your basket wasn't "
+                        "found in our database. "
                         "Please call us for assistance!")
                     )
                     order.delete()
                     return redirect(reverse('basket_summary'))
 
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+            return redirect(
+                reverse('checkout_success', args=[order.order_number])
+                )
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
@@ -65,7 +68,9 @@ def checkout(request):
         basket = request.session.get('basket', {})
 
         if not basket:
-            messages.error(request, "There's nothing in your basket at the moment")
+            messages.error(
+                request, "There's nothing in your basket at the moment"
+                )
             return redirect(reverse('games'))
 
         current_basket = basket_contents(request)

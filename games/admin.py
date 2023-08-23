@@ -6,7 +6,9 @@ from .models import *
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
-    list_display = ('name', 'platform', 'pegi_rating', 'available_in_other_consoles')
+    list_display = (
+        'name', 'platform', 'pegi_rating', 'available_in_other_consoles'
+            )
 
 
 @admin.register(Platform)

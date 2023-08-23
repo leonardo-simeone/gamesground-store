@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from multiselectfield import MultiSelectField
 from embed_video.fields import EmbedVideoField
 
-# Create your models here.
-
 
 class Platform(models.Model):
 
@@ -35,14 +33,22 @@ class Game(models.Model):
         )
 
     name = models.CharField(max_length=254)
-    genre = MultiSelectField(max_length=120, choices=GENRE_OPTIONS, null=True, blank=True)
+    genre = MultiSelectField(
+        max_length=120, choices=GENRE_OPTIONS, null=True, blank=True
+        )
     description = models.TextField()
     year = models.CharField(max_length=4)
-    platform = models.ForeignKey('Platform', null=True, blank=True, on_delete=models.SET_NULL)
+    platform = models.ForeignKey(
+        'Platform', null=True, blank=True, on_delete=models.SET_NULL
+        )
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    pegi_rating = models.ForeignKey('Pegi', null=True, blank=True, on_delete=models.SET_NULL)
+    pegi_rating = models.ForeignKey(
+        'Pegi', null=True, blank=True, on_delete=models.SET_NULL
+        )
     image = models.ImageField(null=True, blank=True)
-    available_in_other_consoles = models.BooleanField(default=False, null=True, blank=True)
+    available_in_other_consoles = models.BooleanField(
+        default=False, null=True, blank=True
+        )
     likes = models.ManyToManyField(User, related_name='game_likes', blank=True)
     trailer = EmbedVideoField()
     created = models.DateTimeField(auto_now_add=True)
