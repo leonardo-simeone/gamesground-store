@@ -183,7 +183,7 @@ To wireframe the website I used [Whimsical](https://whimsical.com/wireframes).
 	- Platform which is clickable and will bring the user to that particular platform games group.
 	- Pegi rating which has the same fuctionality as platform (clickable).
 	- Genre again with the same functionality as the previous two.
-	- Next we have year and likes count, in the likes count the user is shown how many likes the game has and if they're not logged in that they need to in order be able to like it, once they like the game by clicking on the heart icon, there will be an indicator letting them know they like the game.
+	- Next we have year and likes count, in the likes count the user is shown how many likes the game has and if they're not logged in, that they need to in order be able to like it, once they like the game by clicking on the heart icon, there will be an indicator letting them know they like the game.
 	- Last on this section the user will be informed whether this game is available in other platforms or if it is exclusive.
 	- On the next section below, the description of the game will be displayed as 'additional game information' and on the section after, there will be a game trailer video specific to the game being viewed.
 
@@ -933,3 +933,357 @@ class Newsletter(models.Model):
     def __str__(self):
         return self.name
 ```
+
+## Testing
+
+For all testing, please refer to the [TESTING.md](TESTING.md) file.
+
+## Deployment
+
+The live deployed application can be found deployed on [Heroku](https://gamesground-store-6596e524f29e.herokuapp.com).
+
+### ElephantSQL Database
+
+This project uses [ElephantSQL](https://www.elephantsql.com) for the PostgreSQL Database.
+
+To obtain your own Postgres Database, sign-up with your GitHub account, then follow these steps:
+- Click **Create New Instance** to start a new database.
+- Provide a name (this is commonly the name of the project: gamesground-store).
+- Select the **Tiny Turtle (Free)** plan.
+- You can leave the **Tags** blank.
+- Select the **Region** and **Data Center** closest to you.
+- Once created, click on the new database name, where you can view the database URL and Password.
+
+### Amazon AWS
+
+This project uses [AWS](https://aws.amazon.com) to store media and static files online, due to the fact that Heroku doesn't persist this type of data.
+
+Once you've created an AWS account and logged-in, follow these series of steps to get your project connected.
+Make sure you're on the **AWS Management Console** page.
+
+#### S3 Bucket
+
+- Search for **S3**.
+- Create a new bucket, give it a name (matching your Heroku app name), and choose the region closest to you.
+- Uncheck **Block all public access**, and acknowledge that the bucket will be public (required for it to work on Heroku).
+- From **Object Ownership**, make sure to have **ACLs enabled**, and **Bucket owner preferred** selected.
+- From the **Properties** tab, turn on static website hosting, and type `index.html` and `error.html` in their respective fields, then click **Save**.
+- From the **Permissions** tab, paste in the following CORS configuration:
+
+	```shell
+	[
+		{
+			"AllowedHeaders": [
+				"Authorization"
+			],
+			"AllowedMethods": [
+				"GET"
+			],
+			"AllowedOrigins": [
+				"*"
+			],
+			"ExposeHeaders": []
+		}
+	]
+	```
+
+- Copy your **ARN** string.
+- From the **Bucket Policy** tab, select the **Policy Generator** link, and use the following steps:
+	- Policy Type: **S3 Bucket Policy**
+	- Effect: **Allow**
+	- Principal: `*`
+	- Actions: **GetObject**
+	- Amazon Resource Name (ARN): **paste-your-ARN-here**
+	- Click **Add Statement**
+	- Click **Generate Policy**
+	- Copy the entire Policy, and paste it into the **Bucket Policy Editor**
+
+		```shell
+        {
+            "Version": "2012-10-17",
+            "Id": "Policy1234567890",
+            "Statement": [
+                {
+                    "Sid": "Stmt1234567890",
+                    "Effect": "Allow",
+                    "Principal": "*",
+                    "Action": "s3:GetObject",
+                    "Resource": "arn:aws:s3:::gamesground-store/*"
+                }
+            ]
+        }
+		```
+
+	- Before you click "Save", add `/*` to the end of the Resource key in the Bucket Policy Editor (like above).
+	- Click **Save**.
+- From the **Access Control List (ACL)** section, click "Edit" and enable **List** for **Everyone (public access)**, and accept the warning box.
+	- If the edit button is disabled, you need to change the **Object Ownership** section above to **ACLs enabled** (mentioned above).
+
+#### IAM
+
+Back on the AWS Services Menu, search for and open **IAM** (Identity and Access Management).
+Once on the IAM page, follow these steps:
+
+- From **User Groups**, click **Create New Group**.
+	- Suggested Name: `manage-gamesground-store`
+- Tags are optional, but you must click it to get to the **review policy** page.
+- From **User Groups**, select your newly created group, and go to the **Permissions** tab.
+- Open the **Add Permissions** dropdown, and click **Attach Policies**.
+- Select the policy, then click **Add Permissions** at the bottom when finished.
+- From the **JSON** tab, select the **Import Managed Policy** link.
+	- Search for **S3**, select the `AmazonS3FullAccess` policy, and then **Import**.
+	- You'll need your ARN from the S3 Bucket copied again, which is pasted into "Resources" key on the Policy.
+
+		```shell
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Action": [
+                        "s3:*"
+                    ],
+                    "Resource": [
+                        "arn:aws:s3:::gamesground-store",
+                        "arn:aws:s3:::gamesground-store/*"
+                    ]
+                }
+            ]
+        }
+		```
+	
+	- Click **Review Policy**.
+	- Suggested Name: `gamesground-store-policy`
+	- Provide a description:
+		- "Access to S3 Bucket for gamesground-store static files."
+	- Click **Create Policy**.
+- From **User Groups**, click your "manage-gamesground-store".
+- Click **Attach Policy**.
+- Search for the policy you've just created ("gamesground-store-policy") and select it, then **Attach Policy**.
+- From **User Groups**, click **Add User**.
+	- Suggested Name: `gamesground-store-static-files-user`
+- For "Select AWS Access Type", select **Programmatic Access**.
+- Select the group to add your new user to: `manage-gamesground-store`
+- Tags are optional, but you must click it to get to the **review user** page.
+- Click **Create User** once done.
+- You should see a button to **Download .csv**, so click it to save a copy on your system.
+	- **IMPORTANT**: once you pass this page, you cannot come back to download it again, so do it immediately!
+	- This contains the user's **Access key ID** and **Secret access key**.
+	- `AWS_ACCESS_KEY_ID` = **Access key ID**
+	- `AWS_SECRET_ACCESS_KEY` = **Secret access key**
+
+#### Final AWS Setup
+
+- If Heroku Config Vars has `DISABLE_COLLECTSTATIC` still, this can be removed now, so that AWS will handle the static files.
+- Back within **S3**, create a new folder called: `media`.
+- Select any existing media images for your project to prepare them for being uploaded into the new folder.
+- Under **Manage Public Permissions**, select **Grant public read access to this object(s)**.
+- No further settings are required, so click **Upload**.
+
+### Stripe API
+
+This project uses [Stripe](https://stripe.com) to handle the ecommerce payments.
+
+Once you've created a Stripe account and logged-in, follow these series of steps to get your project connected.
+
+- From your Stripe dashboard, click to expand the "Get your test API keys".
+- You'll have two keys here:
+	- `STRIPE_PUBLIC_KEY` = Publishable Key (starts with **pk**)
+	- `STRIPE_SECRET_KEY` = Secret Key (starts with **sk**)
+
+As a backup, in case users prematurely close the purchase-order page during payment, we can include Stripe Webhooks.
+
+- I understand that to achieve robust security and reliability in the checkout process, the use of webhooks is recommended, however due to a matter of time, I didn't implement webhooks for this project. It is though one of the future features I want to implement. The steps to implement them are as follow:
+    - From your Stripe dashboard, click **Developers**, and select **Webhooks**.
+    - From there, click **Add Endpoint**.
+        - `https://gamesground-store-6596e524f29e.herokuapp.com/checkout/wh/`
+    - Click **receive all events**.
+    - Click **Add Endpoint** to complete the process.
+    - You'll have a new key here:
+        - `STRIPE_WH_SECRET` = Signing Secret (Wehbook) Key (starts with **wh**)
+
+### Gmail API
+
+This project uses [Gmail](https://mail.google.com) to handle sending emails to users for account verification and purchase order confirmations.
+
+Once you've created a Gmail (Google) account and logged-in, follow these series of steps to get your project connected.
+
+- Click on the **Account Settings** (cog icon) in the top-right corner of Gmail.
+- Click on the **Accounts and Import** tab.
+- Within the section called "Change account settings", click on the link for **Other Google Account settings**.
+- From this new page, select **Security** on the left.
+- Select **2-Step Verification** to turn it on. (verify your password and account)
+- Once verified, select **Turn On** for 2FA.
+- Navigate back to the **Security** page, and you'll see a new option called **App passwords**.
+- This might prompt you once again to confirm your password and account.
+- Select **Mail** for the app type.
+- Select **Other (Custom name)** for the device type.
+	- Any custom name, such as "Django" or gamesground-store
+- You'll be provided with a 16-character password (API key).
+	- Save this somewhere locally, as you cannot access this key again later!
+	- `EMAIL_HOST_PASS` = user's 16-character API key
+	- `EMAIL_HOST_USER` = user's own personal Gmail email address
+
+### Heroku Deployment
+
+This project uses [Heroku](https://www.heroku.com), a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
+
+Deployment steps are as follows, after account setup:
+
+- Select **New** in the top-right corner of your Heroku Dashboard, and select **Create new app** from the dropdown menu.
+- Your app name must be unique, and then choose a region closest to you (EU or USA), and finally, select **Create App**.
+- From the new app **Settings**, click **Reveal Config Vars**, and set your environment variables.
+
+| Key | Value |
+| --- | --- |
+| `AWS_ACCESS_KEY_ID` | user's own value |
+| `AWS_SECRET_ACCESS_KEY` | user's own value |
+| `DATABASE_URL` | user's own value |
+| `DISABLE_COLLECTSTATIC` | 1 (*this is temporary, and can be removed for the final deployment*) |
+| `EMAIL_HOST_PASS` | user's own value |
+| `EMAIL_HOST_USER` | user's own value |
+| `SECRET_KEY` | user's own value |
+| `STRIPE_PUBLIC_KEY` | user's own value |
+| `STRIPE_SECRET_KEY` | user's own value |
+| `STRIPE_WH_SECRET` | user's own value |
+| `USE_AWS` | True |
+
+Heroku needs two additional files in order to deploy properly.
+- requirements.txt
+- Procfile
+
+You can install this project's **requirements** (where applicable) using:
+- `pip3 install -r requirements.txt`
+
+If you have your own packages that have been installed, then the requirements file needs updated using:
+- `pip3 freeze --local > requirements.txt`
+
+The **Procfile** can be created with the following command:
+- `echo web: gunicorn app_name.wsgi > Procfile`
+- *replace **app_name** with the name of your primary Django app name; the folder where settings.py is located*
+
+For Heroku deployment, follow these steps to connect your own GitHub repository to the newly created app:
+
+Either:
+- Select **Automatic Deployment** from the Heroku app.
+
+Or:
+- In the Terminal/CLI, connect to Heroku using this command: `heroku login -i`
+- Set the remote for Heroku: `heroku git:remote -a app_name` (replace *app_name* with your app name)
+- After performing the standard Git `add`, `commit`, and `push` to GitHub, you can now type:
+	- `git push heroku main`
+
+The project should now be connected and deployed to Heroku!
+
+### Local Deployment
+
+This project can be cloned or forked in order to make a local copy on your own system.
+
+For either method, you will need to install any applicable packages found within the *requirements.txt* file.
+- `pip3 install -r requirements.txt`.
+
+You will need to create a new file called `env.py` at the root-level,
+and include the same environment variables listed above from the Heroku deployment steps.
+
+Sample `env.py` file:
+
+```python
+import os
+
+os.environ.setdefault("AWS_ACCESS_KEY_ID", "user's own value")
+os.environ.setdefault("AWS_SECRET_ACCESS_KEY", "user's own value")
+os.environ.setdefault("DATABASE_URL", "user's own value")
+os.environ.setdefault("EMAIL_HOST_PASS", "user's own value")
+os.environ.setdefault("EMAIL_HOST_USER", "user's own value")
+os.environ.setdefault("SECRET_KEY", "user's own value")
+os.environ.setdefault("STRIPE_PUBLIC_KEY", "user's own value")
+os.environ.setdefault("STRIPE_SECRET_KEY", "user's own value")
+os.environ.setdefault("STRIPE_WH_SECRET", "user's own value")
+
+```
+
+Once the project is cloned or forked, in order to run it locally, you'll need to follow these steps:
+- Start the Django app: `python3 manage.py runserver`
+- Stop the app once it's loaded: `CTRL+C` or `⌘+C` (Mac)
+- Make any necessary migrations: `python3 manage.py makemigrations`
+- Migrate the data to the database: `python3 manage.py migrate`
+- Create a superuser: `python3 manage.py createsuperuser`
+- Load fixtures (if applicable): `python3 manage.py loaddata file-name.json` (repeat for each file)
+- Everything should be ready now, so run the Django app again: `python3 manage.py runserver`
+
+If you'd like to backup your database models, use the following command for each model you'd like to create a fixture for:
+- `python3 manage.py dumpdata your-model > your-model.json`
+- *repeat this action for each model you wish to backup*
+
+#### Cloning
+
+You can clone the repository by following these steps:
+
+1. Go to the [GitHub repository](https://github.com/leonardo-simeone/gamesground-store) 
+2. Locate the Code button above the list of files and click it 
+3. Select if you prefer to clone using HTTPS, SSH, or GitHub CLI and click the copy button to copy the URL to your clipboard
+4. Open Git Bash or Terminal
+5. Change the current working directory to the one where you want the cloned directory
+6. In your IDE Terminal, type the following command to clone my repository:
+	- `git clone https://github.com/leonardo-simeone/gamesground-store.git`
+7. Press Enter to create your local clone.
+
+Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/leonardo-simeone/gamesground-store)
+
+Please note that in order to directly open the project in Gitpod, you need to have the browser extension installed.
+A tutorial on how to do that can be found [here](https://www.gitpod.io/docs/configure/user-settings/browser-extension).
+
+#### Forking
+
+By forking the GitHub Repository, we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original owner's repository.
+You can fork this repository by using the following steps:
+
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/leonardo-simeone/gamesground-store)
+2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
+3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
+
+### Local VS Deployment
+
+The only difference I found between local version and heroku deployment, was the verification emails. When Sign up or Order completed processes ocurred, the verification emails were not sent in the real world but to the developement terminal instead, whereas in the deployed version emails were sent to the actual emails provided by the user.
+
+## Credits
+
+### Content
+
+| Source | Location | Notes |
+| --- | --- | --- |
+| [Markdown Builder](https://traveltimn.github.io/markdown-builder) | README and TESTING | Tool to help generate the Markdown files |
+| [Fontawesome](https://fontawesome.com/search?o=r&m=free) | Social Media Links & Across the Site | Icons |
+| [Alvarotrigo.com](https://codepen.io/anon/embed/ZExxeRz?height=450&theme-id=dark&default-tab=only-result&user=&slug-hash=ZExxeRz&pen-title=&name=cp_embed_5#result-box) | entire site | Responsive footer design, number five in [Alvarotrigo.com](https://alvarotrigo.com/blog/website-footers/), used and adapted to my needs |
+| [Mdbootstrap.com](https://mdbootstrap.com/snippets/standard/mdbootstrap/2964350#js-tab-view) | entire site | Back to top button, used and adapted to my needs |
+| [Termsfeed.com](https://www.termsfeed.com/public/uploads/2018/09/500px-terms-use-conduct-prohibited-activities-clause-excerpt.jpg) | T&C modal | Used and adapted to my needs |
+| [Privacy Policy Generator](https://www.termsfeed.com/privacy-policy-generator/) | Privacy Policy modal | Used to create Privacy Policy for the site |
+| [Stackoverflow.com](https://stackoverflow.com/questions/9643291/how-to-import-a-json-file-to-a-django-model) | Games and Game Detail Views | 'How to import a json file to a Django model', used to import the games objects when Postgres DB had to be reset |
+| [Deque University](https://dequeuniversity.com/rules/axe/4.7/aria-hidden-focus) | Checkout page | 'Aria hidden element must not be focusable or contain focusable elements' used to make Stripe hidden aria element not focusable |
+| [Google](https://developers.google.com/search/docs/crawling-indexing/links-crawlable?visit_id=638265896895052861-2448974256&rd=1) | Basket View | Read documentation to understand that the 'update' and 'remove' anchor elements in the basket were not crawlable since they were called by JS and not a href |
+| [Boutique Ado Code Institute Project](https://boutique-ado-leo.herokuapp.com/) | entire site | 'Code Institute walkthrough project to build a fully functional e-commerce site', used several parts of the walkthrough and adapted to my needs |
+| [Youtube](https://www.youtube.com/watch?v=dGF1x14QNGA&list=WL&index=2&t=72s) | game_detail page | Embed video 'how to embed video in Django project', used and adapted to my needs |
+
+### Media
+
+| Source | Location | Type | Notes |
+| --- | --- | --- | --- |
+| [Gamesground Youtube Channel](https://www.youtube.com/channel/UCHKOktRMLNdhRSqL_DWwgKA) | entire site | image | favicon on all pages, a design of my own (It's my youtube channel) |
+| [Gamesground Youtube Channel](https://www.youtube.com/channel/UCHKOktRMLNdhRSqL_DWwgKA) | entire site | image | logo image on all pages, a design of my own (It's my youtube channel) |
+| [Boutique Ado Code Institute Project](https://github.com/Code-Institute-Solutions/boutique_ado_images/blob/master/pics/noimage.png) | games/game_detail/basket/checkout/edit_game pages | image | default image for game when no image |
+| [Alphacoders](https://images5.alphacoders.com/130/1302520.jpg) | home | image | Jumbotron hero image |
+| [Stock Adobe](https://t4.ftcdn.net/jpg/04/21/34/85/360_F_421348572_9AER2My9tEzC7MvKQfmfKSHVGwf5KEJJ.jpg) | home page | image | Playstation controller |
+| [News Xbox](https://news.xbox.com/en-us/wp-content/uploads/sites/2/2023/04/Remix-Hero-65b07e1f66473b25e3ea.jpg) | home page | image | Xbox controller |
+| [gamespace.com](https://www.gamespace.com/wp-content/uploads/2022/02/Keyboards.jpg) | home page | image | Pc keyboard and mouse |
+| [atlassianblog](https://atlassianblog.wpengine.com/wp-content/uploads/2017/12/ign-1.png) | 404/500 pages | image | image for the custom 404/500 error pages |
+| [Amazon.co.uk](https://www.amazon.co.uk/s?k=video+games&crid=2K35HPLOGF6BK&sprefix=video+games%2Caps%2C86&ref=nb_sb_noss_1) | games/game_detail/basket/checkout/edit_game pages | images | Images, description and year for games taken from Amazon |
+| [Youtube](https://www.youtube.com/results?search_query=game+trailers) | game_detail page | Videos urls | Games trailer videos urls taken from YouTube |
+
+### Acknowledgements
+
+- I would like to thank my Code Institute mentor, [Rory Patrick Sheridan](https://github.com/Ri-Dearg) for his support throughout the development of this project.
+- I would like to thank the [Code Institute](https://codeinstitute.net) tutor team for their fantastic assistance with troubleshooting and debugging some project issues.
+- I would like to thank the [Code Institute Slack community](https://code-institute-room.slack.com) for the moral support; it kept me going during periods of self doubt and imposter syndrome.
+- I would like to thank my wife Amanda, for believing in me, and supporting me unconditionally.
