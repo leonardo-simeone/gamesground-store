@@ -8,7 +8,7 @@ from decimal import Decimal
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.contrib.messages.middleware import MessageMiddleware
 from .views import *
-from games.models import Game
+from games.models import *
 
 
 class TestBasketSummaryView(TestCase):
@@ -40,10 +40,10 @@ class TestBasketSummaryView(TestCase):
 class TestAddToBasketView(TestCase):
 
     """
-    The setUp method is used to create Game and User objects,
+    The setUp method is used to create Game, User and Platform objects,
     set up a client and messages.
-    We have three test methods: test_add_to_basket_view,
-    test_add_to_basket_with_existing_game and test_add_to_basket_redirect.
+    We have several test methods covering different
+    aspects of the add to basket view.
     - In test_add_to_basket_view, we login a user, add a game to the basket
     and check that the game was added correctly and that the message generated
     is correct.
@@ -51,15 +51,28 @@ class TestAddToBasketView(TestCase):
     to the basket and verify that it was added and that the response code is
     correct then add two more games and verify that the quantity was updated
     successfully.
+    - test_add_to_basket_view_with_platform, we test that when a game that has
+    a platform atrtribute is added to the basket the correct messages is
+    generated.
     - In test_add_to_basket_redirect, we simply add a game to the basket and
     verify that the redirect is correct.
     """
 
     def setUp(self):
+        # Create a platform
+        self.platform = Platform.objects.create(name='Test Platform')
         # Create a game
         self.game = Game.objects.create(
             name='Test Game', description='This is a test game.',
             year='2023', price=Decimal('29.99'),
+            available_in_other_consoles=False,
+            trailer='https://www.youtube.com/watch?v=video-id'
+            )
+        # Create a second game with platform
+        self.game2 = Game.objects.create(
+            name='Test Game', description='This is a test game.',
+            year='2023', price=Decimal('29.99'),
+            platform=self.platform,
             available_in_other_consoles=False,
             trailer='https://www.youtube.com/watch?v=video-id'
             )
@@ -119,6 +132,26 @@ class TestAddToBasketView(TestCase):
         basket = self.client.session.get('basket', {})
         self.assertEqual(basket[str(self.game.pk)], 3)
 
+    def test_add_to_basket_view_with_platform(self):
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse('add_to_basket', args=[self.game2.pk]),
+            {'quantity': 2, 'redirect_url': '/'}
+        )
+
+        self.assertEqual(response.status_code, 302)
+
+        basket = self.client.session.get('basket', {})
+        self.assertIn(str(self.game2.pk), basket)
+        self.assertEqual(basket[str(self.game2.pk)], 2)
+
+        messages_list = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages_list), 1)
+        self.assertEqual(
+            messages_list[0].message,
+            f'Added {self.game2.name} {self.game2.platform} to your basket'
+        )
+
     def test_add_to_basket_redirect(self):
         self.client.force_login(self.user)
         response = self.client.post(
@@ -133,26 +166,41 @@ class TestAddToBasketView(TestCase):
 class TestAdjustBasketView(TestCase):
 
     """
-    The setUp method is used to create Game and User objects,
+    The setUp method is used to create Game, User and Platform objects,
     set up a client and messages.
-    We have two test methods:
-    test_adjust_basket_view_quantity_greater_than_zero,
-    and test_adjust_basket_view_quantity_zero.
+    We have several test methods covering different
+    aspects of the adjust basket view.
     - In test_adjust_basket_view_quantity_greater_than_zero,
     we login a user, add a game to the basket, adjust the game quantity
     to three in the basket and check that the game quantity was
     updated correctly and that the message generated is correct.
+    - In test_adjust_basket_view_with_platform_quantity_greater_than_zero,
+    we test that when the basket content is adjusted with a game that
+    has platform attribute, the message generated is correct.
     - In test_adjust_basket_view_quantity_zero, we login a user,
     add a game to the basket, adjust the game quantity to zero
     in the basket and check that the game was removed correctly
     and that the message generated is correct.
+    - In test_adjust_basket_view_with_platform_quantity_zero, we test
+    the same as in the previous method but this time with a game that
+    has platform attribute to check the correct message is generated
     """
 
     def setUp(self):
+        # Create a platform
+        self.platform = Platform.objects.create(name='Test Platform')
         # Create a game
         self.game = Game.objects.create(
             name='Test Game', description='This is a test game.',
             year='2023', price=Decimal('29.99'),
+            available_in_other_consoles=False,
+            trailer='https://www.youtube.com/watch?v=video-id'
+            )
+        # Create a second game with platform
+        self.game2 = Game.objects.create(
+            name='Test Game', description='This is a test game.',
+            year='2023', price=Decimal('29.99'),
+            platform=self.platform,
             available_in_other_consoles=False,
             trailer='https://www.youtube.com/watch?v=video-id'
             )
@@ -194,6 +242,30 @@ class TestAdjustBasketView(TestCase):
             f'Updated {self.game.name} quantity to 3'
             )
 
+    def test_adjust_basket_view_with_platform_quantity_greater_than_zero(self):
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse('add_to_basket', args=[self.game2.pk]),
+            {'quantity': 2, 'redirect_url': '/'}
+        )
+
+        response = self.client.post(
+            reverse('adjust_basket', args=[self.game2.pk]),
+            {'quantity': 3}
+        )
+
+        self.assertEqual(response.status_code, 302)
+
+        basket = self.client.session.get('basket', {})
+        self.assertEqual(basket[str(self.game2.pk)], 3)
+
+        messages_list = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages_list), 2)
+        self.assertEqual(
+            messages_list[1].message.strip(),
+            f'Updated {self.game2.name} {self.game2.platform} quantity to 3'
+        )
+
     def test_adjust_basket_view_quantity_zero(self):
         self.client.force_login(self.user)
         # Add game to the basket first
@@ -224,18 +296,46 @@ class TestAdjustBasketView(TestCase):
         # Ensure the game ID is not in the basket after removal
         self.assertNotIn(str(self.game.pk), basket)
 
+    def test_adjust_basket_view_with_platform_quantity_zero(self):
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse('add_to_basket', args=[self.game2.pk]),
+            {'quantity': 2, 'redirect_url': '/'}
+        )
+
+        response = self.client.post(
+            reverse('adjust_basket', args=[self.game2.pk]),
+            {'quantity': 0}
+        )
+
+        self.assertEqual(response.status_code, 302)
+
+        basket = self.client.session.get('basket', {})
+        self.assertNotIn(str(self.game2.pk), basket)
+
+        messages_list = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages_list), 2)
+        self.assertEqual(
+            messages_list[1].message,
+            f'Removed {self.game2.name} {self.game2.platform} from your basket'
+        )
+
 
 class TestRemoveFromBasketView(TestCase):
 
     """
-    The setUp method is used to create a Game object and
+    The setUp method is used to create Game and Platform objects and
     set up a client.
-    We have two test methods:
-    test_remove_from_basket_view and test_remove_from_basket_view_error.
+    We have three test methods:
+    test_remove_from_basket_view, test_remove_from_basket_view_with_platform
+    and test_remove_from_basket_view_error.
     - In test_remove_from_basket_view, we add a game to the basket,
     make sure the game is in the basket remove the game from the basket,
     check that the game was removed and that the message
     generated is correct.
+    - In test_remove_from_basket_view_with_platform, we test
+    the same as in the previous method but this time with a game that
+    has platform attribute to check the correct message is generated.
     - test_remove_from_basket_view_error, we add a game to the basket,
     make sure the game is in the basket, try to remove the game with an
     incorrect id, check that we get a 500 response code, that the error
@@ -245,10 +345,20 @@ class TestRemoveFromBasketView(TestCase):
     def setUp(self):
         self.client = Client()
 
+        # Create a platform
+        self.platform = Platform.objects.create(name='Test Platform')
         # Create a game for testing
         self.game = Game.objects.create(
             name='Test Game', description='This is a test game.',
             year='2023', price=Decimal('29.99'),
+            available_in_other_consoles=False,
+            trailer='https://www.youtube.com/watch?v=video-id'
+            )
+        # Create a second game with platform
+        self.game2 = Game.objects.create(
+            name='Test Game', description='This is a test game.',
+            year='2023', price=Decimal('29.99'),
+            platform=self.platform,
             available_in_other_consoles=False,
             trailer='https://www.youtube.com/watch?v=video-id'
             )
@@ -281,6 +391,35 @@ class TestRemoveFromBasketView(TestCase):
             messages_list[1].message,
             f'Removed {self.game.name} from your basket'
             )
+
+    def test_remove_from_basket_view_with_platform(self):
+        # Add the game to the basket
+        response = self.client.post(
+            reverse('add_to_basket', args=[self.game2.pk]),
+            {'quantity': 2, 'redirect_url': '/'}
+        )
+
+        # Ensure the game is in the basket
+        self.assertIn(str(self.game2.pk), self.client.session['basket'])
+
+        # Call the remove_from_basket view
+        response = self.client.post(
+            reverse('remove_from_basket', args=[self.game2.pk])
+        )
+
+        # Check the response status code
+        self.assertEqual(response.status_code, 200)
+
+        # Ensure the game is removed from the basket
+        self.assertNotIn(str(self.game2.pk), self.client.session['basket'])
+
+        # Check if the success message is in the messages
+        messages_list = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages_list), 2)
+        self.assertEqual(
+            messages_list[1].message,
+            f'Removed {self.game2.name} {self.game2.platform} from your basket'
+        )
 
     def test_remove_from_basket_view_error(self):
         # Add the game to the basket
