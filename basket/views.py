@@ -55,8 +55,8 @@ def adjust_basket(request, game_id):
         if game.platform:
             messages.success(
                 request,
-                f'Updated {game.name} {game.platform} quantity \
-                  to {basket[game_id]}'
+                f'Updated {game.name} {game.platform} quantity '
+                f'to {basket[game_id]}'
                 )
         else:
             messages.success(
