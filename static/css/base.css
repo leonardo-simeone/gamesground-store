@@ -238,6 +238,14 @@ input[name='q']::placeholder {
     color: #000000!important;
 }
 
+.mobile-badge {
+    width: 135px;
+    height: 30px;
+    display: block;
+    text-align: center;
+    line-height: 15px;
+}
+
 .pegi-row{
     max-width: fit-content;
     margin: 0 auto;

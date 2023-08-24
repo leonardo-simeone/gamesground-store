@@ -23,8 +23,8 @@
         </a>
 
         <div class="d-sm-block d-md-none mb-1">
-          <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1" href="{% url 'games' %}?platform={{ s.name|href_fix }}" aria-label="takes user to {{s.name}} games page">
-            <span class="p-2 mt-2">{{ s.name }}</span>
+          <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1 mobile-badge" href="{% url 'games' %}?platform={{ s.name|href_fix }}" aria-label="takes user to {{s.name}} games page">
+            <p class="p-2 mt-2">{{ s.name }}</p>
           </a>
         </div>
        {% endfor %}
