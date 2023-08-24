@@ -893,7 +893,7 @@ input[name='q']::placeholder {
         text-align: center;
     }
 
-    input[type=number] {
+    .quantity-text {
         text-align: center;
     }
 
