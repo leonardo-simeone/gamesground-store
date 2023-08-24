@@ -1020,6 +1020,20 @@ input[name='q']::placeholder {
     .info-headings h3 {
         font-size: 1.4rem;
     }
+
+    input.form-check-input {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .form-check-label {
+        margin-left: 25px;
+        padding-top: 12px;
+    }
+    
+    .form-check {
+        margin-bottom: 25px;
+    }
 }
 
 
