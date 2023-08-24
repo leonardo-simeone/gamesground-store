@@ -285,7 +285,7 @@ input[name='q']::placeholder {
 }
 
 .input-width {
-    max-width: 39%;
+    max-width: 49%;
 }
 
 .game-description {
@@ -506,7 +506,7 @@ input[name='q']::placeholder {
     border: 1px solid #000000;
 }
 
-.form-control-sm {
+.form-border {
     border: transparent;
 }
 
@@ -938,7 +938,7 @@ input[name='q']::placeholder {
 
 @media (min-width:1040px) {
     .input-width {
-        max-width: 25%;
+        max-width: 28%;
     }
 }
 

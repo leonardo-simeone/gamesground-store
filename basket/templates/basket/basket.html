@@ -104,7 +104,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button class="decrement-qty btn-inc-dec btn btn-sm"
+                                        <button class="decrement-qty btn-inc-dec btn"
                                             data-game_id="{{ item.game_id }}" id="decrement-qty_{{ item.game_id }}"
                                             aria-label="decreases amount of {{item.game.name}} to update to in the shopping basket by 1">
                                             <span>
@@ -112,12 +112,12 @@
                                             </span>
                                         </button>
                                     </div>
-                                    <input class="form-control form-control-sm qty_input" type="number" name="quantity"
+                                    <input class="form-control form-border qty_input" type="number" name="quantity"
                                         value="{{ item.quantity }}" min="1" max="99" data-game_id="{{ item.game_id }}"
                                         id="id_qty_{{ item.game_id }}"
                                         aria-label="shows current amount of {{item.game.name}} in the shopping basket">
                                     <div class="input-group-append">
-                                        <button class="increment-qty btn-inc-dec btn btn-sm"
+                                        <button class="increment-qty btn-inc-dec btn"
                                             data-game_id="{{ item.game_id }}" id="increment-qty_{{ item.game_id }}"
                                             aria-label="increases amount of {{item.game.name}} to update to in the shopping basket by 1">
                                             <span>
@@ -188,7 +188,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <button class="decrement-qty btn-inc-dec btn btn-sm"
+                                            <button class="decrement-qty btn-inc-dec btn"
                                                 data-game_id="{{ item.game_id }}"
                                                 id="decrement-qty-basket_{{ item.game_id }}"
                                                 aria-label="decreases amount of {{item.game.name}} to update to in the shopping basket by 1">
@@ -197,12 +197,12 @@
                                                 </span>
                                             </button>
                                         </div>
-                                        <input class="form-control form-control-sm qty_input" type="number"
+                                        <input class="form-control form-border qty_input" type="number"
                                             name="quantity" value="{{ item.quantity }}" min="1" max="99"
                                             data-game_id="{{ item.game_id }}" id="id_qty_basket_{{ item.game_id }}"
                                             aria-label="shows current amount of {{item.game.name}} in the shopping basket">
                                         <div class="input-group-append">
-                                            <button class="increment-qty btn-inc-dec btn btn-sm"
+                                            <button class="increment-qty btn-inc-dec btn"
                                                 data-game_id="{{ item.game_id }}"
                                                 id="increment-qty-basket_{{ item.game_id }}"
                                                 aria-label="increases amount of {{item.game.name}} to update to in the shopping basket by 1">
