@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -43,6 +43,14 @@ def order_history(request, order_number):
     """ Display the user's order history. """
 
     order = get_object_or_404(Order, order_number=order_number)
+
+    # Check if the logged-in user is the owner of the order
+    if order.user_profile.user != request.user:
+        # If not the owner, show an error message and redirect
+        messages.error(
+            request, 'You do not have permission to view this order history.'
+            )
+        return redirect('home')
 
     messages.info(request, (
         f'This is a past confirmation for order number {order_number}. '
