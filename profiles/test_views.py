@@ -8,7 +8,9 @@ from .forms import UserProfileForm
 from django.test import Client
 from .views import *
 from django.contrib.messages.storage.fallback import FallbackStorage
+from django.contrib import messages
 from django.contrib.sessions.middleware import SessionMiddleware
+from django.contrib.auth import get_user_model
 from decimal import Decimal
 
 
@@ -118,42 +120,104 @@ class TestProfileView(TestCase):
 class TestOrderHistoryView(TestCase):
 
     """
-    The setUp method is used to create an Order object.
-    - In test_order_history, we get the order_history view
-    using the newly created Order object and test that
-    success response code is got (200), the correct template
-    is used and that the view in fact contains the Order object
-    attributes.
+    The setUp method is used to create User and Order objects.
+    We have two test methods: test_order_history_own_user and
+    test_order_history_other_user.
+    - In test_order_history_own_user, we login user a which owns order a,
+    get the order_history view using the newly created Order object
+    and test that success response code is got (200), the correct template
+    is used and that the view in fact contains the Order object attributes.
+    - In test_order_history_other_user, we login user a which doesn't own
+    order b, try to get the order_history view for order b and check that the
+    response code got is correct (302), that the user is redirected to the
+    home page and that the message generated is correct.
     """
 
     def setUp(self):
-        # Create Order object
-        self.order = Order.objects.create(
-            order_number='59D52EBA7553416385A882EE642D7E0Z',
-            full_name='Test User',
-            email='test@test.com',
+        # Create User objects
+        self.user_a = get_user_model().objects.create_user(
+            username='user_a',
+            password='password'
+        )
+        self.user_b = get_user_model().objects.create_user(
+            username='user_b',
+            password='password'
+        )
+
+        # Create UserProfile objects for both users
+        self.user_profile_a = self.user_a.userprofile
+        self.user_profile_b = self.user_b.userprofile
+
+        # Create Order objects for both users
+        self.order_a = Order.objects.create(
+            order_number='59D52EBA7553416385A882EE642D7E0X',
+            user_profile=self.user_a.userprofile,
+            full_name='Test User A',
+            email='test_a@test.com',
             phone_number='1234567890',
             country='Ireland',
-            town_or_city='Test town',
+            town_or_city='Test town A',
             street_address1='Test address 1',
             date='July 28, 2023, 3:28 p.m.',
             delivery_cost=7.00,
             order_total=20.00,
             grand_total=27.00,
-            )
+        )
 
-    def test_order_history(self):
+        self.order_b = Order.objects.create(
+            order_number='59D52EBA7553416385A882EE642D7E0Y',
+            user_profile=self.user_b.userprofile,
+            full_name='Test User B',
+            email='test_b@test.com',
+            phone_number='9876543210',
+            country='USA',
+            town_or_city='Test town B',
+            street_address1='Test address 2',
+            date='July 28, 2023, 3:28 p.m.',
+            delivery_cost=10.00,
+            order_total=30.00,
+            grand_total=40.00,
+        )
 
-        # Get order_history view using the Order object
+    def test_order_history_own_user(self):
+        # Login user A
+        self.client.login(username='user_a', password='password')
+
+        # Access order history view for user A's order
         response = self.client.get(
-            reverse('order_history', args=[self.order.order_number])
-            )
+            reverse('order_history', args=[self.order_a.order_number])
+        )
 
-        # Test that response code, template used and attributes are correct
+        # Test that response code, template used, and attributes are correct
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'checkout/checkout_success.html')
-        self.assertContains(response, '59D52EBA7553416385A882EE642D7E0Z')
-        self.assertContains(response, 'Test User')
+        self.assertContains(response, '59D52EBA7553416385A882EE642D7E0X')
+        self.assertContains(response, 'Test User A')
         self.assertContains(response, '1234567890')
-        self.assertContains(response, 'test@test.com')
-        self.assertEqual(self.order.grand_total, Decimal('27.00'))
+        self.assertContains(response, 'test_a@test.com')
+        self.assertEqual(self.order_a.grand_total, Decimal('27.00'))
+
+    def test_order_history_other_user(self):
+        # Login user A
+        self.client.login(username='user_a', password='password')
+
+        # Try to access order history view for user B's order
+        response = self.client.get(
+            reverse('order_history', args=[self.order_b.order_number])
+        )
+
+        # Test that response status code indicates redirection
+        self.assertEqual(response.status_code, 302)
+
+        # Test that the user is redirected to the home page
+        self.assertRedirects(response, reverse('home'))
+
+        # Follow the redirection and test the messages on the redirected page
+        redirected_response = self.client.get(response.url, follow=True)
+        # Test that the expected error message is correct
+        messages_list = list(messages.get_messages(response.wsgi_request))
+        self.assertEqual(len(messages_list), 1)
+        self.assertEqual(
+            messages_list[0].message, 'You do not have permission to view '
+            'this order history.'
+            )
