@@ -137,8 +137,10 @@
 
                 {% else %}
 
-                <p>Login to like <i class="fa-regular fa-heart ml-2 mr-2"></i>
-                    <span><strong>{{ game.total_likes }}</strong> Likes</span></p>
+                <p>
+                    <a class="like-login" href="{% url 'account_login' %}" aria-label="Takes user to login page">Login</a> to like <i class="fa-regular fa-heart ml-2 mr-2"></i>
+                    <span><strong>{{ game.total_likes }}</strong> Likes</span>
+                </p>
                 {% endif %}
             </form>
 

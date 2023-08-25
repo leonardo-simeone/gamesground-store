@@ -303,7 +303,7 @@ input[name='q']::placeholder {
 .genre-style {
     padding: 0 5px;
     text-transform: uppercase;
-    font-family: 'Merriweather Sans', sans-serif;;
+    font-family: 'Merriweather Sans', sans-serif;
 }
 
 .game-trailer {
@@ -353,6 +353,14 @@ input[name='q']::placeholder {
 
 .game-detail-hr {
     border-top: 1px solid #FFF5F9;
+}
+
+.like-login {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.like-login:hover {
+    color: #F9F871!important;
 }
 
 /* GAMES FORM */
