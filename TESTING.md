@@ -35,3 +35,21 @@ I have used the recommended [HTML W3C Validator](https://validator.w3.org) to va
 | Checkout Success | [W3C](https://validator.w3.org/nu/?doc=https%3A%2F%2Fgamesground-store-6596e524f29e.herokuapp.com%2Fcheckout%2Fcheckout_success%2FD280C480222641609B4B2CDDDF85B293) | ![screenshot](documentation/html-test-checkout-success.png) | ![screenshot](documentation/html-test-checkout-success.png) | Passed no errors. |
 | Profile | [W3C](https://validator.w3.org/nu/?doc=https%3A%2F%2Fgamesground-store-6596e524f29e.herokuapp.com%2Faccounts%2Flogin%2F%3Fnext%3D%2Fprofile%2F) | ![screenshot](documentation/html-test-profile.png) | ![screenshot](documentation/html-test-profile.png) | This test had to be validated by input same as add game, passed no errors. 'Info: Trailing slash on void elements has no effect and interacts badly with unquoted attribute values' same as with Add game. |
 | Order history | [W3C](https://validator.w3.org/nu/?doc=https%3A%2F%2Fgamesground-store-6596e524f29e.herokuapp.com%2Fprofile%2Forder_history%2F3C1076528AFF488A824BFC62CC7912E5) | ![screenshot](documentation/html-test-order-history.png) | ![screenshot](documentation/html-test-order-history.png) | This test had to be validated by input same as profile, passed no errors. |
+
+### CSS
+
+I have used the recommended [CSS Jigsaw Validator](https://jigsaw.w3.org/css-validator) to validate all of my CSS files.
+
+| File | Jigsaw URL | Before Screenshot | After Screenshot | Notes |
+| --- | --- | --- | --- | --- |
+| base.css | [Jigsaw](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fgamesground-store-6596e524f29e.herokuapp.com%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en#warnings) | ![screenshot](documentation/base-css-test.png) | ![screenshot](documentation/base-css-test.png) | The warnings shown are the result of using AWS and Bootstrap, passed no errors. |
+| checkout.css | [Jigsaw](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fgamesground-store-6596e524f29e.herokuapp.com%2Fcheckout%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en) | ![screenshot](documentation/checkout-css-test.png) | ![screenshot](documentation/checkout-css-test.png) | The warnings shown are the result of using AWS and Bootstrap, since this is an extra css file besides the base css it was tested both by input and by uri, passed no errors. |
+| profile.css | [Jigsaw](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fgamesground-store-6596e524f29e.herokuapp.com%2Fprofile%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en) | ![screenshot](documentation/profile-css-test.png) | ![screenshot](documentation/profile-css-test.png) | The warnings shown are the result of using AWS and Bootstrap, since this is an extra css file besides the base css it was tested both by input and by uri, passed no errors. |
+
+### JavaScript
+
+I have used the recommended [JShint Validator](https://jshint.com) to validate all of my JS files.
+
+| File | Screenshot | Notes |
+| --- | --- | --- |
+| stripe_elements.js | ![screenshot](documentation/stripe-elements-js-test.png) | Undefined Stripe variable |
