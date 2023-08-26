@@ -460,7 +460,7 @@ class TestEditGameView(TestCase):
 
     """
     The setUp method is used to create two User objects, one superuser
-    and one regular user and a Game object.
+    and one regular user and Game and Platform objects.
     We have several test methods covering different
     aspects of the edit_game view.
     - test_edit_game_authenticated_superuser_get: Tests superuser's GET
@@ -472,6 +472,8 @@ class TestEditGameView(TestCase):
     - test_edit_game_authenticated_non_superuser: Tests authenticated
     non-superuser's GET request.
     - test_edit_game_unauthenticated: Tests unauthenticated user's GET request.
+    - test_edit_game_with_platform_message: Tests that when editing a game with
+    platform the correct message is generated.
     """
 
     def setUp(self):
@@ -485,13 +487,25 @@ class TestEditGameView(TestCase):
         self.user = User.objects.create_user(
             username='testuser', password='testpassword'
             )
-        # Create a game
+        # Create a platform
+        self.platform = Platform.objects.create(name='Test Platform')
+        # Create a game without platform
         self.game = Game.objects.create(
             name='Test Game',
             description='This is a test game.',
             year='2023',
             price=29.99,
             available_in_other_consoles=False,
+            trailer='https://www.youtube.com/watch?v=video-id'
+            )
+        # Create a game with platform
+        self.game2 = Game.objects.create(
+            name='Test Game 2',
+            description='This is another test game.',
+            year='2023',
+            price=29.99,
+            available_in_other_consoles=False,
+            platform=self.platform,
             trailer='https://www.youtube.com/watch?v=video-id'
             )
 
@@ -618,12 +632,27 @@ class TestEditGameView(TestCase):
 
         self.assertRedirects(response, redirect_url)
 
+    def test_edit_game_with_platform_message(self):
+        # Simulate an authenticated superuser's GET request to edit a game
+        self.client.force_login(self.superuser)
+
+        response = self.client.get(reverse('edit_game', args=[self.game2.pk]))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'games/edit_game.html')
+        self.assertIsInstance(response.context['form'], GameForm)
+        self.assertEqual(response.context['game'], self.game2)
+        self.assertContains(
+            response,
+            f'You are editing {self.game2.name} {self.game2.platform}'
+        )
+
 
 class TestDeleteGameView(TestCase):
 
     """
     The setUp method is used to create two User objects, one superuser
-    and one regular user and a Game object.
+    and one regular user and Game and Platform objects.
     We have several test methods covering different
     aspects of the delete_game view.
     - test_delete_game_authenticated_superuser_get: Tests superuser's GET
@@ -634,6 +663,8 @@ class TestDeleteGameView(TestCase):
     non-superuser's GET request to delete a game.
     - test_delete_game_unauthenticated: Tests unauthenticated user's
     GET request to delete a game.
+    - test_delete_game_with_platform_message: Tests that when deleting
+    a game with platform the correct message is generated.
     """
 
     def setUp(self):
@@ -647,12 +678,25 @@ class TestDeleteGameView(TestCase):
         self.user = User.objects.create_user(
             username='testuser', password='testpassword'
             )
-        # Create a game
+
+        self.platform = Platform.objects.create(name='Test Platform')
+        # Create a game without platform
         self.game = Game.objects.create(
             name='Test Game',
             description='This is a test game.',
-            year='2023', price=29.99,
+            year='2023',
+            price=29.99,
             available_in_other_consoles=False,
+            trailer='https://www.youtube.com/watch?v=video-id'
+            )
+        # Create a game with platform
+        self.game2 = Game.objects.create(
+            name='Test Game 2',
+            description='This is another test game.',
+            year='2023',
+            price=29.99,
+            available_in_other_consoles=False,
+            platform=self.platform,
             trailer='https://www.youtube.com/watch?v=video-id'
             )
 
@@ -713,3 +757,25 @@ class TestDeleteGameView(TestCase):
         redirect_url = login_url + '?next=' + delete_game_url
 
         self.assertRedirects(response, redirect_url)
+
+    def test_delete_game_with_platform_message(self):
+        # Simulate an authenticated superuser's POST request to delete a game
+        self.client.force_login(self.superuser)
+
+        response = self.client.post(
+            reverse('delete_game', args=[self.game2.pk]), follow=True
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'games/games.html')
+
+        # Check if the game was deleted
+        self.assertFalse(Game.objects.filter(pk=self.game2.pk).exists())
+
+        # Check if a success message is in the response
+        messages_list = list(messages.get_messages(response.wsgi_request))
+        self.assertEqual(len(messages_list), 1)
+        self.assertEqual(
+            messages_list[0].message,
+            f'{self.game2.name} {self.game2.platform} has been deleted!'
+        )
