@@ -1,5 +1,6 @@
 from django.test import TestCase, RequestFactory, Client
 from django.urls import reverse
+from django.http import HttpResponse
 from django.contrib.auth.models import User, AnonymousUser
 from decimal import Decimal
 from unittest.mock import patch, Mock
@@ -14,6 +15,7 @@ from games.models import *
 from django.contrib.messages.middleware import MessageMiddleware
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.contrib.messages.storage.fallback import FallbackStorage
+from django.contrib.messages import get_messages, constants
 from django.core import mail
 
 
@@ -35,8 +37,13 @@ class TestCheckoutView(TestCase):
     - test_game_not_found: Tests that the response in case of game not existent
     in the database is correct (response code, url and error message).
     - test_user_profile_not_found: Tests that the response in case of user
-    profile not existent in the database is correct
-    (response code).
+    profile not existent in the database is correct (response code) and that
+    the form is being instantiated.
+    - test_checkout_view_empty_basket: Tests that user is redirected to games
+    page and message generated is correct when forcing their way to checkout
+    with an empty basket.
+    - test_missing_stripe_public_key_warning: Test that the correct message is
+    generated when stripe public key is missing.
     Since the intent object is directly referenced in a possible
     test_checkout_view_post_invalid_form method, and the view
     structure heavily depends on it, it seems difficult to test
@@ -210,32 +217,78 @@ class TestCheckoutView(TestCase):
         # Assert that the correct message was added to the messages
         mock_messages.error.assert_called_once()
 
-    @patch('profiles.views.UserProfile.objects.get')
+    @patch('checkout.views.UserProfile.objects.get')
     def test_user_profile_not_found(self, mock_user_profile_get):
         # Mock UserProfile.objects.get
         # to raise UserProfile.DoesNotExist exception
         mock_user_profile_get.side_effect = UserProfile.DoesNotExist()
 
-        request = self.factory.post(reverse('checkout'), {
-            'full_name': 'John Doe',
-            'email': 'john@example.com',
-            'phone_number': '1234567890',
-            'country': 'US',
-            'postcode': '12345',
-            'town_or_city': 'Test City',
-            'street_address1': '123 Test St',
-            'street_address2': 'Apt 2',
-            'county': 'Test County',
-        })
-
-        # Sample basket data
+        request = self.factory.get(reverse('checkout'))
         request.session = {'basket': {'1': 2}}
-        request.user = self.user
+        request.user = AnonymousUser()
 
         response = checkout(request)
 
-        # Assert that the response is successful
+        # Assert that the response
+        # is a rendered template response (HTML response)
+        self.assertIsInstance(response, HttpResponse)
+        self.assertEqual(response.status_code, 200)
+        # Assert that the response content contains certain
+        # strings or elements related to the form meaning the form
+        # is being instantiated
+        self.assertContains(response, '<form', count=3)
+        self.assertContains(response, 'id="id_full_name"', count=1)
+        self.assertContains(response, 'id="id_email"', count=1)
+        self.assertContains(response, 'id="id_phone_number"', count=1)
+        self.assertContains(response, 'id="id_country"', count=1)
+        self.assertContains(response, 'id="id_postcode"', count=1)
+        self.assertContains(response, 'id="id_street_address1"', count=1)
+        self.assertContains(response, 'id="id_street_address2"', count=1)
+        self.assertContains(response, 'id="id_town_or_city"', count=1)
+        self.assertContains(response, 'id="id_county"', count=1)
+
+    def test_checkout_view_empty_basket(self):
+        self.client = Client()
+
+        # Simulate a GET request to checkout with an empty basket
+        response = self.client.get(reverse('checkout'))
+
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('games'))
+
+        # Check if the expected message is in the messages framework
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(
+            messages[0].message, "There's nothing in your basket at the moment"
+            )
+        self.assertEqual(messages[0].level, constants.ERROR)
+
+    def test_missing_stripe_public_key_warning(self):
+        self.client = Client()
+
+        # Set a non-empty basket in the session
+        basket = {'1': 2}
+        session = self.client.session
+        session['basket'] = basket
+        session.save()
+
+        with self.settings(STRIPE_PUBLIC_KEY=''):
+            # Simulate a GET request to checkout
+            response = self.client.get(reverse('checkout'))
+
+            # Assert that the response status code is 200 (OK)
+            self.assertEqual(response.status_code, 200)
+
+            # Check if the expected warning message is
+            # in the messages framework
+            messages = list(get_messages(response.wsgi_request))
+            self.assertEqual(len(messages), 1)
+            self.assertEqual(
+                messages[0].message, 'Stripe public key is missing. '
+                'Did you forget to set it in your environment?'
+            )
+            self.assertEqual(messages[0].level, constants.WARNING)
 
 
 class TestCheckoutSuccessView(TestCase):
