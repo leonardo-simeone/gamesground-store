@@ -131,3 +131,28 @@ I've tested my deployed project on multiple devices to check for responsiveness 
 | 4K Monitor | ![screenshot](documentation/responsive-4k.png) | Works as expected |
 | Samsung Galaxy A52s (my own phone) | ![screenshot](documentation/responsive-own-phone.png) | Works as expected |
 
+## Lighthouse Audit
+
+I've tested my deployed project using the Lighthouse Audit tool to check for any major issues.
+
+| Page | Mobile | Desktop | Notes |
+| --- | --- | --- | --- |
+| Home | ![screenshot](documentation/lighthouse-test-home-mobile.png) | ![screenshot](documentation/lighthouse-test-home-desktop.png) | Few warnings on mobile |
+| About Us | ![screenshot](documentation/lighthouse-test-about-us-mobile.png) | ![screenshot](documentation/lighthouse-test-about-us-desktop.png) | Few warnings on mobile |
+| Newsletter | ![screenshot](documentation/lighthouse-test-newsletter-mobile.png) | ![screenshot](documentation/lighthouse-test-newsletter-desktop.png) | Few warnings on mobile |
+| Contact Us | ![screenshot](documentation/lighthouse-test-contact-us-mobile.png) | ![screenshot](documentation/lighthouse-test-contact-us-desktop.png) | Few warnings on mobile |
+| Contact List | ![screenshot](documentation/lighthouse-test-contact-list-mobile.png) | ![screenshot](documentation/lighthouse-test-contact-list-desktop.png) | Few warnings on mobile |
+| Games | ![screenshot](documentation/lighthouse-test-games-mobile.png) | ![screenshot](documentation/lighthouse-test-games-desktop.png) | Slow response time due to amount of images, few warnings |
+| Game Detail | ![screenshot](documentation/lighthouse-test-game-detail-mobile.png) | ![screenshot](documentation/lighthouse-test-game-detail-desktop.png) | few warnings on mobile |
+| Add Game | ![screenshot](documentation/lighthouse-test-add-game-mobile.png) | ![screenshot](documentation/lighthouse-test-add-game-desktop.png) | few warnings on mobile |
+| Edit Game | ![screenshot](documentation/lighthouse-test-edit-game-mobile.png) | ![screenshot](documentation/lighthouse-test-edit-game-desktop.png) | few warnings on mobile and some minor warnings on desktop due to aspect ratio on game image |
+| Delete Game | ![screenshot](documentation/lighthouse-test-delete-game-mobile.png) | ![screenshot](documentation/lighthouse-test-delete-game-desktop.png) | few warnings on mobile |
+| Shopping Basket | ![screenshot](documentation/lighthouse-test-basket-mobile.png) | ![screenshot](documentation/lighthouse-test-basket-desktop.png) | few warnings on mobile |
+| Register | ![screenshot](documentation/lighthouse-test-register-mobile.png) | ![screenshot](documentation/lighthouse-test-register-desktop.png) | few warnings on mobile |
+| Login | ![screenshot](documentation/lighthouse-test-login-mobile.png) | ![screenshot](documentation/lighthouse-test-login-desktop.png) | few warnings on mobile |
+| Logout | ![screenshot](documentation/lighthouse-test-logout-mobile.png) | ![screenshot](documentation/lighthouse-test-logout-desktop.png) | few warnings on mobile |
+| Checkout | ![screenshot](documentation/lighthouse-test-checkout-mobile.png) | ![screenshot](documentation/lighthouse-test-checkout-desktop.png) | few warnings on mobile |
+| Checkout Success | ![screenshot](documentation/lighthouse-test-checkout-success-mobile.png) | ![screenshot](documentation/lighthouse-test-checkout-success-desktop.png) | few warnings on mobile |
+| Profile | ![screenshot](documentation/lighthouse-test-profile-mobile.png) | ![screenshot](documentation/lighthouse-test-profile-desktop.png) | few warnings on mobile |
+| Order History | ![screenshot](documentation/lighthouse-test-order-history-mobile.png) | ![screenshot](documentation/lighthouse-test-order-history-desktop.png) | few warnings on mobile |
+
