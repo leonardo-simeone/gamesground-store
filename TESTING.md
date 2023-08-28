@@ -117,3 +117,17 @@ I've tested my deployed project on multiple browsers to check for compatibility 
 | Chrome | ![screenshot](documentation/chrome-test.png) | Works as expected |
 | Edge | ![screenshot](documentation/edge-test.png) | Works as expected |
 | Firefox | ![screenshot](documentation/firefox-test.png) | Works as expected |
+
+## Responsiveness
+
+I've tested my deployed project on multiple devices to check for responsiveness issues.
+
+| Device | Screenshot | Notes |
+| --- | --- | --- |
+| Mobile (DevTools) | ![screenshot](documentation/responsive-mobile.png) | Works as expected |
+| Tablet (DevTools) | ![screenshot](documentation/responsive-tablet.png) | Works as expected |
+| Desktop (DevTools) | ![screenshot](documentation/responsive-desktop.png) | Works as expected |
+| XL Monitor | ![screenshot](documentation/responsive-xl.png) | Works as expected |
+| 4K Monitor | ![screenshot](documentation/responsive-4k.png) | Works as expected |
+| Samsung Galaxy A52s (my own phone) | ![screenshot](documentation/responsive-own-phone.png) | Works as expected |
+
