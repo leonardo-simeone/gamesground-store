@@ -107,3 +107,13 @@ I have used the recommended [CI Python Linter](https://pep8ci.herokuapp.com) to 
 | Profiles *test_models.py* | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/leonardo-simeone/gamesground-store/main/profiles/test_models.py) | ![screenshot](documentation/profiles-test-models-python-test-pass.png) | ![screenshot](documentation/profiles-test-models-python-test-pass.png) | Passed no errors. |
 | Profiles *test_forms.py* | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/leonardo-simeone/gamesground-store/main/profiles/test_forms.py) | ![screenshot](documentation/profiles-test-forms-python-test-pass.png) | ![screenshot](documentation/profiles-test-forms-python-test-pass.png) | Passed no errors. |
 | Profiles *test_views.py* | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/leonardo-simeone/gamesground-store/main/profiles/test_views.py) | ![screenshot](documentation/profiles-test-views-python-test-pass.png) | ![screenshot](documentation/profiles-test-views-python-test-pass.png) | Passed no errors. |
+
+## Browser Compatibility
+
+I've tested my deployed project on multiple browsers to check for compatibility issues.
+
+| Browser | Screenshot | Notes |
+| --- | --- | --- |
+| Chrome | ![screenshot](documentation/chrome-test.png) | Works as expected |
+| Edge | ![screenshot](documentation/edge-test.png) | Works as expected |
+| Firefox | ![screenshot](documentation/firefox-test.png) | Works as expected |
