@@ -183,7 +183,7 @@ To wireframe the website I used [Whimsical](https://whimsical.com/wireframes).
 	- Platform which is clickable and will bring the user to that particular platform games group.
 	- Pegi rating which has the same fuctionality as platform (clickable).
 	- Genre again with the same functionality as the previous two.
-	- Next we have year and likes count, in the likes count the user is shown how many likes the game has and if they're not logged in, that they need to in order be able to like it, once they like the game by clicking on the heart icon, there will be an indicator letting them know they like the game.
+	- Next we have year and likes count, in years the game release year is shown and in the likes count, the user is shown how many likes the game has and if they're not logged in, that they need to login(link to login page) in order be able to like it, once they like the game by clicking on the heart icon, there will be an indicator letting them know they like the game.
 	- Last on this section the user will be informed whether this game is available in other platforms or if it is exclusive.
 	- On the next section below, the description of the game will be displayed as 'additional game information' and on the section after, there will be a game trailer video specific to the game being viewed.
 

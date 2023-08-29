@@ -297,3 +297,25 @@ Defensive programming was manually tested with the below user acceptance testing
 | | Order history page loads data | Order history page loads the same data as in Checkout success page given that the same template is used | Pass | The difference in this page is that a message will show at the top of the page to indicate the user that this is a past confirmation for the order number and that a confirmation email was sent on the order date, also a Back to profile button will show instead of a Check out all our games button |
 | | Click on Back to profile button | Redirection to Profile page | Pass | |
 | | Brute forcing the URL to get to Order history Page without logging in first or when logged in, to get to Order history Page of a different user | User will be redirected to Home page and an error will show at the top of the page to indicate the user that they do not have permission to view this order history | Pass | |
+
+## User Story Testing
+
+| User Story | Screenshot |
+| --- | --- |
+| As a site user, I would like to register for an account, so that I can  login and out with personal account and recover my password in case I forget it. | ![screenshot](documentation/user-story-register.png) |
+| As a site user, I would like to view a list of games, so that I can select one or more to purchase. | ![screenshot](documentation/games.png) |
+| As a site user, I would like to view an individual game, so that I can identify its name, price, image, genre, description, year, platform, pegi rating, trailer video and likes count. | ![screenshot](documentation/game-detail.png) |
+| As a site user, I would like to search for a specific game name or genre, so that I can easily find the game I want to purchase. | ![screenshot](documentation/user-story-search-by.png) |
+| As a site user, I would like to sort games by price, genre, name, pegi rating and popularity, so that I can easily find the games according to my preferences. | ![screenshot](documentation/user-story-sort-by.png) |
+| As a site user, I would like to add, view, update and delete games in the shopping basket, so that I can manage/review my shopping basket before proceeding to checkout. | ![screenshot](documentation/user-story-basket.png) |
+| As a site user, I would like to provide the necessary billing/delivery details, so that I can purchase games and view an order confirmation after checkout to verify all the information from my purchase is accurate. | ![screenshot](documentation/user-story-checkout.png) |
+| As a site user, I would like to receive an email confirmation after my purchase, so that I can keep records of my transactions. | ![screenshot](documentation/order-confirmation-email.png) |
+| As a site user, I would like to create/manage my personal account profile, so that I can view/update my profile, view my order history and save my payment information. | ![screenshot](documentation/profile.png) |
+| As a site user, I would like to contact the site administrator, so that I can query/recommend the site admin on different topics. | ![screenshot](documentation/contact.png) |
+| As a site user, I would like to subscribe to a newsletter, so that I can receive news, special offers and general information related to the store. | ![screenshot](documentation/newsletter.png) |
+| As a site user, I would like to navigate to the site's about us, terms & conditions and privacy policy links, so that I can inform myself in more depth about the site. | ![screenshot](documentation/user-story-aboutus-tc-pp.png) |
+| As a site administrator, I should be able to create/add, read, update and delete games, so that I can manage the games on the site. | ![screenshot](documentation/user-story-admin-manage-game.png) |
+| As a site administrator, I should be able to add, update and delete pegi ratings, so that I can assign pegi ratings to games. | ![screenshot](documentation/user-story-manage-pegi.png) |
+| As a site administrator, I should be able to add, update and delete platforms, so that I can assign platforms to games. | ![screenshot](documentation/user-story-manage-platform.png) |
+| As a store owner, I should be able to add/edit/delete games from the website, so that I can manage new games, games updates or games that are no longer available. | ![screenshot](documentation/user-story-owner-manage-game.png) |
+| As a product owner, I would like to run automated tests, so that I can make sure everything is working as it should. | ![screenshot](documentation/user-story-automated-tests.png) |
