@@ -57,6 +57,8 @@ def checkout(request):
                     return redirect(reverse('basket_summary'))
 
             request.session['save_info'] = 'save-info' in request.POST
+            # Set session variable to indicate successful checkout
+            request.session['checkout_completed'] = True
             return redirect(
                 reverse('checkout_success', args=[order.order_number])
                 )
@@ -123,6 +125,17 @@ def checkout_success(request, order_number):
     """
     Handle successful checkouts
     """
+    # Check if the checkout was completed successfully
+    if not request.session.get('checkout_completed'):
+        messages.error(
+            request,
+            'You can only access this page after completing a purchase.'
+            )
+        # Redirect to appropriate page with an error message
+        return redirect(reverse('basket_summary'))
+
+    # Clear the session variable now that it's been used
+    del request.session['checkout_completed']
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
 
