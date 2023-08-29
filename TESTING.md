@@ -171,6 +171,7 @@ Defensive programming was manually tested with the below user acceptance testing
 | About Us Page | | | | |
 | | Click on About Us link in navbar | Redirection to About Us page | Pass | |
 | | Click on About Us link in footer | Redirection to About Us page | Pass | |
+| | Click on About Us page external links | External links open in new page | Pass | |
 | Games Page | | | | |
 | | Click on Shop now link in homepage Jumbotron | Redirection to All Games page showing all games for all platforms | Pass | |
 | | Click on Playstation Games link in homepage | Redirection to Games page showing Playstation 4 and 5 Games | Pass | |
@@ -216,7 +217,7 @@ Defensive programming was manually tested with the below user acceptance testing
 | | Click on Contact list link in navbar | Redirection to Contact list page | Pass | |
 | | Display Contact list | All users and their information (including messages) that have contacted the site admin will be displayed | Pass | |
 | | Brute forcing the URL to get to Contact list page without logging in first | User will be redirected to Login page | Pass | |
-| | Brute forcing the URL to get to Contact list page logged in not as a Superuser | User will be redirected to Home page and an error will show at the top of the page to indicate the user that only store owners can do that | Pass | |
+| | Brute forcing the URL to get to Contact list page logged in not as a Superuser | User will be redirected to Home page and an error will show at the top of the page to indicate the user that only store owners can do that | Pass | If user is not logged in, they will be redirected to login page |
 | Newsletter Page | | | | |
 | | Click on Newsletter link in home page bottom | Redirection to Newsletter page | Pass | |
 | | Newsletter page will load a form for the user to fill out | Newsletter form, loads as expected | Pass | Should the user be logged in, the name and email address fields in the form will be prefilled with the user's information |
@@ -292,11 +293,14 @@ Defensive programming was manually tested with the below user acceptance testing
 | | Profile page loads data | Profile page loads a form with the user profile fields for the user to fill out and a table with the user's order history (none if no transactions have been completed) | Pass | Should the user have completed previous transactions and saved their information during the process then these fields will be prefilled because the information will be attached to their user profile |
 | | Click on Update information button | Existing user profile will be updated | Pass | A message will show at the top of the page to indicate the user the profile updated successfully, no field in this form is required hence the user can update/delete information in their profile at will |
 | | Order history table | If the user has completed previous transactions, information pertaining to those transactions will be displayed on the order history table, showing order number(cropped), order date, games purchased and order total | Pass | The order number is hoverable (shows user full order number) and clickable, allowing the user to go to that order history on click |
+| | Brute forcing the URL to get to Profile page as a logged out user | User is redirected to login page | Pass | |
 | Order History Page | | | | |
 | | Click on order number on order history table in profile page | Redirection to Order history page | Pass | |
 | | Order history page loads data | Order history page loads the same data as in Checkout success page given that the same template is used | Pass | The difference in this page is that a message will show at the top of the page to indicate the user that this is a past confirmation for the order number and that a confirmation email was sent on the order date, also a Back to profile button will show instead of a Check out all our games button |
 | | Click on Back to profile button | Redirection to Profile page | Pass | |
 | | Brute forcing the URL to get to Order history Page without logging in first or when logged in, to get to Order history Page of a different user | User will be redirected to Home page and an error will show at the top of the page to indicate the user that they do not have permission to view this order history | Pass | |
+| Footer | | | | |
+| | Click on footer links | All footer links work correctly | Pass | External links in footer open in new page |
 
 ## User Story Testing
 
