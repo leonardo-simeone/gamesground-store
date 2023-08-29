@@ -323,3 +323,74 @@ Defensive programming was manually tested with the below user acceptance testing
 | As a site administrator, I should be able to add, update and delete platforms, so that I can assign platforms to games. | ![screenshot](documentation/user-story-manage-platform.png) |
 | As a store owner, I should be able to add/edit/delete games from the website, so that I can manage new games, games updates or games that are no longer available. | ![screenshot](documentation/user-story-owner-manage-game.png) |
 | As a product owner, I would like to run automated tests, so that I can make sure everything is working as it should. | ![screenshot](documentation/user-story-automated-tests.png) |
+
+## Automated Testing
+
+I have conducted a series of automated tests on my application.
+
+This includes a series of testing across several files in all my five apps(home, games, basket, checkout, profiles), consisting of a total of 161 unique tests.
+
+I fully acknowledge and understand that, in a real-world scenario, an extensive set of additional tests would be more comprehensive.
+
+### Python (Unit Testing)
+
+I have used Django's built-in unit testing framework to test the application functionality.
+
+In order to run the tests, I ran the following command in the terminal each time:
+
+`python3 manage.py test home `
+
+`python3 manage.py test games `
+
+`python3 manage.py test basket `
+
+`python3 manage.py test checkout `
+
+`python3 manage.py test profiles `
+
+To create the coverage report, I would then run the following commands each time as before:
+
+`coverage run --source=name-of-app manage.py test`
+
+`coverage report`
+
+To see the HTML version of the reports, and find out whether some pieces of code were missing, I ran the following commands:
+
+`coverage html`
+
+`python3 -m http.server`
+
+Below are the results from the various apps on my application that I've tested:
+
+| App | File | Coverage | Screenshot | Notes |
+| --- | --- | --- | --- | --- |
+| Home | test_forms.py | 100% | ![screenshot](documentation/py-test-home-forms.png) | |
+| Home | test_models.py | 100% | ![screenshot](documentation/py-test-home-models.png) | |
+| Home | test_urls.py | 100% | ![screenshot](documentation/py-test-home-urls.png) | |
+| Home | test_views.py | 100% | ![screenshot](documentation/py-test-home-views.png) | |
+| Home | test_contact_count.py | 100% | ![screenshot](documentation/py-test-home-contact-count.png) | |
+| Games | test_forms.py | 100% | ![screenshot](documentation/py-test-games-forms.png) | |
+| Games | test_models.py | 100% | ![screenshot](documentation/py-test-games-models.png) | |
+| Games | test_urls.py | 100% | ![screenshot](documentation/py-test-games-urls.png) | |
+| Games | test_views.py | 100% | ![screenshot](documentation/py-test-games-views.png) | |
+| Games | test_widgets.py | 100% | ![screenshot](documentation/py-test-games-widgets.png) | |
+| Basket | test_urls.py | 100% | ![screenshot](documentation/py-test-basket-urls.png) | |
+| Basket | test_views.py | 100% | ![screenshot](documentation/py-test-basket-views.png) | |
+| Basket | test_contexts.py | 100% | ![screenshot](documentation/py-test-basket-contexts.png) | |
+| Checkout | test_forms.py | 100% | ![screenshot](documentation/py-test-checkout-forms.png) | |
+| Checkout | test_models.py | 100% | ![screenshot](documentation/py-test-checkout-models.png) | |
+| Checkout | test_urls.py | 100% | ![screenshot](documentation/py-test-checkout-urls.png) | |
+| Checkout | test_views.py | 100% | ![screenshot](documentation/py-test-checkout-views.png) | |
+| Checkout | views.py | 96% | ![screenshot](documentation/py-test-checkout-views-missing.png) | In the coverage html report, I found two statements that were not tested. In the case of an invalid checkout form ('messages.error(request, 'There was an error with your form. Please double check your information.')) Given the tight coupling between the Stripe API (intent object) and checkout view, I found it really difficult to isolate one from the other to test invalid form, which is why when possible, I'd like to separate the stripe functionality in an individual function that can be called during checkout to make the view more testable, however due to time limitations and the fact that the checkout processs works as intended, I will not be doing so right now. For the second case ('except UserProfile.DoesNotExist: order_form = OrderForm()') the functionality is actually tested in the 'test_user_profile_not_found' test method, however because I couldn't directly test 'order form = Order Form()' coverage does not detect the test even though it is tested indirectly by mocking 'UserProfile.DoesNotExist()' and asserting that the form fields are rendered. Leaving 'invalid checkout form' as the only untested item. |
+| Checkout | checkout total | 99% | ![screenshot](documentation/py-test-checkout-views-total.png) | Coverage report shows that the application is tested to 99% |
+| Checkout | test_signals.py | 100% | ![screenshot](documentation/py-test-checkout-signals.png) | |
+| Profiles | test_forms.py | 100% | ![screenshot](documentation/py-test-profiles-forms.png) | |
+| Profiles | test_models.py | 100% | ![screenshot](documentation/py-test-profiles-models.png) | |
+| Profiles | test_urls.py | 100% | ![screenshot](documentation/py-test-profiles-urls.png) |
+| Profiles | test_views.py | 100% | ![screenshot](documentation/py-test-profiles-views.png) | |
+
+#### Unit Test Issues
+
+While writing the unit test methods for the checkout view I encountered an issue that didn't allow me to complete the testing of an invalid form for checkout view. When I tried (different ways) to test the invalid form I found that the tight coupling between the intent object from Stripe and the actual checkout view, made it really difficult to test the invalid form. In the future (with more time) I'd like to separate the Stripe functionality from the view in a separate function, which would make the checkout view easier to test. One of the many ways I tried to test the invalid form is shown in the screenshot below.
+
+![screenshot](documentation/checkout-invalid-form-unit-test-failure.png)
