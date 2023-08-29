@@ -321,6 +321,9 @@ class TestCheckoutSuccessView(TestCase):
     info will be stored, we assert the response code is correct(200) and
     that the user info fields are correct for checkout_success.
     - test_basket_deleted: Tests that basket is deleted in checkout success.
+    - test_incomplete_checkout_access: Tests that user is redirected to
+    basket_summary view when trying to force access checkout_success view
+    without completing a purchase (checkout view) first.
     """
 
     def setUp(self):
@@ -581,3 +584,15 @@ class TestCheckoutSuccessView(TestCase):
 
         # Check if the 'basket' is deleted from the session
         self.assertNotIn('basket', response.wsgi_request.session)
+
+    def test_incomplete_checkout_access(self):
+        client = Client()
+
+        # Simulate a GET request to checkout_success
+        # without 'checkout_completed'
+        response = client.get(
+            reverse('checkout_success', args=[self.order_number])
+        )
+
+        # Check for redirection to basket_summary
+        self.assertRedirects(response, reverse('basket_summary'))
