@@ -148,6 +148,7 @@ class TestCheckoutView(TestCase):
         order_line_game = OrderLineGame.objects.last()
         self.assertEqual(order_line_game.game, self.game)
         self.assertEqual(order_line_game.quantity, 2)
+        self.assertTrue(request.session.get('checkout_completed'))
 
     # Test checkout valid form with authenticated user
     @patch('checkout.views.stripe.PaymentIntent.create')
@@ -185,6 +186,7 @@ class TestCheckoutView(TestCase):
         order_line_game = OrderLineGame.objects.last()
         self.assertEqual(order_line_game.game, self.game)
         self.assertEqual(order_line_game.quantity, 2)
+        self.assertTrue(request.session.get('checkout_completed'))
 
     @patch('checkout.views.messages')
     @patch('games.views.Game.objects.get')
@@ -359,46 +361,53 @@ class TestCheckoutSuccessView(TestCase):
         )
 
     def test_checkout_success_authenticated_user(self):
-        request = self.factory.get(
+        client = Client()
+        client.login(username='testuser', password='testpassword')
+
+        # Simulate a successful checkout by setting the session variable
+        session = client.session
+        session['checkout_completed'] = True
+        session.save()
+
+        # Access the checkout_success view
+        response = client.get(
             reverse('checkout_success', args=[self.order_number])
-            )
-        request.user = self.user
-        request.session = {'basket': self.basket}
+        )
 
-        middleware = SessionMiddleware()
-        middleware.process_request(request)
-        request.session.save()
-
-        messages = FallbackStorage(request)
-        setattr(request, '_messages', messages)
-
-        with self.assertTemplateUsed('checkout/checkout_success.html'):
-            response = checkout_success(request, self.order_number)
-
+        # Assert that the response status code is 200
         self.assertEqual(response.status_code, 200)
+
+        # Assert that the template 'checkout/checkout_success.html' is used
+        self.assertTemplateUsed(response, 'checkout/checkout_success.html')
+
+        # Assert that the order number is in the response content
         self.assertContains(response, self.order_number)
+
         # Check if email is sent
         self.assertEqual(len(mail.outbox), 1)
 
     def test_checkout_success_anonymous_user(self):
-        request = self.factory.get(
+        client = Client()
+
+        # Simulate a successful checkout by setting the session variable
+        session = client.session
+        session['checkout_completed'] = True
+        session.save()
+
+        # Access the checkout_success view
+        response = client.get(
             reverse('checkout_success', args=[self.order_number])
-            )
-        request.user = AnonymousUser()
-        request.session = {'basket': self.basket}
+        )
 
-        middleware = SessionMiddleware()
-        middleware.process_request(request)
-        request.session.save()
-
-        messages = FallbackStorage(request)
-        setattr(request, '_messages', messages)
-
-        with self.assertTemplateUsed('checkout/checkout_success.html'):
-            response = checkout_success(request, self.order_number)
-
+        # Assert that the response status code is 200
         self.assertEqual(response.status_code, 200)
+
+        # Assert that the template 'checkout/checkout_success.html' is used
+        self.assertTemplateUsed(response, 'checkout/checkout_success.html')
+
+        # Assert that the order number is in the response content
         self.assertContains(response, self.order_number)
+
         # Check if email is sent
         self.assertEqual(len(mail.outbox), 1)
 
@@ -423,15 +432,19 @@ class TestCheckoutSuccessView(TestCase):
         self.assertNotIn('basket', request.session)
 
     def test_checkout_success_messages(self):
-        # Create a test client
         client = Client()
 
-        # Perform a GET request to simulate the checkout_success view
-        response = client.get(
-            reverse('checkout_success', args=[self.order.order_number])
-            )
+        # Simulate a successful checkout by setting the session variable
+        session = client.session
+        session['checkout_completed'] = True
+        session.save()
 
-        # Check the response status code
+        # Access the checkout_success view
+        response = client.get(
+            reverse('checkout_success', args=[self.order_number])
+        )
+
+        # Assert that the response status code is 200
         self.assertEqual(response.status_code, 200)
 
         # Check if messages are present in the response
@@ -442,27 +455,28 @@ class TestCheckoutSuccessView(TestCase):
         self.assertEqual(len(messages), 1)
         self.assertTrue(
             str(messages[0]).startswith('Order successfully processed!')
-            )
+        )
 
-        # Check the rendered template
+        # Assert that the template 'checkout/checkout_success.html' is used
         self.assertTemplateUsed(response, 'checkout/checkout_success.html')
 
     def test_checkout_success_email_sent(self):
-        request = self.factory.get(
+        client = Client()
+
+        # Simulate a successful checkout by setting the session variable
+        session = client.session
+        session['checkout_completed'] = True
+        session.save()
+
+        # Access the checkout_success view
+        response = client.get(
             reverse('checkout_success', args=[self.order_number])
-            )
-        request.user = self.user
+        )
 
-        # Manually create a session for the request
-        session_middleware = SessionMiddleware()
-        session_middleware.process_request(request)
-        request.session.save()
-
-        messages = FallbackStorage(request)
-        setattr(request, '_messages', messages)
-
-        response = checkout_success(request, self.order_number)
+        # Assert that the response status code is 200
         self.assertEqual(response.status_code, 200)
+
+        # Check if the success message is present in the response
         self.assertContains(response, 'Order successfully processed!')
 
         # Ensure only one email was sent
@@ -472,62 +486,58 @@ class TestCheckoutSuccessView(TestCase):
         self.assertEqual(
             sent_email.subject,
             f'Gamesground Store Confirmation for Order Number '
-            f'{ self.order_number }'
-            )
+            f'{self.order_number}'
+        )
         self.assertEqual(sent_email.to, ['test@example.com'])
 
         # Clear the mail.outbox after the test
         mail.outbox = []
 
     def test_checkout_success_template_context(self):
-        request = self.factory.get(
+        client = Client()
+
+        # Simulate a successful checkout by setting the session variable
+        session = client.session
+        session['checkout_completed'] = True
+        session.save()
+
+        # Access the checkout_success view
+        response = client.get(
             reverse('checkout_success', args=[self.order_number])
-            )
-        request.user = self.user
+        )
 
-        session_middleware = SessionMiddleware()
-        session_middleware.process_request(request)
-        request.session.save()
-
-        messages = FallbackStorage(request)
-        setattr(request, '_messages', messages)
-
-        response = checkout_success(request, self.order_number)
-
+        # Assert that the response contains the order number
         self.assertContains(response, self.order_number)
 
     def test_checkout_success_template_used(self):
-        request = self.factory.get(
-            reverse('checkout_success', args=[self.order_number])
-            )
-        request.user = self.user
+        client = Client()
 
-        session_middleware = SessionMiddleware()
-        session_middleware.process_request(request)
-        request.session.save()
+        # Simulate a successful checkout by setting the session variable
+        session = client.session
+        session['checkout_completed'] = True
+        session.save()
 
-        messages = FallbackStorage(request)
-        setattr(request, '_messages', messages)
-
+        # Access the checkout_success view
         with self.assertTemplateUsed('checkout/checkout_success.html'):
-            response = checkout_success(request, self.order_number)
+            response = client.get(
+                reverse('checkout_success', args=[self.order_number])
+            )
 
+        # Assert that the response status code is 200
         self.assertEqual(response.status_code, 200)
 
     @patch('checkout.views.messages')
     @patch('profiles.views.UserProfileForm')
-    def test_save_user_info(
-         self,
-         mock_user_profile_form, mock_messages):
+    def test_save_user_info(self, mock_user_profile_form, mock_messages):
         # Mock form validation
         mock_user_profile_form.return_value.is_valid.return_value = True
 
         checkout_success_url = reverse(
             'checkout_success', args=['56E3AC1F12814832AB8397205867DCB5']
-            )
+        )
         request = self.factory.get(checkout_success_url)
         request.user = self.user
-        request.session = {'save_info': True}
+        request.session = {'save_info': True, 'checkout_completed': True}
         request._messages = FallbackStorage(request)
 
         self.order_number = '56E3AC1F12814832AB8397205867DCB5'
@@ -545,7 +555,7 @@ class TestCheckoutSuccessView(TestCase):
         )
         response = checkout_success(
             request, '56E3AC1F12814832AB8397205867DCB5'
-            )
+        )
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.order.full_name)
@@ -553,22 +563,21 @@ class TestCheckoutSuccessView(TestCase):
         self.assertContains(response, self.order.phone_number)
 
     def test_basket_deleted(self):
-        request = self.factory.get('/')
-        request.user = self.user
-        middleware = SessionMiddleware()
-        middleware.process_request(request)
-        request.session.save()
+        client = Client()
 
-        # Add a 'basket' to the session
-        request.session['basket'] = self.basket
-        request.session.save()
+        # Simulate an authenticated user session
+        session = client.session
+        session['checkout_completed'] = True
+        session['basket'] = self.basket
+        session.save()
 
-        # Apply MessageMiddleware
-        messages = FallbackStorage(request)
-        setattr(request, '_messages', messages)
-
-        # Call the checkout_success view
-        response = checkout_success(request, order_number=self.order_number)
+        # Access the checkout_success view
+        response = client.get(
+            reverse(
+                'checkout_success',
+                args=['56E3AC1F12814832AB8397205867DCB4']
+                )
+        )
 
         # Check if the 'basket' is deleted from the session
-        self.assertNotIn('basket', request.session)
+        self.assertNotIn('basket', response.wsgi_request.session)
