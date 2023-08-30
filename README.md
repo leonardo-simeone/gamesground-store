@@ -1,4 +1,39 @@
-# GAMESGROUND STORE
+# Table of Contents
+
+1. [Gamesground Store](#gamesground-store)
+2. [UX](#ux)
+    - [Colour Scheme](#colour-scheme)
+    - [Typography](#typography)
+3. [User Stories](#user-stories)
+    - [Site Users](#site-users)
+    - [Site Admin](#site-admin)
+    - [Product Owner](#product-owner)
+4. [Wireframes](#wireframes)
+    - [Pages Wireframes](#pages-wireframes)
+5. [Features](#features)
+    - [Existing Features](#existing-features)
+    - [Future Features](#future-features)
+6. [Tools & Technologies Used](#tools--technologies-used)
+7. [Database Design](#database-design)
+8. [Agile Development Process](#agile-development-process)
+    - [GitHub Projects](#github-projects)
+    - [GitHub Issues](#github-issues)
+    - [MoSCoW Prioritization](#moscow-prioritization)
+9. [Ecommerce Business Model](#ecommerce-business-model)
+10. [Search Engine Optimization (SEO) & Social Media Marketing](#search-engine-optimization-seo--social-media-marketing)
+    - [Keywords](#keywords)
+    - [Sitemap](#sitemap)
+    - [Robots](#robots)
+    - [Social Media Marketing](#social-media-marketing)
+    - [Newsletter Marketing](#newsletter-marketing)
+11. [Testing](#testing)
+12. [Deployment](#deployment)
+13. [Credits](#credits)
+    - [Content](#content)
+    - [Media](#media)
+14. [Acknowledgements](#acknowledgements)
+
+## Gamesground Store
 
 GamesGround Store, is an ecommerce site designed to provide video games users of a place where they can find information about video games, purchase them and provide feedback about games should they want to. What makes GamesGround Store special is the fact that this store is all about games, nothing else. Nowadays it is common to find thousands of ecommerce stores that sell video games but most of them offer video games and a plethora of other products more, in GamesGround we focus on games.
 
