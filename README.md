@@ -377,6 +377,43 @@ To wireframe the website I used [Whimsical](https://whimsical.com/wireframes).
     - Create a blog app where the site's admin/owner can create content and the user can read on games news, reviews, tips and more.
 - Add webhooks to checkout process.
     - Implement the use of webhooks during the checkout process.
+- Add view logic in add_game view to send emails to Newsletter subscribers every time a new game is added to the store.
+    - I effectively managed to add the logic to the add_game view to accomplish the task, I manually tested the functionality and it worked as intended, however in the unit testing side of things, I was having difficulty to test the Django send_mail() function call. Due to time limitations I decided to leave it as it is now and I will re engage the task in the future. Here is the code snippet I created in the add_game view to achieve the desired outcome:
+
+    ```python
+    # Newsletter subscribers email subject
+    subject = 'New Game Added to the Store!'
+    if request.method == 'POST':
+            form = GameForm(request.POST, request.FILES)
+            if form.is_valid():
+                game = form.save()
+
+                game_detail_url = request.build_absolute_uri(
+                    reverse('game_detail', args=[game.id])
+                    )
+
+                # Send email to newsletter subscribers
+                subscribers = Newsletter.objects.all()
+                for subscriber in subscribers:
+                    message = (
+                        f'Hi {subscriber.name}, a new game "{game.name}" '
+                        f'has been added to the store. '
+                        f'Check it out: '
+                        f'{game_detail_url}'
+                    )
+                    from_email = settings.DEFAULT_FROM_EMAIL
+                    recipient_list = [subscriber.email]
+
+                    send_mail(
+                        subject,
+                        message,
+                        from_email, recipient_list
+                    )
+
+                messages.success(request, 'Successfully added game!')
+                return redirect(reverse('game_detail', args=[game.id]))
+
+    ```
 
 ## Tools & Technologies Used
 
