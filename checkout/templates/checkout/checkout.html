@@ -78,8 +78,8 @@
                 {% csrf_token %}
                 <fieldset class="rounded px-3 mb-5">
                     <legend class="fieldset-label small px-2 w-auto">Details</legend>
-                        {{ order_form.full_name | as_crispy_field }}
-                        {{ order_form.email | as_crispy_field }}
+                    {{ order_form.full_name | as_crispy_field }}
+                    {{ order_form.email | as_crispy_field }}
                 </fieldset>
 
                 <fieldset class="rounded px-3 mb-5">
@@ -93,13 +93,15 @@
                     {{ order_form.country | as_crispy_field }}
                     <div class="form-check form-check-inline float-right mr-0">
                         {% if user.is_authenticated %}
-                            <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
-                            <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                        <label class="form-check-label" for="id-save-info">Save this delivery information to my
+                            profile</label>
+                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info"
+                            checked>
                         {% else %}
-                            <label class="form-check-label">
-                                <a class="save-info-cta" href="{% url 'account_signup' %}">Create an account</a> or 
-                                <a class="save-info-cta" href="{% url 'account_login' %}">login</a> to save this information
-                            </label>
+                        <label class="form-check-label">
+                            <a class="save-info-cta" href="{% url 'account_signup' %}">Create an account</a> or
+                            <a class="save-info-cta" href="{% url 'account_login' %}">login</a> to save this information
+                        </label>
                         {% endif %}
                     </div>
                 </fieldset>
@@ -112,22 +114,27 @@
                     <!-- Used to display form errors -->
                     <div class="mb-3 rounded card-error-div text-center" id="card-errors" role="alert"></div>
                 </fieldset>
-                
-                <div class="submit-button text-right mt-5 mb-2">                    
-                    <a href="{% url 'basket_summary' %}" class="btn btn-shopping-basket rounded mr-2 all-buttons-font text-uppercase small-buttons" aria-label="takes user back to their shopping page">
+
+                <div class="submit-button text-right mt-5 mb-2">
+                    <a href="{% url 'basket_summary' %}"
+                        class="btn btn-shopping-basket rounded mr-2 all-buttons-font text-uppercase small-buttons"
+                        aria-label="takes user back to their shopping page">
                         <span class="icon">
                             <i class="fas fa-chevron-left"></i>
                         </span>
                         <span class="font-weight-bold">Adjust Basket</span>
                     </a>
-                    <button id="submit-button" class="btn btn-shopping-basket rounded all-buttons-font text-uppercase small-buttons" aria-label="completes purchase">
+                    <button id="submit-button"
+                        class="btn btn-shopping-basket rounded all-buttons-font text-uppercase small-buttons"
+                        aria-label="completes purchase">
                         <span class="font-weight-bold">Complete Order</span>
                         <span class="icon">
                             <i class="fas fa-lock"></i>
                         </span>
                     </button>
                     <p class="small mt-2">
-                        <span class="checkout-charge-warning-text"><i class="fas fa-exclamation-circle"></i> Your card will be charged <strong>€{{ grand_total|floatformat:2 }}</strong></span>
+                        <span class="checkout-charge-warning-text"><i class="fas fa-exclamation-circle"></i> Your card
+                            will be charged <strong>€{{ grand_total|floatformat:2 }}</strong></span>
                     </p>
                 </div>
             </form>

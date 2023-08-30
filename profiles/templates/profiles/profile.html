@@ -28,7 +28,8 @@
             <form class="mt-3" action="{% url 'profile' %}" method="POST" id="profile-update-form">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <button class="btn btn-shopping-basket rounded text-uppercase float-right mb-2 all-buttons-font" aria-label="updates user profile">Update Information</button>
+                <button class="btn btn-shopping-basket rounded text-uppercase float-right mb-2 all-buttons-font"
+                    aria-label="updates user profile">Update Information</button>
             </form>
         </div>
         <div class="col-12 col-lg-6">
@@ -46,25 +47,26 @@
                     </thead>
                     <tbody>
                         {% for order in orders %}
-                            <tr>
-                                <td>
-                                    <a class="order-history-link" id="{{order.order_number}}" href="{% url 'order_history' order.order_number %}"
-                                    title="{{ order.order_number }}" aria-label="takes user to order history page">
-                                        {{ order.order_number|truncatechars:6 }}
-                                    </a>
-                                </td>
-                                <td>{{ order.date }}</td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        {% for item in order.linegames.all %}
-                                            <li class="small">
-                                                {{ item.game.name }} x{{ item.quantity }}
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </td>
-                                <td>€{{ order.grand_total }}</td>
-                            </tr>
+                        <tr>
+                            <td>
+                                <a class="order-history-link" id="{{order.order_number}}"
+                                    href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}"
+                                    aria-label="takes user to order history page">
+                                    {{ order.order_number|truncatechars:6 }}
+                                </a>
+                            </td>
+                            <td>{{ order.date }}</td>
+                            <td>
+                                <ul class="list-unstyled">
+                                    {% for item in order.linegames.all %}
+                                    <li class="small">
+                                        {{ item.game.name }} x{{ item.quantity }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>€{{ order.grand_total }}</td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>

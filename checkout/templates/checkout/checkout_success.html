@@ -18,7 +18,8 @@
             <br>
             <h2 class="mb-4">Thank you for your purchase</h2>
             <hr class="checkout-hr">
-            <p>Your order information is below. A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
+            <p>Your order information is below. A confirmation email will be sent to <strong>{{ order.email }}</strong>.
+            </p>
         </div>
     </div>
 
@@ -186,7 +187,7 @@
                         <p class="mb-0">€{{ order.grand_total }}</p>
                     </div>
                 </div>
-            
+
             </div>
         </div>
     </div>
@@ -194,24 +195,24 @@
     <div class="row">
         <div class="col-12 col-lg-7 text-right mt-2">
             {% if from_profile %}
-                    <a href="{% url 'profile' %}" class="btn btn-shopping-basket" aria-label="takes user back to profile page">
-                        <span class="icon mr-2">
-                            <i class="fas fa-angle-left"></i>
-                        </span>
-                        <span class="text-uppercase">Back to Profile</span>
-                    </a>
-                {% else %}
-                    <a href="{% url 'games' %}?platform=PS5,PS4,XBOX%20ONE,XBOX%20SERIES%20X/S,NINTENDO%20SWITCH,PC" class="btn btn-shopping-basket" aria-label="takes user to all games page">
-                        <span class="icon mr-2">
-                            <i class="fa-solid fa-gamepad"></i>
-                        </span>
-                        <span class="text-uppercase">Check out all our games!</span>
-                    </a>
+            <a href="{% url 'profile' %}" class="btn btn-shopping-basket" aria-label="takes user back to profile page">
+                <span class="icon mr-2">
+                    <i class="fas fa-angle-left"></i>
+                </span>
+                <span class="text-uppercase">Back to Profile</span>
+            </a>
+            {% else %}
+            <a href="{% url 'games' %}?platform=PS5,PS4,XBOX%20ONE,XBOX%20SERIES%20X/S,NINTENDO%20SWITCH,PC"
+                class="btn btn-shopping-basket" aria-label="takes user to all games page">
+                <span class="icon mr-2">
+                    <i class="fa-solid fa-gamepad"></i>
+                </span>
+                <span class="text-uppercase">Check out all our games!</span>
+            </a>
             {% endif %}
-            
+
         </div>
     </div>
 
 </section>
 {% endblock %}
-

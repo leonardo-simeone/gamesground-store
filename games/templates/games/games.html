@@ -16,32 +16,34 @@
   <section id="games-badges-section" class="row text-center mt-3">
     <div class="col-12 consoles-small">
       <h2>Games</h2>
-      
-      {% for s in selected_platforms %}
-        <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1 d-none d-md-inline" href="{% url 'games' %}?platform={{ s.name|href_fix }}" aria-label="takes user to {{s.name}} games page">
-          <span class="p-2 mt-2">{{ s.name }}</span>
-        </a>
 
-        <div class="d-sm-block d-md-none mb-1">
-          <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1 mobile-badge" href="{% url 'games' %}?platform={{ s.name|href_fix }}" aria-label="takes user to {{s.name}} games page">
-            <p class="p-2 mt-2">{{ s.name }}</p>
-          </a>
-        </div>
-       {% endfor %}
-      
-       {% for s in selected_pegi %}
-        <div class="pegi-row">
-          <p class="pegi-badge text-decoration-none rounded mr-2 ml-2 p-1 text-uppercase">
-            Ages {{ s.age }} and Over
-          </p>
-        </div>
+      {% for s in selected_platforms %}
+      <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1 d-none d-md-inline"
+        href="{% url 'games' %}?platform={{ s.name|href_fix }}" aria-label="takes user to {{s.name}} games page">
+        <span class="p-2 mt-2">{{ s.name }}</span>
+      </a>
+
+      <div class="d-sm-block d-md-none mb-1">
+        <a class="platform-badge text-decoration-none rounded mr-2 ml-2 p-1 mobile-badge"
+          href="{% url 'games' %}?platform={{ s.name|href_fix }}" aria-label="takes user to {{s.name}} games page">
+          <p class="p-2 mt-2">{{ s.name }}</p>
+        </a>
+      </div>
+      {% endfor %}
+
+      {% for s in selected_pegi %}
+      <div class="pegi-row">
+        <p class="pegi-badge text-decoration-none rounded mr-2 ml-2 p-1 text-uppercase">
+          Ages {{ s.age }} and Over
+        </p>
+      </div>
       {% endfor %}
       {% if g %}
-        <div class="pegi-row">
-          <p class="pegi-badge text-decoration-none rounded mr-2 ml-2 p-1 text-uppercase">
-            {{ g }}
-          </p>
-        </div>
+      <div class="pegi-row">
+        <p class="pegi-badge text-decoration-none rounded mr-2 ml-2 p-1 text-uppercase">
+          {{ g }}
+        </p>
+      </div>
       {% endif %}
     </div>
   </section>
@@ -49,84 +51,97 @@
 
   <section id="games-sorting-section" class="row mt-1 mb-2">
     <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
-        <div class="sort-select-wrapper w-50">
-            <select id="sort-selector" class="custom-select custom-select-sm rounded border border-{% if selected_sorting != 'None_None' %}info{% else %}black{% endif %}">
-                <option value="reset" {% if selected_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
-                <option value="price_asc" {% if selected_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
-                <option value="price_desc" {% if selected_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
-                <option value="likes_asc" {% if selected_sorting == 'likes_asc' %}selected{% endif %}>Popularity (low to high)</option>
-                <option value="likes_desc" {% if selected_sorting == 'likes_desc' %}selected{% endif %}>Popularity (high to low)</option>
-                <option value="pegi_rating_asc" {% if selected_sorting == 'pegi_rating_asc' %}selected{% endif %}>PEGI Rating (low to high)</option>
-                <option value="pegi_rating_desc" {% if selected_sorting == 'pegi_rating_desc' %}selected{% endif %}>PEGI Rating (high to low)</option>
-                <option value="name_asc" {% if selected_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
-                <option value="name_desc" {% if selected_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
-                <option value="platform_asc" {% if selected_sorting == 'platform_asc' %}selected{% endif %}>Platform (A-Z)</option>
-                <option value="platform_desc" {% if selected_sorting == 'platform_desc' %}selected{% endif %}>Platform (Z-A)</option>
-            </select>
-        </div>
+      <div class="sort-select-wrapper w-50">
+        <select id="sort-selector"
+          class="custom-select custom-select-sm rounded border border-{% if selected_sorting != 'None_None' %}info{% else %}black{% endif %}">
+          <option value="reset" {% if selected_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+          <option value="price_asc" {% if selected_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)
+          </option>
+          <option value="price_desc" {% if selected_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)
+          </option>
+          <option value="likes_asc" {% if selected_sorting == 'likes_asc' %}selected{% endif %}>Popularity (low to high)
+          </option>
+          <option value="likes_desc" {% if selected_sorting == 'likes_desc' %}selected{% endif %}>Popularity (high to
+            low)</option>
+          <option value="pegi_rating_asc" {% if selected_sorting == 'pegi_rating_asc' %}selected{% endif %}>PEGI Rating
+            (low to high)</option>
+          <option value="pegi_rating_desc" {% if selected_sorting == 'pegi_rating_desc' %}selected{% endif %}>PEGI
+            Rating (high to low)</option>
+          <option value="name_asc" {% if selected_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+          <option value="name_desc" {% if selected_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+          <option value="platform_asc" {% if selected_sorting == 'platform_asc' %}selected{% endif %}>Platform (A-Z)
+          </option>
+          <option value="platform_desc" {% if selected_sorting == 'platform_desc' %}selected{% endif %}>Platform (Z-A)
+          </option>
+        </select>
+      </div>
     </div>
     <div class="col-12 col-md-6 order-md-first">
-        <h2 id="games-home" class="mt-3 text-center text-md-left">
-            {% if search_term or selected_platforms or selected_pegi or selected_sorting or g != 'None_None' %}
-                <span><a class="link-home" href="{% url 'games' %}">Games Home</a> | </span>
-            {% endif %}
-            {{ games|length }} Games{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
-        </h2>
+      <h2 id="games-home" class="mt-3 text-center text-md-left">
+        {% if search_term or selected_platforms or selected_pegi or selected_sorting or g != 'None_None' %}
+        <span><a class="link-home" href="{% url 'games' %}">Games Home</a> | </span>
+        {% endif %}
+        {{ games|length }} Games{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+      </h2>
     </div>
   </section>
 
 
-    <section id="games-display-section" class="row">
+  <section id="games-display-section" class="row">
 
-      <div class="col-12 mt-3 left">
-        <div class="row">
-          {% for game in games %}
-          
-            <div class="col-md-4 col-lg-3 mb-4">
-              <div class="card mb-4 h-100">
-                
-                <a href="{% url 'game_detail' game.id %}" class="card-body games-cards-font-color" id="{{game.name|href_fix}}{% if game.platform %}{{game.platform.name|href_fix}}{% endif %}" aria-label="takes user to {{game.name}} detail page">
-                  <div class="image-container">
-                    {% if game.image %}
-                      <img class="card-img-top rounded img-fluid" id="{{game.id}}" src="{{ game.image.url }}" alt="{{game.name}}{% if game.platform %} {{game.platform.name}}{% endif %}">
-                    {% else %}
-                      <img class="card-img-top rounded img-fluid" id="{{game.id}}" src="{% static 'images/default-image.webp' %}"
-                      alt="no image available">
-                    {% endif %}
-                  </div>
+    <div class="col-12 mt-3 left">
+      <div class="row">
+        {% for game in games %}
 
-                  <h2 class="card-title game-title card-text-overflow">{{game.name}}
-                  </h2>
+        <div class="col-md-4 col-lg-3 mb-4">
+          <div class="card mb-4 h-100">
 
-                  <p class="card-text"><i class="fa-solid fa-euro-sign"></i> {{game.price}}</p>
-                  <hr>
-                  {% if game.platform %}
-                    <p class="card-text card-text-overflow">{{game.platform.name}}</p>
-                  {% else %}
-                    <p class="card-text card-text-overflow"><em>No platform assigned to this game</em></p>
-                  {% endif %}
-                  <hr>
-                  <span class="float-right">{{ game.total_likes }} <i class="fa-solid fa-heart"></i></span>
-                </a>
-                
-                {% if request.user.is_superuser %}
-                  <hr>
-                  <small>
-                      <a class="btn-shopping-basket genre-style rounded mr-1" href="{% url 'edit_game' game.id %}" aria-label="takes user to edit {{game.name}} page">Edit</a> 
-                      <a class="btn-shopping-basket genre-style rounded ml-1" href="{% url 'delete_game' game.id %}" aria-label="takes user to delete {{game.name}} page">Delete</a>
-                  </small>
-                  <hr class="edit-delete-buttom-separator">
+            <a href="{% url 'game_detail' game.id %}" class="card-body games-cards-font-color"
+              id="{{game.name|href_fix}}{% if game.platform %}{{game.platform.name|href_fix}}{% endif %}"
+              aria-label="takes user to {{game.name}} detail page">
+              <div class="image-container">
+                {% if game.image %}
+                <img class="card-img-top rounded img-fluid" id="{{game.id}}" src="{{ game.image.url }}"
+                  alt="{{game.name}}{% if game.platform %} {{game.platform.name}}{% endif %}">
+                {% else %}
+                <img class="card-img-top rounded img-fluid" id="{{game.id}}"
+                  src="{% static 'images/default-image.webp' %}" alt="no image available">
                 {% endif %}
-              
               </div>
-            </div>
-        
-          
-          {% endfor %}
+
+              <h2 class="card-title game-title card-text-overflow">{{game.name}}
+              </h2>
+
+              <p class="card-text"><i class="fa-solid fa-euro-sign"></i> {{game.price}}</p>
+              <hr>
+              {% if game.platform %}
+              <p class="card-text card-text-overflow">{{game.platform.name}}</p>
+              {% else %}
+              <p class="card-text card-text-overflow"><em>No platform assigned to this game</em></p>
+              {% endif %}
+              <hr>
+              <span class="float-right">{{ game.total_likes }} <i class="fa-solid fa-heart"></i></span>
+            </a>
+
+            {% if request.user.is_superuser %}
+            <hr>
+            <small>
+              <a class="btn-shopping-basket genre-style rounded mr-1" href="{% url 'edit_game' game.id %}"
+                aria-label="takes user to edit {{game.name}} page">Edit</a>
+              <a class="btn-shopping-basket genre-style rounded ml-1" href="{% url 'delete_game' game.id %}"
+                aria-label="takes user to delete {{game.name}} page">Delete</a>
+            </small>
+            <hr class="edit-delete-buttom-separator">
+            {% endif %}
+
+          </div>
         </div>
+
+
+        {% endfor %}
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+</div>
 
 {% endblock %}
-

@@ -12,7 +12,9 @@
             <br>
             <h2 class="mb-4 other-headings">Contact Us List</h2>
             <hr class="checkout-hr">
-            <h3 class="mb-4 add-game-heading other-headings">A list of all the users that have contacted store Owner/Admin</h3>
+            <h3 class="mb-4 add-game-heading other-headings">
+                A list of all the users that have contacted store Owner/Admin
+            </h3>
             <hr class="checkout-hr">
         </div>
     </div>
@@ -26,22 +28,22 @@
 
                 <!-- Start of mobile for loop -->
                 {% for contact in contacts %}
-                    <div class="row game-info-mobile rounded mb-3">
-                        <!-- Contact name mobile -->
-                        <div class="col-12 mt-2">
-                            <p class="mb-0"><strong>Name: </strong>{{ contact.name }}</p>
-                        </div>
-                        <!-- Contact email mobile -->
-                        <div class="col-12 mb-2 mt-2">
-                            <p class="my-0"><strong>Email: </strong>{{ contact.email }}</p>
-                        </div>
-                        <!-- Contact message mobile -->
-                        <div class="col-12 order-sm-last">
-                            <p class="text-justify mb-0"><strong>Message: </strong>{{ contact.body }}</p>
-                            <p class="message-created rounded">This message was written on {{ contact.created }}</p>
-                        </div>
+                <div class="row game-info-mobile rounded mb-3">
+                    <!-- Contact name mobile -->
+                    <div class="col-12 mt-2">
+                        <p class="mb-0"><strong>Name: </strong>{{ contact.name }}</p>
                     </div>
-                    <hr>
+                    <!-- Contact email mobile -->
+                    <div class="col-12 mb-2 mt-2">
+                        <p class="my-0"><strong>Email: </strong>{{ contact.email }}</p>
+                    </div>
+                    <!-- Contact message mobile -->
+                    <div class="col-12 order-sm-last">
+                        <p class="text-justify mb-0"><strong>Message: </strong>{{ contact.body }}</p>
+                        <p class="message-created rounded">This message was written on {{ contact.created }}</p>
+                    </div>
+                </div>
+                <hr>
 
                 {% endfor %}
                 <!-- End of mobile for loop -->
@@ -59,21 +61,21 @@
                     <tbody>
                         <!-- Start of desktop for loop -->
                         {% for contact in contacts %}
-                            <tr class="contact-list-info">
-                                <td class="p-3 border-bottom">
-                                    <!-- Contact name -->
-                                    <p>{{ contact.name }}</p>
-                                </td>
-                                <td class="py-3 border-bottom">
-                                    <!-- Contact email -->
-                                    <p class="my-0">{{ contact.email }}</p>
-                                </td>
-                                <td class="py-3 border-bottom">
-                                    <!-- Contact message -->
-                                    <p class="text-justify mb-0">{{ contact.body }}</p>
-                                    <p class="message-created rounded">This message was written on {{ contact.created }}</p>
-                                </td>
-                            </tr>
+                        <tr class="contact-list-info">
+                            <td class="p-3 border-bottom">
+                                <!-- Contact name -->
+                                <p>{{ contact.name }}</p>
+                            </td>
+                            <td class="py-3 border-bottom">
+                                <!-- Contact email -->
+                                <p class="my-0">{{ contact.email }}</p>
+                            </td>
+                            <td class="py-3 border-bottom">
+                                <!-- Contact message -->
+                                <p class="text-justify mb-0">{{ contact.body }}</p>
+                                <p class="message-created rounded">This message was written on {{ contact.created }}</p>
+                            </td>
+                        </tr>
                         {% endfor %}
                         <!-- End of desktop for loop -->
                     </tbody>

@@ -7,14 +7,15 @@
 
 
 
-  <section id="newsletter-subscription-section" class="container newsletter-container">
+<section id="newsletter-subscription-section" class="container newsletter-container">
 
     <div class="row">
         <div class="col">
             <br>
             <h2 class="mb-4 other-headings">Newsletter</h2>
             <hr class="checkout-hr">
-            <h3 class="mb-4 add-game-heading other-headings">Subscribe to our newsletter and get the latest news, special offers and more on all our games!</h3>
+            <h3 class="mb-4 add-game-heading other-headings">Subscribe to our newsletter and get the latest news,
+                special offers and more on all our games!</h3>
             <hr class="checkout-hr">
         </div>
     </div>
@@ -25,11 +26,14 @@
 
                 {{ form|crispy }}
                 <div class="text-right">
-                    <a class="btn btn-shopping-basket rounded mr-2 text-uppercase" href="{% url 'games' %}?platform=PS5,PS4,XBOX%20ONE,XBOX%20SERIES%20X/S,NINTENDO%20SWITCH,PC" aria-label="takes user to all games page">Cancel</a>
-                    <button id="subscribe-button" class="btn btn-shopping-basket rounded text-uppercase" type="submit" aria-label="subscribes to site newsletter">Subscribe</button>
+                    <a class="btn btn-shopping-basket rounded mr-2 text-uppercase"
+                        href="{% url 'games' %}?platform=PS5,PS4,XBOX%20ONE,XBOX%20SERIES%20X/S,NINTENDO%20SWITCH,PC"
+                        aria-label="takes user to all games page">Cancel</a>
+                    <button id="subscribe-button" class="btn btn-shopping-basket rounded text-uppercase" type="submit"
+                        aria-label="subscribes to site newsletter">Subscribe</button>
                 </div>
             </form>
-        </div>            
+        </div>
     </div>
 </section>
 
