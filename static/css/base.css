@@ -691,7 +691,33 @@ input[name='q']::placeholder {
     text-decoration: underline!important;
 }
 
-/* 404 & 500 PAGES */
+/* 400, 403, 404 & 500 PAGES */
+
+#wrapper-400 {
+    margin-top: 15px;
+    margin-bottom: 80px;
+}
+
+#image-wrapper-400 {
+    width: 80%;
+}
+
+#image-400 {
+    border-radius: 10px;
+}
+
+#wrapper-403 {
+    margin-top: 15px;
+    margin-bottom: 80px;
+}
+
+#image-wrapper-403 {
+    width: 80%;
+}
+
+#image-403 {
+    border-radius: 10px;
+}
 
 #wrapper-404 {
     margin-top: 15px;

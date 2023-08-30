@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}403{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid h-100">
+    <div class="row h-100 custom-error-pages-row">
+        <div id="wrapper-403" class="col-12 d-flex flex-column align-items-center justify-content-center text-center">
+            <h1 class="text-danger custom-404-500-headings">403</h1>
+            <p class="fs-5 fw-bold">
+                Forbidden Error.
+            </p>
+            <div id="image-wrapper-403">
+                <img src="{% static 'images/403.webp' %}" id="image-403" class="img-fluid"
+                    alt="mario bros video game 403 page">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

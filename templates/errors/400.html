@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}400{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid h-100">
+    <div class="row h-100 custom-error-pages-row">
+        <div id="wrapper-400" class="col-12 d-flex flex-column align-items-center justify-content-center text-center">
+            <h1 class="text-danger custom-404-500-headings">400</h1>
+            <p class="fs-5 fw-bold">
+                Bad request Error.
+            </p>
+            <div id="image-wrapper-400">
+                <img src="{% static 'images/400.webp' %}" id="image-400" class="img-fluid"
+                    alt="mario bros video game 400 page">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
