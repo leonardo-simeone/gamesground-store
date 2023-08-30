@@ -86,6 +86,7 @@ Store owners/admins can administer the site from the user interface, they have t
 - As a Site User I would like to contact the site administrator so that I can query/recommend the site admin on different topics, [Link here](https://github.com/leonardo-simeone/gamesground-store/issues/16).
 - As a Site User I would like to subscribe to a newsletter so that I can receive news, special offers and general information related to the store, [Link here](https://github.com/leonardo-simeone/gamesground-store/issues/17).
 - As a Site User I would like to navigate to the site's about us, terms & conditions and privacy policy links so that I can inform myself in more depth about the site, [Link here](https://github.com/leonardo-simeone/gamesground-store/issues/19).
+- As a Site User I would like to receive an email every time a new game is added to the store so that I will be up to date with what games are available, [Link here](https://github.com/leonardo-simeone/gamesground-store/issues/20).
 
 ### Site Admin
 
@@ -890,7 +891,7 @@ There, I used my own **User Story Template** to manage user stories.
 
 It also helped with milestone iterations on a weekly basis.
 
-- [Open Issues](https://github.com/leonardo-simeone/gamesground-store/issues?q=is%3Aopen+is%3Aissue), no open issues remaining.
+- [Open Issues](https://github.com/leonardo-simeone/gamesground-store/issues?q=is%3Aopen+is%3Aissue), There is only one open issue remaining (won't have) which will be addressed in a future iteration along with other issues to come for [Future Features](#future-features), [Link here](https://github.com/leonardo-simeone/gamesground-store/issues/20).
 
 ![screenshot](documentation/gh-issues-open.png)
 
