@@ -1272,6 +1272,7 @@ The only difference I found between local version and heroku deployment, was the
 | --- | --- | --- | --- |
 | [Gamesground Youtube Channel](https://www.youtube.com/channel/UCHKOktRMLNdhRSqL_DWwgKA) | entire site | image | favicon on all pages, a design of my own (It's my youtube channel) |
 | [Gamesground Youtube Channel](https://www.youtube.com/channel/UCHKOktRMLNdhRSqL_DWwgKA) | entire site | image | logo image on all pages, a design of my own (It's my youtube channel) |
+| [Gamesground Youtube Channel](https://www.youtube.com/channel/UCHKOktRMLNdhRSqL_DWwgKA) | entire site (footer) | YouTube channel link | Link to GamesGround YouTube channel (It's my youtube channel) |
 | [Boutique Ado Code Institute Project](https://github.com/Code-Institute-Solutions/boutique_ado_images/blob/master/pics/noimage.png) | games/game_detail/basket/checkout/edit_game pages | image | default image for game when no image |
 | [Alphacoders](https://images5.alphacoders.com/130/1302520.jpg) | home | image | Jumbotron hero image |
 | [Stock Adobe](https://t4.ftcdn.net/jpg/04/21/34/85/360_F_421348572_9AER2My9tEzC7MvKQfmfKSHVGwf5KEJJ.jpg) | home page | image | Playstation controller |
