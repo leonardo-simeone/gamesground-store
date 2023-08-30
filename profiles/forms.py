@@ -4,6 +4,11 @@ from .models import UserProfile
 
 
 class CustomSignupForm(SignupForm):
+    """
+    A class to customize the django predetermined
+    signup form by adding first and last names to it
+    """
+
     first_name = forms.CharField(max_length=50, label='First Name')
     last_name = forms.CharField(max_length=50, label='Last Name')
 
@@ -52,6 +57,13 @@ class CustomSignupForm(SignupForm):
 
 
 class UserProfileForm(forms.ModelForm):
+    """
+    A class to create the user profile form. It has
+    a meta class to determine the fields, and a helper
+    method to loop through the fields to add placeholders,
+    add classes and set autofocus
+    """
+
     class Meta:
         model = UserProfile
         exclude = ('user',)

@@ -5,6 +5,10 @@ from embed_video.fields import EmbedVideoField
 
 
 class Platform(models.Model):
+    """
+    A model to create a platform table in the database
+    and create platform objects
+    """
 
     name = models.CharField(max_length=254)
 
@@ -13,6 +17,10 @@ class Platform(models.Model):
 
 
 class Pegi(models.Model):
+    """
+    A model to create a pegi table in the database
+    and create pegi objects
+    """
 
     class Meta:
         verbose_name_plural = 'Pegi Rating'
@@ -24,6 +32,19 @@ class Pegi(models.Model):
 
 
 class Game(models.Model):
+    """
+    A model to create a game table in the database
+    and create game objects. It contains a tuple
+    which defines the game genre options used in the
+    genre field. There are three particular
+    relationships in the model. The platform and pegi_rating
+    fields have a FK relationship with platform and pegi models
+    and the likes field has a M2M relationship with User.
+    This model has a meta class to determine the
+    descending order of the game objects and two helper methods,
+    one to count the number of likes and one to represent the objects
+    with a custom string.
+    """
 
     GENRE_OPTIONS = (
         ('Action', 'Action'), ('Adventure', 'Adventure'),

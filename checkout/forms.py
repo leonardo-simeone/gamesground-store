@@ -3,6 +3,13 @@ from .models import Order
 
 
 class OrderForm(forms.ModelForm):
+    """
+    A class to create the order objects form. It has
+    a meta class to determine the fields, and a helper
+    method to loop through the fields to add placeholders,
+    add classes and set autofocus
+    """
+
     class Meta:
         model = Order
         fields = ('full_name', 'email', 'phone_number',

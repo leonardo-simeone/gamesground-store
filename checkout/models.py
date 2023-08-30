@@ -12,6 +12,16 @@ from profiles.models import UserProfile
 
 
 class Order(models.Model):
+    """
+    A model to create an order table in the database
+    and create order objects. There is one particular
+    relationship in the model, the user profile field has
+    a FK relationship with UserProfile model. It has four
+    helper methods, one to create the order number, one to update
+    the order total, one to save the order number and one to
+    represent the objects with the order number.
+    """
+
     order_number = models.CharField(max_length=32, null=False, editable=False)
     user_profile = models.ForeignKey(
         UserProfile,
@@ -76,6 +86,16 @@ class Order(models.Model):
 
 
 class OrderLineGame(models.Model):
+    """
+    A model to create an order line game table in the database
+    and create order line game objects. There are two particular
+    relationships in the model, the order field has
+    a FK relationship with order model and the game field
+    has a FK relationship with game model. It has two
+    helper methods, one to calculate line game total and one
+    to represent the objects with a custom string
+    """
+
     order = models.ForeignKey(
         Order,
         null=False,

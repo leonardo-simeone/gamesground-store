@@ -5,6 +5,9 @@ from games.models import *
 
 
 def basket_contents(request):
+    """
+    A function to handle basket contents
+    """
 
     basket_items = []
     total = 0
