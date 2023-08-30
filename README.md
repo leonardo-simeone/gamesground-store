@@ -380,6 +380,13 @@ To wireframe the website I used [Whimsical](https://whimsical.com/wireframes).
 
 ![404/500](documentation/404-500.png)
 
+- **400/403 Custom Pages**
+
+    - The 400 and 403 custom error pages show said errors in a user friendly way.
+    - The custom pages allow the user to avail of the navbar and footer present in all the other pages, making it easier for the user to go anywhere they want in the site after getting the error.
+
+![400/403](documentation/400-403.png)
+
 - **Modals**
 
     - Privacy Policy and Terms & Conditions were included in modals.
