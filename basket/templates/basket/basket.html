@@ -44,7 +44,7 @@
                         {% if free_delivery_delta > 0 %}
                         <p class="mb-1 free-delivery">
                             You could get <em>free delivery</em><i class="fa-solid fa-truck mr-1 ml-2"></i> by spending
-                            just <strong>${{ free_delivery_delta }}</strong>
+                            just <strong>€{{ free_delivery_delta }}</strong>
                             more!
                         </p>
                         {% endif %}
@@ -93,7 +93,7 @@
                     <!-- Game Price mobile -->
                     <div class="col-12 col-sm-6 order-sm-last">
                         <p class="my-0">Price Each: €{{ item.game.price }}</p>
-                        <p><strong>Subtotal: </strong>{{ item.game.price | calc_subtotal:item.quantity }}
+                        <p><strong>Subtotal: </strong>€{{ item.game.price | calc_subtotal:item.quantity }}
 
                         </p>
                     </div>
@@ -222,7 +222,7 @@
 
                         </td>
                         <td class="py-3">
-                            <p class="my-0">{{ item.game.price | calc_subtotal:item.quantity }}</p>
+                            <p class="my-0">€{{ item.game.price | calc_subtotal:item.quantity }}</p>
                         </td>
                     </tr>
                     {% endfor %}
@@ -240,7 +240,7 @@
                             {% if free_delivery_delta > 0 %}
                             <p class="mb-1 free-delivery">
                                 You could get <em>free delivery</em><i class="fa-solid fa-truck mr-1 ml-2"></i> by
-                                spending just <strong>${{ free_delivery_delta }}</strong>
+                                spending just <strong>€{{ free_delivery_delta }}</strong>
                                 more!
                             </p>
                             {% endif %}
